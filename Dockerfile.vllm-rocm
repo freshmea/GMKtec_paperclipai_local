@@ -1,0 +1,31 @@
+# vLLM Docker 이미지 (ROCm GPU 가속)
+# AMD MI250/MI300 등 ROCm 지원 GPU에서 사용
+# gfx1150 (Radeon 8060S) 지원은 ROCm 버전에 따라 실험적
+#
+# 빌드 방법 (vLLM 공식 Dockerfile.rocm 이용):
+#   git clone --depth 1 --branch v0.19.0 https://github.com/vllm-project/vllm.git /tmp/vllm-src
+#   cd /tmp/vllm-src
+#   DOCKER_BUILDKIT=1 docker build \
+#     --target vllm-openai \
+#     --tag vllm-rocm:v0.19.0 \
+#     --file docker/Dockerfile.rocm .
+#
+# 참고: 소스 빌드는 1~2시간 이상 소요될 수 있습니다.
+
+FROM rocm/pytorch:rocm6.3_ubuntu22.04_py3.10_pytorch_release_2.6.0
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV VLLM_TARGET_DEVICE=rocm
+
+WORKDIR /workspace
+
+# vLLM 설치
+RUN pip install --upgrade pip && \
+    pip install vllm
+
+RUN mkdir -p /models
+
+EXPOSE 8000
+
+ENTRYPOINT ["python", "-m", "vllm.entrypoints.openai.api_server"]
+CMD ["--host", "0.0.0.0", "--port", "8000"]

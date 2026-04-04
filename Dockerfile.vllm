@@ -1,0 +1,29 @@
+# vLLM Docker 이미지 (CPU 모드)
+# AMD Radeon 8060S (gfx1150) ROCm Docker 이미지가 미제공이므로 CPU 모드 사용
+# ROCm GPU 가속이 필요하면 Dockerfile.vllm-rocm 참조
+FROM python:3.12-bookworm
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# 시스템 의존성 설치
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    numactl \
+    libnuma-dev \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# CPU 전용 PyTorch 설치 (CUDA 미포함으로 이미지 크기 절감)
+RUN pip install --upgrade pip && \
+    pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+
+# vLLM 설치 (기설치된 CPU PyTorch 활용)
+RUN pip install vllm
+
+# 모델 저장 디렉토리
+RUN mkdir -p /models
+
+EXPOSE 8000
+
+ENTRYPOINT ["python", "-m", "vllm.entrypoints.openai.api_server"]
+CMD ["--host", "0.0.0.0", "--port", "8000"]
