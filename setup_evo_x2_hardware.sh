@@ -36,8 +36,11 @@ EOF
 
 echo "[4/7] 부팅 커널 파라미터 최적화"
 GRUB_FILE="/etc/default/grub"
-if ! grep -q "amdgpu.gttsize=131072" "${GRUB_FILE}"; then
-  sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="\([^"]*\)"/GRUB_CMDLINE_LINUX_DEFAULT="\1 amdgpu.gttsize=131072 amd_pstate=active mitigations=off"/' "${GRUB_FILE}"
+# deprecated amdgpu.gttsize 제거
+sed -i 's/ amdgpu.gttsize=[0-9]*//' "${GRUB_FILE}"
+# ttm.pages_limit (108GB GTT) + amd_pstate + mitigations=off 추가
+if ! grep -q "ttm.pages_limit" "${GRUB_FILE}"; then
+  sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="\([^"]*\)"/GRUB_CMDLINE_LINUX_DEFAULT="\1 ttm.pages_limit=27648000 ttm.page_pool_size=27648000 amd_pstate=active mitigations=off"/' "${GRUB_FILE}"
 fi
 update-grub
 

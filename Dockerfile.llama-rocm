@@ -1,0 +1,113 @@
+# =============================================================================
+# llama.cpp ROCm 빌드 (gfx1151 / Strix Halo)
+# 참고: kyuz0/amd-strix-halo-toolboxes
+# =============================================================================
+# 대부분의 경우 사전 빌드된 이미지 사용을 권장합니다:
+#   docker pull kyuz0/amd-strix-halo-toolboxes:rocm-7.2
+#
+# 이 Dockerfile은 커스텀 빌드가 필요한 경우에만 사용하세요.
+# 빌드 시간: 약 30분~1시간 소요
+# =============================================================================
+
+# --- build stage ---
+FROM registry.fedoraproject.org/fedora:43 AS builder
+
+# ROCm 7.2 repo
+RUN <<'EOF'
+tee /etc/yum.repos.d/rocm.repo <<REPO
+[ROCm-7.2]
+name=ROCm7.2
+baseurl=https://repo.radeon.com/rocm/rhel10/7.2/main
+enabled=1
+priority=50
+gpgcheck=1
+gpgkey=https://repo.radeon.com/rocm/rocm.gpg.key
+REPO
+EOF
+
+# 빌드 의존성
+RUN dnf -y --nodocs --setopt=install_weak_deps=False \
+    --exclude='*sdk*' --exclude='*samples*' --exclude='*-doc*' --exclude='*-docs*' \
+    install \
+    make gcc cmake lld clang clang-devel compiler-rt libcurl-devel ninja-build \
+    rocm-llvm rocm-device-libs hip-runtime-amd hip-devel \
+    rocblas rocblas-devel hipblas hipblas-devel rocm-cmake libomp-devel libomp \
+    rocminfo git-core \
+    && dnf clean all && rm -rf /var/cache/dnf/*
+
+# ROCm 환경변수
+ENV ROCM_PATH=/opt/rocm \
+    HIP_PATH=/opt/rocm \
+    HIP_CLANG_PATH=/opt/rocm/llvm/bin \
+    HIP_DEVICE_LIB_PATH=/opt/rocm/amdgcn/bitcode \
+    PATH=/opt/rocm/bin:/opt/rocm/llvm/bin:$PATH
+
+# llama.cpp 소스
+WORKDIR /opt/llama.cpp
+ARG LLAMA_BRANCH=master
+RUN git clone -b ${LLAMA_BRANCH} --single-branch --recursive \
+    https://github.com/ggerganov/llama.cpp.git .
+
+# 빌드
+RUN cmake -S . -B build \
+    -DGGML_HIP=ON \
+    -DCMAKE_HIP_FLAGS="--rocm-path=/opt/rocm -mllvm --amdgpu-unroll-threshold-local=600" \
+    -DAMDGPU_TARGETS=gfx1151 \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DGGML_RPC=ON \
+    -DLLAMA_HIP_UMA=ON \
+    -DGGML_CUDA_ENABLE_UNIFIED_MEMORY=ON \
+    -DROCM_PATH=/opt/rocm \
+    -DHIP_PATH=/opt/rocm \
+    -DHIP_PLATFORM=amd \
+    && cmake --build build --config Release -- -j$(nproc) \
+    && cmake --install build --config Release
+
+# 라이브러리 복사
+RUN find /opt/llama.cpp/build -type f -name 'lib*.so*' -exec cp {} /usr/lib64/ \; \
+    && ldconfig
+
+# --- runtime stage ---
+FROM registry.fedoraproject.org/fedora-minimal:43
+
+# ROCm 7.2 repo
+RUN <<'EOF'
+tee /etc/yum.repos.d/rocm.repo <<REPO
+[ROCm-7.2]
+name=ROCm7.2
+baseurl=https://repo.radeon.com/rocm/rhel10/7.2/main
+enabled=1
+priority=50
+gpgcheck=1
+gpgkey=https://repo.radeon.com/rocm/rocm.gpg.key
+REPO
+EOF
+
+# 런타임 의존성
+RUN microdnf -y --nodocs --setopt=install_weak_deps=0 \
+    --exclude='*sdk*' --exclude='*samples*' --exclude='*-doc*' --exclude='*-docs*' \
+    install \
+    bash ca-certificates libatomic libstdc++ libgcc libgomp \
+    hip-runtime-amd rocblas hipblas \
+    rocminfo curl \
+    && microdnf clean all && rm -rf /var/cache/dnf/*
+
+# 빌드 결과물 복사
+COPY --from=builder /usr/local/ /usr/local/
+
+# 라이브러리 경로 설정
+RUN echo "/usr/local/lib" > /etc/ld.so.conf.d/local.conf \
+    && echo "/usr/local/lib64" >> /etc/ld.so.conf.d/local.conf \
+    && ldconfig \
+    && cp -n /usr/local/lib/libllama*.so* /usr/lib64/ 2>/dev/null || true \
+    && ldconfig
+
+# ROCm 환경변수
+ENV ROCM_PATH=/opt/rocm \
+    HIP_PATH=/opt/rocm \
+    PATH=/opt/rocm/bin:/usr/local/bin:$PATH
+
+EXPOSE 8000
+
+ENTRYPOINT ["llama-server"]
+CMD ["--host", "0.0.0.0", "--port", "8000"]

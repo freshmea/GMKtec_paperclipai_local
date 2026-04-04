@@ -1,47 +1,60 @@
 # =============================================================================
-# vLLM + OpenCode + PaperClip Docker Compose
-# GMKtec EVO-X2 | AMD Ryzen AI MAX+ 395 | 64GB RAM
+# LLM 추론 서버 + OpenCode + PaperClip Docker Compose
+# GMKtec EVO-X2 | AMD Ryzen AI MAX+ 395 | 128GB LPDDR5
+# Radeon 8060S (gfx1151, RDNA 4) — ROCm 7.2 + llama.cpp
+# =============================================================================
+# 참고: https://github.com/kyuz0/amd-strix-halo-toolboxes
 # =============================================================================
 
 services:
   # ---------------------------------------------------------------------------
-  # vLLM - OpenAI 호환 LLM 추론 서버
+  # LLM 서버 — llama-server (ROCm GPU 가속)
+  # OpenAI 호환 API (/v1/chat/completions, /v1/models 등)
   # ---------------------------------------------------------------------------
-  vllm:
-    build:
-      context: .
-      dockerfile: Dockerfile.vllm
-    container_name: vllm-server
+  llm:
+    image: kyuz0/amd-strix-halo-toolboxes:rocm-7.2
+    ## 커스텀 빌드 시 아래 주석 해제 (image: 줄을 주석 처리):
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile.llama-rocm
+    container_name: llm-server
     ports:
-      - "${VLLM_PORT:-8000}:8000"
+      - "${LLM_PORT:-8000}:8000"
     volumes:
       - ${MODEL_DIR:-./models}:/models:ro
+    # GPU 장치 접근
+    devices:
+      - /dev/kfd:/dev/kfd
+      - /dev/dri:/dev/dri
+    group_add:
+      - video
+      - render
+    security_opt:
+      - seccomp=unconfined
     environment:
-      - OMP_NUM_THREADS=${OMP_NUM_THREADS:-32}
-      - VLLM_CPU_KVCACHE_SPACE=${VLLM_CPU_KVCACHE_SPACE:-40}
+      # ROCm 7.2는 gfx1151 네이티브 지원 — HSA_OVERRIDE 불필요
+      - GPU_MAX_HW_QUEUES=${GPU_MAX_HW_QUEUES:-2}
     command: >
+      llama-server
       --host 0.0.0.0
       --port 8000
-      --device cpu
-      --model /models/${MODEL_FILENAME:-gemma-4-31B-it-Q4_K_M.gguf}
-      --served-model-name ${SERVED_MODEL_NAME:-gemma-4-31b-it}
-      --max-model-len ${MAX_MODEL_LEN:-8192}
-      --kv-cache-dtype auto
-      --dtype auto
-      --tensor-parallel-size 1
-      --disable-log-requests
+      -m /models/${MODEL_FILENAME:-gemma-4-31B-it-Q4_K_M.gguf}
+      --alias ${SERVED_MODEL_NAME:-gemma-4-31b-it}
+      -ngl 999
+      -fa
+      --no-mmap
+      -c ${CONTEXT_LENGTH:-8192}
     deploy:
       resources:
         limits:
-          memory: ${VLLM_MEMORY_LIMIT:-48g}
-    shm_size: '4g'
+          memory: ${LLM_MEMORY_LIMIT:-96g}
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s
       timeout: 10s
       retries: 5
-      start_period: 120s
+      start_period: 180s
     networks:
       - llm-network
 
@@ -54,13 +67,13 @@ services:
     ports:
       - "${OPENCODE_PORT:-3000}:3000"
     environment:
-      - OPENAI_API_BASE=http://vllm:8000/v1
+      - OPENAI_API_BASE=http://llm:8000/v1
       - OPENAI_API_KEY=${OPENAI_API_KEY:-sk-no-key-required}
-      - LOCAL_ENDPOINT=http://vllm:8000/v1
+      - LOCAL_ENDPOINT=http://llm:8000/v1
     volumes:
       - ${WORKSPACE_DIR:-./workspace}:/workspace
     depends_on:
-      vllm:
+      llm:
         condition: service_healthy
     restart: unless-stopped
     networks:
