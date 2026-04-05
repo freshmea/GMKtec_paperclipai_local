@@ -1,0 +1,92 @@
+Source PDF: 3주차/15-1.pdf
+Status: image_only_or_unextractable
+Week: 3
+Deck: 15
+Part: 1
+Revision: None
+Page count: 20
+Nonempty pages: 0
+Total chars: 0
+Average chars per page: 0.0
+
+Page data:
+
+=== Page 1 ===
+chars: 0
+text: [no extractable text detected with local parser]
+
+=== Page 2 ===
+chars: 0
+text: [no extractable text detected with local parser]
+
+=== Page 3 ===
+chars: 0
+text: [no extractable text detected with local parser]
+
+=== Page 4 ===
+chars: 0
+text: [no extractable text detected with local parser]
+
+=== Page 5 ===
+chars: 0
+text: [no extractable text detected with local parser]
+
+=== Page 6 ===
+chars: 0
+text: [no extractable text detected with local parser]
+
+=== Page 7 ===
+chars: 0
+text: [no extractable text detected with local parser]
+
+=== Page 8 ===
+chars: 0
+text: [no extractable text detected with local parser]
+
+=== Page 9 ===
+chars: 0
+text: [no extractable text detected with local parser]
+
+=== Page 10 ===
+chars: 0
+text: [no extractable text detected with local parser]
+
+=== Page 11 ===
+chars: 0
+text: [no extractable text detected with local parser]
+
+=== Page 12 ===
+chars: 0
+text: [no extractable text detected with local parser]
+
+=== Page 13 ===
+chars: 0
+text: [no extractable text detected with local parser]
+
+=== Page 14 ===
+chars: 0
+text: [no extractable text detected with local parser]
+
+=== Page 15 ===
+chars: 0
+text: [no extractable text detected with local parser]
+
+=== Page 16 ===
+chars: 0
+text: [no extractable text detected with local parser]
+
+=== Page 17 ===
+chars: 0
+text: [no extractable text detected with local parser]
+
+=== Page 18 ===
+chars: 0
+text: [no extractable text detected with local parser]
+
+=== Page 19 ===
+chars: 0
+text: [no extractable text detected with local parser]
+
+=== Page 20 ===
+chars: 0
+text: [no extractable text detected with local parser]

@@ -1,0 +1,389 @@
+Source PDF: 1주차/2-1.pdf
+Status: image_only_or_unextractable
+Week: 1
+Deck: 2
+Part: 1
+Revision: None
+Page count: 20
+Nonempty pages: 0
+Total chars: 0
+Average chars per page: 0.0
+OCR available: True
+OCR pages with text: 20
+OCR total chars: 2050
+
+Page data:
+
+=== Page 1 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+NotebookLM
+
+=== Page 2 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+号
+(lmplicit Knowledge)
+(Visualization)
+(Explicit Knowledge)
+(Visualization)
+NotebookLM
+
+=== Page 3 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+()
+Transparency
+Targeting
+Standardization
+()
+(引)
+()
+,,
+(X/DX)
+章Y
+NotebookLM
+
+=== Page 4 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+（Before）vs亨（After）
+000:588
+12:15m
+X
+000B8
+0008月
+9AIZ:15m
+A15m
+X
+000888
+A：15m
+NotebookLM
+
+=== Page 5 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[
+S
+cS,Y后  daS
+Step 3:   R 从(Estimate Time) 7
+Example
+Example
+Example
+Example
+Example
+(30是)
+引0|日 否列 (40是)
+(60是)
+召 豆 (10是)
+今 (20是)
+2
+3
+4
+5
+1
+NotebookLM
+
+=== Page 6 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+MacroMicro
+ValueChain(）
+Process (旱/)
+Y
+Task()
+2l0
+Sub-task（）
+NotebookLM
+
+=== Page 7 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+MECE
+1/0
+y（ndno）（ndu）
+化ch lo% '正百o 白lo 函o lok
+TRIGGER
+BOUNDARY
+品
+hx 白
+(:今)?
+NotebookLM
+
+=== Page 8 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+（Swmlane）o
+Handoff
+(Supplier)
+青是 μlok Iy蓓
+（xl0）
+L
+目 今
+哭
+Handoff
+(Me)
+（
+DB
+(Customer)
+名幂是立x品
+NotebookLM
+
+=== Page 9 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+TheTransparentBlueprint
+[ns
+0
+AIRPA
+AI
+(Previous Task)
+Handoff
+SwivelChairTask:
+(Next Task)
+Silo：
+NotebookLM
+
+=== Page 10 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[Mini]引大
+()
+人
+异塑三三（0）
+入召叶亚是班人豆.
+LF
+（）
+(
+NotebookLM
+
+=== Page 11 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+（HiddenFactory)
+20%
+HiddenFactory（）
+80%
+NotebookLM
+
+=== Page 12 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+：号（Bottleneck）vs号（Routine）
+号（Bottleneck）
+号（Routine）
+High Impact, Low Frequency
+LowImpact,HighFrequency
+NotebookLM
+
+=== Page 13 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+号（Bottleneck)
+号（Routine）
+(Causes)
+,
+1
+(Symptoms)
+,I
+(Impact)
+(High Impact)
+(High Frequency)
+AX
+LLM(ChatGPT)是导
+RPA /nn
+(Solutions)
+0
+NotebookLM
+
+=== Page 14 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+7（7Was）
+CH71
+Idd
+BlY M lY
+晟晶 B  归百
+Office
+Wastes
+卫
+x10
+/品
+层lo 正疼口
+NotebookLM
+
+=== Page 15 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[Self-Diagnosis]己
+00- :0
+/No
+[Yes/
+Y     / :O
+[Yes
+？
+4:3
+？
+Ys2
+NotebookLM
+
+=== Page 16 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[1]（TaskInventory）
+Task（O）
+lo
+品品
+ERP
+,
+是 号  合.
+NotebookLM
+
+=== Page 17 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+：
+S
+1
+品品居
+X
+X
+10
+（后）
+(
+NotebookLM
+
+=== Page 18 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+人（Inefficiency Invoice）
+Description
+3人
+活品晶花
+4
+12人
+30,000
+Total (Monthly)
+360,000
+Total(Annual-Multiplied by12)
+4,320,000
+NotebookLM
+
+=== Page 19 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[]
+l0,IVY l0
+[品吉品]
+[异(B/R) ]
+[人]
+[百而居 ]
+[[Y]
+[   ]
+[R (早引)]
+[2人]
+[唇]
+[8人]
+[2,880,000  ]
+是异:B (Bottleneck -思号), R (Routine -E会号)
+NotebookLM
+
+=== Page 20 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+号（B）->ChatGPT（AI）
+（R) ->(）
+80R:
+NBG8:
+G:
+SD1BRO
+10A6xO
+BOUN HD ROBOWB
+99129
+20m
+18
+2.500
+$10,360
+SOGGM
+20m
+18
+2000
+$10,300
+80 M
+10m
+30%
+1800
+$15000
+3R026W
+20m
+30%
+1.600
+$3500
+AI
+4I-S/B
+8
+10m
+18
+30
+81300
+49BCNM.EG
+20m
+18
+1,300
+S4900
+8A120
+R
+30m
+30%8
+100
+$1900
+900159
+R
+10m
+S0浓
+500
+S5900
+RO1371
+8
+20m
+18
+399
+$1.800
+SORAORN SE
+20m
+308
+$00
+$2700
+414
+20/8
+BO KB
+20m
+30
+S3900
+RN
+27,800
+$90:90
+90
+41.260
+S272
+NotebookLM

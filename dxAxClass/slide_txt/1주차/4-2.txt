@@ -1,0 +1,315 @@
+Source PDF: 1주차/4-2.pdf
+Status: image_only_or_unextractable
+Week: 1
+Deck: 4
+Part: 2
+Revision: None
+Page count: 20
+Nonempty pages: 0
+Total chars: 0
+Average chars per page: 0.0
+OCR available: True
+OCR pages with text: 20
+OCR total chars: 1594
+
+Page data:
+
+=== Page 1 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+京人（Garbage In）
+（BlueprintOut）
+20
+40
+00
+SO
+100
+Garbage In, Garbage Out:
+后吉 IV
+NotebookLM
+
+=== Page 2 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+AI-Ready    4
+1. 是列 明召
+2.号班 (Goal)
+(Background)
+(SI-SV)r 可居 后R
+(To-Be)
+豆号
+Al-Ready
+3.
+4. 7 豆斗
+(Constraints)
+(Expected Effects)
+, 人, 7,
+是
+/
+NotebookLM
+
+=== Page 3 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+12-(As-Is)(o-Be)
+号亚H(To-Be)
+AIMN
+NN
+(SI-sV)  Hrp
+(deo) lr 亡IV
+·SMART
+·亚(Symptom)明利l
+·m（RootCause)
+3:
+平否 4: 7 豆
+,引
+,
+IY品 2三
+ROI
+NotebookLM
+
+=== Page 4 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[
+1.
+2.号班：大
+4.：ROI
+NotebookLM
+
+=== Page 5 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[
+(Action Mode)
+10是
+30是
+10是
+则 1-Page
+I首YE片
+1
+叫
+NotebookLM
+
+=== Page 6 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+d
+Before：（）
+After:AI ()
+10
+DX
+书。
+#
+.
+NotebookLM
+
+=== Page 7 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+S2.
+(Phenomenon)
+叫  ,卫
+10%
+品 最 晶ly :T JaKe7
+Layer 2:今|E
+90%
+Layer 3:合号
+NotebookLM
+
+=== Page 8 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Stp3.
+（）
+[]ORPAO
+！
+Iclo 是k吾 H
+！
+[]
+1.
+2. 0...
+3. LHIT会..
+NotebookLM
+
+=== Page 9 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Sp4.:
+121
+Scope李
+(Human)
+(AI)
+（c
+NotebookLM
+
+=== Page 10 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+(1) l  ds
+100%
+（Feasibility）
+Fast
+(Hlo 2lyT)
+ll (Budget)
+2(Resources)
+() y 开
+Zero (0)
+() -
+NotebookLM
+
+=== Page 11 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+可班（Quantitative）
+班（Qualitative）
+1.
+($)
+S
+60/40
+2. 2
+%
+李 (%)
+75/25
+3. 异 %
+召全 (%)
+NotebookLM
+
+=== Page 12 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+(0)Y, I
+Master Document
+1是QA三己三
+ll 青 Y归
+(Background)
+(Goal)
+？
+lo(号  百)尼
+？
+(Constraints)
+(Expected
+Action Plan ?
+Effects)
+NotebookLM
+
+=== Page 13 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+引(BestPractice)
+Best Practice
+RootCause
+Constraints
+1:(Root Cause)
+NotebookLM
+
+=== Page 14 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[]
+AX
+:
+：
+(AI Solutions)
+(Doer)
+(Director)
+DX
+(Digital Data &Process)
+AI
+Problem Solving
+Pylo
+NotebookLM
+
+=== Page 15 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+ActionItem
+Prv
+Excel + Al
+是
+（ActionItem）
+1.
+NotebookLM
+
+=== Page 16 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+As-ls
+()
+(2h)
+(4h)
+(2h)
+AI
+To-Be
+()
+(1h)
+(1h)
+豆400%
+(5m)
+NotebookLM
+
+=== Page 17 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+AICore
+(Excel)
+NotebookLM
+
+=== Page 18 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Yes/No
+Yes
+No
+1？
+是是 AI7 0
+Yes
+No
+, 班,,
+4？
+()
+Yes
+No
+QA？
+NotebookLM
+
+=== Page 19 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Phase 4: 召 (Validation)
+品崩三血
+Phase 3:  (Execution)
+(Continuous
+Evolution)
+Phase 2:  (Structuring)
+Phase 1: I (Awareness)
+晶r 喜ln oR
+NotebookLM
+
+=== Page 20 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+TheBuilder'sJourney:
+1：个
+2：人人→
+NotebookLM

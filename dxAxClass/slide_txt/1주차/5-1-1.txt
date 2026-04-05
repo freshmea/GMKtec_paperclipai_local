@@ -1,0 +1,319 @@
+Source PDF: 1주차/5-1-1.pdf
+Status: image_only_or_unextractable
+Week: 1
+Deck: 5
+Part: 1
+Revision: 1
+Page count: 20
+Nonempty pages: 0
+Total chars: 0
+Average chars per page: 0.0
+OCR available: True
+OCR pages with text: 20
+OCR total chars: 1889
+Anomalies: has_revision_suffix
+
+Page data:
+
+=== Page 1 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Sesson1
+o|E(Data-Driven Thinking)
+死loklAHh 孕樟 是尼 应冠
+合号班
+k·
+·（ParadigmShift)
+NotebookLM
+
+=== Page 2 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+（Intuition）
+o|E  (Data-Driven)
+()
+(自 lo) 是k
+() -
+后E
+NotebookLM
+
+=== Page 3 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+正YHlolllolYllo晟p吉晟
+[AS-IS]
+CH合:
+处:
+2：
+A利
+lo品l是是
+3
+15%
+品号
+[TO-BE]E：
+NotebookLM
+
+=== Page 4 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+1      3 ,
+(Decision)
+l0/
+日lo归
+(0%)
+(100%)
+（Decision）
+l0/
+(0%)
+(100%)
+（Decision）
+l0/
+日lo归英
+(0%)
+(100%)
+合人:5是
+NotebookLM
+
+=== Page 5 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+今豆（DXUseCase）
+[
+[TO-BE] O|E7AI
+Actual Demand
+ActualDemand
+1o,品, 后居Y B品
+是晟 (三 Im民)用 亢 + 白lol 比
+R晶 征 百存 亿 Ilo口2 后K
+20%
+30%
+NotebookLM
+
+=== Page 6 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Session2：ol号
+(Raw Data)
+(DataPipeline&Process)
+(ActionableInsight)
+号
+,
+NotebookLM
+
+=== Page 7 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+01今（Collect)
+02(Store)
+人引工CRM
+·
+·  (BI)
+·7PC
+正百昆Y品尼·
+品
+NotebookLM
+
+=== Page 8 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+lolE（DarkData）
+ERP,,
+白l0l
+(10%)
+Water Level
+(%06)
+PDF
+NotebookLM
+
+=== Page 9 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+(Example)
+[合]
+InputSource
+Storage&Process
+Outpat
+(71？)
+(OW27E77)
+（997)
+2lDataFlowMap利l大l7l
+民lllo
+Bottleneck（）
+Input Source
+Storage&Process
+Output
+NotebookLM
+
+=== Page 10 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+（o)Ylo
+AFTER
+BEFORE
+昌品品
+旨旨账扣
+HR
+Elol白loll
+(Data Lake)
+（
+NotebookLM
+
+=== Page 11 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Session 3:
+(Shift)
+lolEl是（Analyst)
+人2X（DecisionMaker）
+比·
+NotebookLM
+
+=== Page 12 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Human-in-the-Loop
+品l
+品
+(System)
+(Human)
+(Action)
+·
+Helo
+NotebookLM
+
+=== Page 13 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Action
+（Prescriptive）
+A（Action）
+L（BusinessValue）
+（Predictive）
+百2hy IAl活Hl口
+（Descriptive）
+NotebookLM
+
+=== Page 14 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+m
+[合]AI是2丨ActionPlan
+ActionPlan引
+1. |目 0 | (Insight):
+%1
+:()     乙
+- Action 1 (What & Who):
+- Action 2 (What & Who):
+- Action 3 (What & Who):
+3.  7 (By When):
+NotebookLM
+
+=== Page 15 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+m
+lo
+型喜（ConfirmationBias）
+lo丨El（GIGO:Garbage In,GarbageOut)
+vs（CorrelationCausation）
+（ritcanig
+NotebookLM
+
+=== Page 16 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+m
+[1]
+[o]
+/ (andul) 能
+奢引（Output) /
+（（
+NotebookLM
+
+=== Page 17 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+m
+品lRY
+T
+C
+U
+Context
+Input
+Output
+(叫)
+(alol品)
+(引)
+Ho10·
+?(Why)
+？ (What)
+？(How)
+·（，，
+？(Who)
+H (PDF, )
+？
+l0
+NotebookLM
+
+=== Page 18 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+loE引：GIGO(GarbageInGarbage Out)
+号...
+E!...
+三引:
+(Y0）
+百掉品
+(2) Y[V]
+2：丛引l7| （GarbageOut)
+站:A7
+lo民·
+IYlY 品
+民·
+：（nsightOut）
+NotebookLM
+
+=== Page 19 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+品吉品
+号(Context):
+l|El(Input)
+o
+:[][[PDF[
+班[] 吾[] :
+:
+(:,):
+:(号lY 善Hlo xooe :lo) lyk
+NotebookLM
+
+=== Page 20 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+xSs）
+:( ->|)
+(lo) ll:
+Transformation Roadmap
+3正人: Human-in-the-loop
+享川(（14:00~)
+NotebookLM

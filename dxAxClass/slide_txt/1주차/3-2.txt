@@ -1,0 +1,336 @@
+Source PDF: 1주차/3-2.pdf
+Status: image_only_or_unextractable
+Week: 1
+Deck: 3
+Part: 2
+Revision: None
+Page count: 20
+Nonempty pages: 0
+Total chars: 0
+Average chars per page: 0.0
+OCR available: True
+OCR pages with text: 20
+OCR total chars: 2117
+
+Page data:
+
+=== Page 1 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+亡 ,品 X,     ololo
+上
+(Analysis)
+(Filtering)
+碧
+(Evaluation)
+,
+号班
+L| 引(Impact) vs  0|(Effort)
+NotebookLM
+
+=== Page 2 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Major Projects ( )
+Quick Wins ( )
+AI
+号 亡  K
+(lmpact)
+, ,
+Thankless Tasks (III7l)
+Fill-ins ( 人 )
+人
+o| (Effort)
+NotebookLM
+
+=== Page 3 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+ickWin
+Major Project
+Quick Win
+1人
+晶vIY 易  活
+IY正百可序白lol
+/
+,
+:y /l0
+HERPDB
+Thankless Task
+:/:
+0
+l0I
+NotebookLM
+
+=== Page 4 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+2：2×2月
+|(1~5)
+(1~5)
+3
+2
+2
+3
+3
+NotebookLM
+
+=== Page 5 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Phase 1:QuickWins
+Phase 2:Workflow Automation
+Phase 3: System Integration
+H乙~L
+品H9
+haGP
+-IT（ERPCRM)
+NotebookLM
+
+=== Page 6 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+6正人：Al7大l（ValueEstimation）
+(Value Translation)
+A是丛
+lo2ly,
+90%
+NotebookLM
+
+=== Page 7 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+（heEquation）
+As-ls
+(）×()×()
+=(
+To-Be
+= (AI  ) × () × ()
+(ROI)
+人（TimeReductionImpact）
+3×4=12
+B IV
+2
+(IO8) 百ly 首K 吉  后lyOL
+NotebookLM
+
+=== Page 8 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+引
+（CoreTask)
+- 300%
+Hlol百 -
+R正   b用 o -
+会
+百百角
+Y
+,,
+三 圳三
+-
+(Cognitive Surplus)
+NotebookLM
+
+=== Page 9 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+(Reference)
+Ll Value Estimation Canvas
+甘品 RH
+H  (1会 Quick Win):
+STEP 1. 7否  从 哭  (As-Is)
+STEP 2. AI H 人 (To-Be)
+STEP 1 (As-Is)
+STEP 2 (To-Be)
+AI 吴 /
+4人  /
+30是 全R /
+ly9L 居
+ly乙 层
+STEP3.（Re-investment)-
+STEP 3 (Re-investment)
+lyL  居百
+NotebookLM
+
+=== Page 10 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[]（ElevatorPitch）
+是 后 号 IIo OL 是IY
+66
+AI是各
+A:
+,
+B:/
+口品 lo
+0是昱
+C:
+D:
+99
+引
+Inh (2y)号n 是五
+号班(KPI)
+？
+NotebookLM
+
+=== Page 11 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+(Task)
+(Workflow)
+至引
+(Deconstruction &
+Reconstruction)
+2
+人
+(Process Design)
+NotebookLM
+
+=== Page 12 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+As-ls（Botenck）
+（：50%-
+(：20%)
+(：10%）
+(：10%)
+(：10%）
+号对/PainPoint)
+思号(Bottleneck)今
+ok loY -
+NotebookLM
+
+=== Page 13 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+To-Be：Al川（Intervention Point)智
+正百
+(晶Y/)
+(AI 医站)
+Drafter)
+Reviewer)
+（）
+HITL (Human-in-the-Loop) 晋今 竺川 Z
+- Al Co-worker 早:  (Drafter), (Summarizer)
+Human-in-the-Loop:A80%,0 20% 引
+-    :  nn
+NotebookLM
+
+=== Page 14 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+1:    (As-Is)
+人   (Task)  .
+AI H 召(Intervention Point)  哭 互 叫
+2（To-Be）
+AI
+AI
+/百后
+/百后
+:
+:
+(:ChatGPT,)
+(ll:ChatGPT,引)
+NotebookLM
+
+=== Page 15 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+83
+叫互(Over-automation)
+| 引7  (GIGO)
+思号 ol (Bottleneck Shift)
+Garbage In, Garbage Out.
+, 召
+A  管.
+10
+开否（Formatting)
+召（Self-Reflection）
+lYl0号b品
+NotebookLM
+
+=== Page 16 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+：3（PeerReview）
+居x/品
+后品 号晨 IV k
+宜
+8x 吉B F r品
+昌账口/品品
+IT/7H些
+晶 r亡 白lol
+NotebookLM
+
+=== Page 17 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+ROI
+1号
+1号
+品是
+1号
+1号
+NotebookLM
+
+=== Page 18 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[]（GeryWa）
+17,
+4 1
+到0是否大
+1
+:y前
+iHh品oμlolo品
+？
+引 日 .
+0  Al(Hallucination)
+（Accountability)
+？
+NotebookLM
+
+=== Page 19 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Insight
+3
+aloY -
+1./引
+A,
+2.是哭
+3.卫是
+NotebookLM
+
+=== Page 20 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+()lo()
+()
+4
+（
+(oa)loI
+.
+lc μlo归 μ花 尼 k录o 是alol
+(Data-Driven Thinking)是 合LH.
+NotebookLM

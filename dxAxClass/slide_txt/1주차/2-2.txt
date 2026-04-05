@@ -1,0 +1,243 @@
+Source PDF: 1주차/2-2.pdf
+Status: image_only_or_unextractable
+Week: 1
+Deck: 2
+Part: 2
+Revision: None
+Page count: 15
+Nonempty pages: 0
+Total chars: 0
+Average chars per page: 0.0
+OCR available: True
+OCR pages with text: 15
+OCR total chars: 1402
+Anomalies: page_count_15
+
+Page data:
+
+=== Page 1 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+() ·:
+5:DX (BPR)
+6: A
+7: AI   合
+2
+NotebookLM
+
+=== Page 2 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+（Digitization）（BPR）
+异 (X)
+BPR:
+2:
+（）
+比 可'
+.
+(Eliminate)
+(Integrate)
+(Parallelize)
+NotebookLM
+
+=== Page 3 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+（）（
+B
+Before
+Before
+After
+After
+NotebookLM
+
+=== Page 4 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+（Bonck）
+1. 人(Time-consuming)
+2. 今 引 (Error-prone)
+AS-IS大
+1
+2
+3
+4
+5
+号
+NotebookLM
+
+=== Page 5 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Step3
+Ax(AlTransformation)gl
+号裂：
+Step 2
+lo 后
+（/
+Step 1
+()
+lol
+/
+(Doer)
+(Reviewer)
+NotebookLM
+
+=== Page 6 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+站（Automation）vs站（Intelligence）引
+苦（Automation）
+（Intelligence）
+品
+白lo
+2居号
+IF-THENL|()
+RPA,叫三
+ChatGPT, Claude  AI
+（Bypass&Continue)
+X
+(Stop)
+(xception)
+NotebookLM
+
+=== Page 7 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+（ntelligentWorkflow）：A
+Zero-to-One :     引  A  ( 80% )
+1E:Human
+2Ell:AlCopilot
+3E:Human
+(
+今
+R异品'肯2 善
+[
+10套
+Yl
+NotebookLM
+
+=== Page 8 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Generative Al
+1
+22
+32
+4
+NotebookLM
+
+=== Page 9 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Quick Win
+（）
+Strategic
+（Y）
+10
+.
+Hold
+Low Hanging Fruit
+。
+NotebookLM
+
+=== Page 10 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Step 1. 是 (Deconstruct)
+Step 2. 叫 (Map)
+Step3.台 (Position)
+品
+(lmpact)
+(Feasibility)
+是(正百 居 :o)吉 2o 忆
+品 后IV lo后为 号辟  应H亚
+(,
+(,,
+( , , ,
+存险应 是晶lol0 亿切 Io(l0号
+)
+NotebookLM
+
+=== Page 11 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+25:00
+[]AickWn
+: (Quick Win)ll
+1:00H
+k  IV Y  h,
+百Ylo百
+QuickWin
+Strategic
+（
+Hold
+LowHangingFr#
+2: AI  效
+NotebookLM
+
+=== Page 12 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+1.AS-IS2人是
+2. AI 人 7H豆
+3.
+豆?
+Quick Win171?
+叫:    召,  AI (ChatGPT, Claude )
+NotebookLM
+
+=== Page 13 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+5人：BPR
+6：GenAI
+7人：QuickWin
+(RPA)
+正lo
+LESSISMORE
+COPILOTOVERAUTOPILOT
+STARTSMALL,ACTFAT
+NotebookLM
+
+=== Page 14 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[llElSecurity】
+LH（Enterprise)Al
+[Resistance】
+[Hallucination]
+YY品%0OL
+Hma-n-te-oop（）
+NotebookLM
+
+=== Page 15 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+NexS（）
+ChatGPT
+3号开
+(What)？
+(How)？
+AI
+是
+(Quick Win) E 互鲁
+号：
+-  互 1企 Quick Win 叫则 引|三
+- ChatGPT  LH   AI  召
+NotebookLM

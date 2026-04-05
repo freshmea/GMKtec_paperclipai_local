@@ -1,0 +1,340 @@
+Source PDF: 1주차/1-2.pdf
+Status: image_only_or_unextractable
+Week: 1
+Deck: 1
+Part: 2
+Revision: None
+Page count: 20
+Nonempty pages: 0
+Total chars: 0
+Average chars per page: 0.0
+OCR available: True
+OCR pages with text: 20
+OCR total chars: 1829
+
+Page data:
+
+=== Page 1 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+DX(|）
+AX（AI克）
+后,屌, o吕季亡忆: 应亚亡 ·
+H百 Hly (dunr wnjuenO)立是 昌尼 后R异 民RR ·
+bo正
+1X（Archestratr)
+NotebookLM
+
+=== Page 2 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+引:DX VS AX
+high
+(Human-in-the-loop) —>
+AX
+序 K
+一
+DX
+low
+low
+外  (Value Creation)
+> high
+召(Focus)
+(Tool)
+登 (Output)
+DX:
+DX: 人 否 豆 (ERP, CRM)
+DX: 今 引  H人三
+AX:|
+AX: -AI  否 (LLM, Agent)
+AX:
+NotebookLM
+
+=== Page 3 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Data
+Process
+A
+hA 后良品
+alol
+o
+百品品
+(ROI)
+People
+A
+'AlOrchestrator'
+（早）
+NotebookLM
+
+=== Page 4 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+:A×(Activation Curve)
+1. o(Natural Language)
+l
+(Productivity)
+1 1 A
+2.
+Hlr (0)否k
+.
+(Tipping Point)
+(Initial Friction):
+y ly
+从 召 (Time/Experience)
+NotebookLM
+
+=== Page 5 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[Mini]（DA
+,
+Step 1.
+QuickWin
+（
+3
+(Value Impact)
+Step 2.
+Step 3.
+‘17
+（Repeatability）
+NotebookLM
+
+=== Page 6 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+BlackboxArchitectureFlow
+三三三
+/  / 0
+(品/能品)
+(引)
+2居号
+lo  oo loIyvx
+(Context)'‘L 今.
+NotebookLM
+
+=== Page 7 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+（
+ChatGPT
+Claude
+音月l02
+Perplexity
+MS Copilot
+/
+Midjourney
+Canva
+olo
+NotebookLM
+
+=== Page 8 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[]
+[]
+DataLeakage
+alo舌居五吉-
+-  (PII)
+-
+(A从，B）
+h
+品层lo
+百,,
+Y
+NotebookLM
+
+=== Page 9 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+：Human-in-the-Loop
+(Typist)   L(Editor)
+（）
+100%
+(20%)
+(60%)
+(20%)
+AI 哭
+I
+(40%)
+(10%)
+(50%)
+NotebookLM
+
+=== Page 10 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+PipelineBlueprint
+号：
+号：
+号：
+囚
+今
+号
+四号
+√
+NotebookLM
+
+=== Page 11 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+AxBeforAer
+[]
+[]
+8Hrs
+100Pages
+品
+L（Persona）
+1Page
+30Mins
+刮音弘（Template）
+80%
+NotebookLM
+
+=== Page 12 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+号
+□-
+[ A  5
+HolEl(Context)
+,
+2X
+郭 :  召 Perplexity, 合 是/是  Claude
+NotebookLM
+
+=== Page 13 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Y
+αN3N=}.111~1.
+"WYIAV"
+111
+7vvW
+/><</
+..
+0.v（v
+-    (Decisions)
+(
+(STTO|E)
+NotebookLM
+
+=== Page 14 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+角后角白lo音R
+(As-Is)
+（-Be）
+000
+□-区
+.
+#VALUE
+#VALUE!
+=SUMIFS（.）
+ChatGPT Advanced Data Analysis喜
+VBA)
+(RawData)
+NotebookLM
+
+=== Page 15 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[Mini]BestPractice&
+[]
+[古品 归 h]
+[日0]
+[7[ 豆]
+3
+引
+IY 辟 H
+1
+/
+号班大
+NotebookLM
+
+=== Page 16 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+A2早？
+是利（Pain-point）：
+:  A   ,           .
+NotebookLM
+
+=== Page 17 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+（B
+(As-Is)
+Data
+AI Tool
+Prompt
+2H (To-Be)
+(居能品)
+(早)
+(olylx)
+号班豆人
+NotebookLM
+
+=== Page 18 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[（Pan-point）
+2.
+1.
+3.
+一号（Bottleneck）
+(ndul)aloll能品
+引lol（Output）
+NotebookLM
+
+=== Page 19 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[2
+（）
+[（)]
+[AI] (:ChatGPT, Claude,Perplexity)
+[]
+():
+:(品是)白lo能品
+[]
+（
+NotebookLM
+
+=== Page 20 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+rap-up)
+后k 是k 后hYxlyx 克XV yloXa
+后
+AX 人L2| 互奢
+是:从三
+NextStp（472）
+引旱
+号lol
+IVRR :是
+7:DXI
+k
+6
+klhhho
+NotebookLM

@@ -1,0 +1,1550 @@
+{
+  "root": "/home/aa/kuBig2026/dxAxClass",
+  "summary": {
+    "pdf_count": 40,
+    "page_total": 790,
+    "nonextractable_pdf_count": 40,
+    "parse_error_count": 0,
+    "expected_page_count_per_pdf": 20
+  },
+  "weekly_summary": [
+    {
+      "week": 1,
+      "pdf_count": 11,
+      "page_total": 215,
+      "nonextractable_pdf_count": 11,
+      "missing_pairs": []
+    },
+    {
+      "week": 2,
+      "pdf_count": 10,
+      "page_total": 200,
+      "nonextractable_pdf_count": 10,
+      "missing_pairs": []
+    },
+    {
+      "week": 3,
+      "pdf_count": 10,
+      "page_total": 200,
+      "nonextractable_pdf_count": 10,
+      "missing_pairs": []
+    },
+    {
+      "week": 4,
+      "pdf_count": 9,
+      "page_total": 175,
+      "nonextractable_pdf_count": 9,
+      "missing_pairs": [
+        "18-1.pdf missing"
+      ]
+    }
+  ],
+  "anomaly_files": [
+    {
+      "file": "1주차/2-2.pdf",
+      "anomalies": [
+        "page_count_15"
+      ]
+    },
+    {
+      "file": "1주차/5-1-1.pdf",
+      "anomalies": [
+        "has_revision_suffix"
+      ]
+    },
+    {
+      "file": "4주차/18-2.pdf",
+      "anomalies": [
+        "page_count_15"
+      ]
+    }
+  ],
+  "records": [
+    {
+      "week": 1,
+      "relative_path": "1주차/1-1.pdf",
+      "file_name": "1-1.pdf",
+      "deck": 1,
+      "part": 1,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 1,
+      "relative_path": "1주차/1-2.pdf",
+      "file_name": "1-2.pdf",
+      "deck": 1,
+      "part": 2,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 1,
+      "relative_path": "1주차/2-1.pdf",
+      "file_name": "2-1.pdf",
+      "deck": 2,
+      "part": 1,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 1,
+      "relative_path": "1주차/2-2.pdf",
+      "file_name": "2-2.pdf",
+      "deck": 2,
+      "part": 2,
+      "revision": null,
+      "page_count": 15,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [
+        "page_count_15"
+      ],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 1,
+      "relative_path": "1주차/3-1.pdf",
+      "file_name": "3-1.pdf",
+      "deck": 3,
+      "part": 1,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 1,
+      "relative_path": "1주차/3-2.pdf",
+      "file_name": "3-2.pdf",
+      "deck": 3,
+      "part": 2,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 1,
+      "relative_path": "1주차/4-1.pdf",
+      "file_name": "4-1.pdf",
+      "deck": 4,
+      "part": 1,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 1,
+      "relative_path": "1주차/4-2.pdf",
+      "file_name": "4-2.pdf",
+      "deck": 4,
+      "part": 2,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 1,
+      "relative_path": "1주차/5-1-1.pdf",
+      "file_name": "5-1-1.pdf",
+      "deck": 5,
+      "part": 1,
+      "revision": 1,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [
+        "has_revision_suffix"
+      ],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 1,
+      "relative_path": "1주차/5-1.pdf",
+      "file_name": "5-1.pdf",
+      "deck": 5,
+      "part": 1,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 1,
+      "relative_path": "1주차/5-2.pdf",
+      "file_name": "5-2.pdf",
+      "deck": 5,
+      "part": 2,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 2,
+      "relative_path": "2주차/10-1.pdf",
+      "file_name": "10-1.pdf",
+      "deck": 10,
+      "part": 1,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 2,
+      "relative_path": "2주차/10-2.pdf",
+      "file_name": "10-2.pdf",
+      "deck": 10,
+      "part": 2,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 2,
+      "relative_path": "2주차/6-1.pdf",
+      "file_name": "6-1.pdf",
+      "deck": 6,
+      "part": 1,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 2,
+      "relative_path": "2주차/6-2.pdf",
+      "file_name": "6-2.pdf",
+      "deck": 6,
+      "part": 2,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 2,
+      "relative_path": "2주차/7-1.pdf",
+      "file_name": "7-1.pdf",
+      "deck": 7,
+      "part": 1,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 2,
+      "relative_path": "2주차/7-2.pdf",
+      "file_name": "7-2.pdf",
+      "deck": 7,
+      "part": 2,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 2,
+      "relative_path": "2주차/8-1.pdf",
+      "file_name": "8-1.pdf",
+      "deck": 8,
+      "part": 1,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 2,
+      "relative_path": "2주차/8-2.pdf",
+      "file_name": "8-2.pdf",
+      "deck": 8,
+      "part": 2,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 2,
+      "relative_path": "2주차/9-1.pdf",
+      "file_name": "9-1.pdf",
+      "deck": 9,
+      "part": 1,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 2,
+      "relative_path": "2주차/9-2.pdf",
+      "file_name": "9-2.pdf",
+      "deck": 9,
+      "part": 2,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 3,
+      "relative_path": "3주차/11-1.pdf",
+      "file_name": "11-1.pdf",
+      "deck": 11,
+      "part": 1,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 3,
+      "relative_path": "3주차/11-2.pdf",
+      "file_name": "11-2.pdf",
+      "deck": 11,
+      "part": 2,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 3,
+      "relative_path": "3주차/12-1.pdf",
+      "file_name": "12-1.pdf",
+      "deck": 12,
+      "part": 1,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 3,
+      "relative_path": "3주차/12-2.pdf",
+      "file_name": "12-2.pdf",
+      "deck": 12,
+      "part": 2,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 3,
+      "relative_path": "3주차/13-1.pdf",
+      "file_name": "13-1.pdf",
+      "deck": 13,
+      "part": 1,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 3,
+      "relative_path": "3주차/13-2.pdf",
+      "file_name": "13-2.pdf",
+      "deck": 13,
+      "part": 2,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 3,
+      "relative_path": "3주차/14-1.pdf",
+      "file_name": "14-1.pdf",
+      "deck": 14,
+      "part": 1,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 3,
+      "relative_path": "3주차/14-2.pdf",
+      "file_name": "14-2.pdf",
+      "deck": 14,
+      "part": 2,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 3,
+      "relative_path": "3주차/15-1.pdf",
+      "file_name": "15-1.pdf",
+      "deck": 15,
+      "part": 1,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 3,
+      "relative_path": "3주차/15-2.pdf",
+      "file_name": "15-2.pdf",
+      "deck": 15,
+      "part": 2,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 4,
+      "relative_path": "4주차/16-1.pdf",
+      "file_name": "16-1.pdf",
+      "deck": 16,
+      "part": 1,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 4,
+      "relative_path": "4주차/16-2.pdf",
+      "file_name": "16-2.pdf",
+      "deck": 16,
+      "part": 2,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 4,
+      "relative_path": "4주차/17-1.pdf",
+      "file_name": "17-1.pdf",
+      "deck": 17,
+      "part": 1,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 4,
+      "relative_path": "4주차/17-2.pdf",
+      "file_name": "17-2.pdf",
+      "deck": 17,
+      "part": 2,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 4,
+      "relative_path": "4주차/18-2.pdf",
+      "file_name": "18-2.pdf",
+      "deck": 18,
+      "part": 2,
+      "revision": null,
+      "page_count": 15,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [
+        "page_count_15"
+      ],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 4,
+      "relative_path": "4주차/19-1.pdf",
+      "file_name": "19-1.pdf",
+      "deck": 19,
+      "part": 1,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 4,
+      "relative_path": "4주차/19-2.pdf",
+      "file_name": "19-2.pdf",
+      "deck": 19,
+      "part": 2,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 4,
+      "relative_path": "4주차/20-1.pdf",
+      "file_name": "20-1.pdf",
+      "deck": 20,
+      "part": 1,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    },
+    {
+      "week": 4,
+      "relative_path": "4주차/20-2.pdf",
+      "file_name": "20-2.pdf",
+      "deck": 20,
+      "part": 2,
+      "revision": null,
+      "page_count": 20,
+      "nonempty_pages": 0,
+      "total_chars": 0,
+      "avg_chars_per_page": 0.0,
+      "status": "image_only_or_unextractable",
+      "anomalies": [],
+      "sample_page_char_counts": [
+        {
+          "page": 1,
+          "chars": 0
+        },
+        {
+          "page": 2,
+          "chars": 0
+        },
+        {
+          "page": 3,
+          "chars": 0
+        },
+        {
+          "page": 4,
+          "chars": 0
+        },
+        {
+          "page": 5,
+          "chars": 0
+        }
+      ],
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,298 @@
+Source PDF: 1주차/4-1.pdf
+Status: image_only_or_unextractable
+Week: 1
+Deck: 4
+Part: 1
+Revision: None
+Page count: 20
+Nonempty pages: 0
+Total chars: 0
+Average chars per page: 0.0
+OCR available: True
+OCR pages with text: 20
+OCR total chars: 1661
+
+Page data:
+
+=== Page 1 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+哈
+1.
+2k，o
+3.
+4.ChatGPT
+AIDA
+(4空型)
+号
+NotebookLM
+
+=== Page 2 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+（）
+h 是l2 后 b (xajuo)  h0 clo 用扣 号IV
+丽0
+()
+(Garbage Out)
+(是)
+(High-Quality Output)
+NotebookLM
+
+=== Page 3 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+()o()
+名七
+(Phenomenon)
+是列(Problem)
+NotebookLM
+
+=== Page 4 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+（
+（）
+号lo品
+10百Y
+平 :(When),0(Where), 叶LI(How much)?
+NotebookLM
+
+=== Page 5 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[Mini-Practice1]7
+5
+Y
+MIN
+Step1.（Before)
+Step 2.(After)
+,, ,
+1.
+Ho沿 vl否 晶序 白lol FY Iy 后 B品 2立 :lo
+St 3.   , A
+NotebookLM
+
+=== Page 6 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+2人：7引
+：
+.   (Decomposition)A
+AI
+(号)
+（21）
+：
+NotebookLM
+
+=== Page 7 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Who
+Why
+（10）
+(牛）
+(H)
+(昆Y品 :)
+Target
+How
+What
+：3
+Problem
+()
+（）
+(:)
+(百怕μ 开 五
+（）
+When
+Where
+厚后品2ly 后白loll
+（：20257）
+()
+())
+（：LB2BSaaS人人）
+NotebookLM
+
+=== Page 8 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+What Tree (ol 刑7?)
+WhyTree（？）
+HowTree（
+(RP)
+（Y/
+MECE (Mutually Exclusive, Collectively Exhaustive): 召元 , 召ol Lo2.
+NotebookLM
+
+=== Page 9 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+（TargetNode）：Ai
+Al（PromptTarget)
+CAC
+NotebookLM
+
+=== Page 10 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[Mini-Practice2]引号
+R
+A
+对（Point)
+三  (STT)
+刘三川豆.
+()
+NotebookLM
+
+=== Page 11 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+HUMAN
+AI
+BRAIN
+PROCESSOR
+（High-Context）
+（Low-Context）
+(Translator)
+"
+:.
+:.
+(Markdown）
+NotebookLM
+
+=== Page 12 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+号
+京三三三（Before）
+三三（After）
+(Category)
+2025B2BSaaS人7
+(Intent)
+(Format)
+(Tone)
+(,),()(,)
+NotebookLM
+
+=== Page 13 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Prompt:
+Prompt:
+Prompt:
+10
+.
+Output Result (Simulated text):
+Output Result (Simulated text):
+Output Result (Simulated text):
+（CTR）（CVR）
+ROI是刁（BEP）
+/
+,3
+"
+是...
+NotebookLM
+
+=== Page 14 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+-L?
+C-Context
+- ？()
+(
+（）
+C-Constraint
+(Hnlo 00s :|lo) 混音 -
+(自E:)  -
+r olr bolx号
+NotebookLM
+
+=== Page 15 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[Mini-Practice3]C-T-C7
+（Conx）：
+:.010%
+3 ,
+（Constrant）：
+HY0:
+NotebookLM
+
+=== Page 16 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+TOP SECRET
+[MissionBrief]L
+Step 1:
+Step 2:
+Step 3:
+公是H（LogicTree）
+飞号（Multi-Turn)
+（C--C）
+NotebookLM
+
+=== Page 17 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+()
+AY/'T
+1-1.型对
+1-2. UX/UI 号型
+2.
+2-1.
+[] Y-
+17H(Target Node)
+3.  .
+NotebookLM
+
+=== Page 18 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Step2：卫2号（Multi-Turn）
+k I  Y,乙-Z
+品
+Y品归
+300
+500
+吾SNSO
+SP15
+200
+NotebookLM
+
+=== Page 19 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+(Review)
+(Refine)
+H列（Multi-Turn)：GPT召o||，
+NotebookLM
+
+=== Page 20 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+DX·AX2（TheFinalBlueprint）
+[]
+[
+（C-TC）？
+[登]
+NotebookLM

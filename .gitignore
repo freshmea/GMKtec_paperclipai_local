@@ -3,3 +3,6 @@ models/
 .env
 workspace/
 paperclip-data/
+.tools/
+.vscode/
+__pycache__/

@@ -1,0 +1,272 @@
+Source PDF: 1주차/1-1.pdf
+Status: image_only_or_unextractable
+Week: 1
+Deck: 1
+Part: 1
+Revision: None
+Page count: 20
+Nonempty pages: 0
+Total chars: 0
+Average chars per page: 0.0
+OCR available: True
+OCR pages with text: 20
+OCR total chars: 1540
+
+Page data:
+
+=== Page 1 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+D
+NotebookLM
+
+=== Page 2 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Transformation Journey Map
+.
+(4/27 ~ 5/6)
+3：
+(/xo)白
+nn
+(4/20 ~ 4/24)
+2：
+Output:n8n三
+1：
+(4/13 ~ 4/17)
+(4/6 ~ 4/10)
+音lol
+DX·AX
+Output:Allo目
+Output：
+NotebookLM
+
+=== Page 3 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+：030%/70%
+吉品H
+Hslo
+（gie）
+三E
+NotebookLM
+
+=== Page 4 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+5MIN
+AS-IS: Pain-point
+TO-BEA
+NotebookLM
+
+=== Page 5 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Session1R
+Session2三2lH：TheParadigm
+号0 l0
+XX
+NotebookLM
+
+=== Page 6 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+DX(DigitalTransformation)
+Z思号（HumanBottleneck）
+I
+.
+Y-
+DX ()
+l
+RF
+Digitalization（C）
+CRM
+Digitization（）
+NotebookLM
+
+=== Page 7 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+AX（AlTransformation）
+AX:
+AX:
+→
+GenAI
+Rule-based 人→ Context-based Ⅱ三L
+(Context-based)
+→
+DataDX
+(Rule-based)
+NotebookLM
+
+=== Page 8 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+(Legacy)
+(xa) YP
+2H (AX)
+正百 阳
+Data Chart
+Al Gear
+Written Document
+NotebookLM
+
+=== Page 9 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+(Sweet Spot)
+R
+品
+—
+NotebookLM
+
+=== Page 10 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+NotebookLM
+
+=== Page 11 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Y-
+（Domain
+Knowledge)
+NotebookLM
+
+=== Page 12 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+UseCase1：2大70
+（）
+AI召(Perplexity)
+TimeSaved:70%2人2
+TO-BE：AX4U
+NotebookLM
+
+=== Page 13 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+UseCase2：（Draft）
+PromptAnatomy（三三旱）
+：（Blankpage）
+→
+[ 15 .]
+:
+['可 lo 品 &lY  Iolo
+2mxlo征L 强正百 klo应品是 乏可晶 是号H lo]
+,    .]
+ok，
+NotebookLM
+
+=== Page 14 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+(Reverse-engineering)
+PerfectOutput
+[（Role)]:
+[（Goal)]:
+[(Format)]:
+2.(30%)
+百
+NotebookLM
+
+=== Page 15 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Session3豆Session4三己
+AI
+S
+NotebookLM
+
+=== Page 16 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+ChatGPT
+Claude
+Gemini
+(OpenAl)
+(Anthropic)
+(Google)
+Key Strength:
+Key Strength:
+Key Strength:
+Advanced Data Analysis
+/PDF
+(DocS,
+居有音 白lob/晟
+o品
+居有 IloR位
+2
+ChatGPTClaudeL
+NotebookLM
+
+=== Page 17 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+（）
+C+R+I+C=号
+Context() +Role() + Instruction(冈人) +Constraint(M/)
+（0）
+[2026  三三0 H] (Context)
+[L 10洲.] (Role)
+卫  裂.
+[3   .] (Instruction)
+[印己.] (Constraint)
+NotebookLM
+
+=== Page 18 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+15MIN
+PRACTICE
+TIME
+2（Checklist）
+Pain-point'
+ChatGPTClaude
+CR
+（BreakingGrond）
+NotebookLM
+
+=== Page 19 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+（g）
+1  (CRIC )
+号五,,音-
+AI
+怕Y
+：卫2（Follow-upPrompt）
+():
+,2
+叶(teration)
+AI
+NotebookLM
+
+=== Page 20 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+1人
+X
+(CI)
+-D
+NotebookLM

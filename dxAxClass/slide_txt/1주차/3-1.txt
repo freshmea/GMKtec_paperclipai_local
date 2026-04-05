@@ -1,0 +1,374 @@
+Source PDF: 1주차/3-1.pdf
+Status: image_only_or_unextractable
+Week: 1
+Deck: 3
+Part: 1
+Revision: None
+Page count: 20
+Nonempty pages: 0
+Total chars: 0
+Average chars per page: 0.0
+OCR available: True
+OCR pages with text: 20
+OCR total chars: 2505
+
+Page data:
+
+=== Page 1 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[1卫人]
+40%
+60%
+SYNERGYFORCE
+DATA FLOW
+INTEGRATIONPOINT
+ORGANISMPOINT
+5009
+号班：，
+00000
+00003
+A？
+o后V：漏百品屌
+3C0S
+人|Lxl(Human-Al Collaboration)
+DATAFLOW
+INTEGRATION
+SYNERGYFORCE
+POINT
+40%
+60%
+,.D3.
+L   A ？ A . 1 A
+NotebookLM
+
+=== Page 2 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+—引o 喜：H(Replacement)o(Augmentation)
+：A7LH2H（Replacement)
+AI
+(Human)
+Al(Artificial
+Intelligence)
+V
+·：A（Colo
+: A L    ?     .   To    A
+NotebookLM
+
+=== Page 3 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Al7o引（TheAlAdvantage）
+O
+后Hlo归 声A 归品
+印人三喜是异
+Lens
+可 号h R牌
+0.8今
+: A,   A    .    3  ,
+A0., 10.8
+NotebookLM
+
+=== Page 4 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+(
+()
+：（Cx）
+[]
+(AI早)
+（花)品能2￥l
+→
+(AI 早)
+: , A      .   ' . A
+,      ,
+NotebookLM
+
+=== Page 5 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+早H大叫三引（TaskRelocationMatrix)
+白lol
+★AIE印★
+(Data-intensive)
+会号，目
+Y-Axis
+晶
+(Relational)
+今7l(Intuition-based)
+←X-Axis →
+(Rule-based)
+品n '百lyMlc IkoV 号y 号B 号 lo和 是白lol 正海品 lok h是 Iclylc  是后 lo :盲是E Y&
+.
+NotebookLM
+
+=== Page 6 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+：Task
+？
+Task
+（
+（
+：
+Task
+(Task Decomposition)
+NotebookLM
+
+=== Page 7 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+：（o）（Su-tsk）
+[Job]-
+[Duy]
+·AJob/DutyH对司
+lyllo ,t-qns,
+(ActionVerb)否
+（Hallucination）
+[Sub-ask]
+:   .  , ,    .
+, 53  S-a
+NotebookLM
+
+=== Page 8 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+Input ()
+Process(引)
+(旨loll差) ndno
+L是
+0
+？
+？
+:    IPO  .   (I) , A
+(Procss) ,     (utut)
+NotebookLM
+
+=== Page 9 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+A3（he3FitChecks）
+（Clarity)
+斗（Digitization）
+？
+乏(首Yh/lY吾)怕邑
+PerfectFit
+否？
+（Frequency)
+(ROI 香)
+x      h K :Y
+NotebookLM
+
+=== Page 10 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+（seCas）
+正百o
+1: 引0目 是三
+2:
+Ylo:
+(2o)
+(AI)
+(AI)
+(AI)
+[Before]  3从豆
+[After]30是豆（豆号600%71）
+NotebookLM
+
+=== Page 11 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[3]
+Workshop
+Guide
+Step 1: List (L)
+Step 2:Deconstruct（是l)
+Step3:Score(7l)
+2
+3
+0-0-0-0-0
+NotebookLM
+
+=== Page 12 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[Step1]L合日2三（BrainDump）
+11
+品吉品
+57
+1人
+(会号)
+：
+2
+2到
+2人
+叫早 盖品
+里，号
+Action Item 本香
+5Min
+品
+Action
+乒号（TimeThief）o片
+4
+5
+NotebookLM
+
+=== Page 13 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[Sp2]P07
+[Input]否号
+[Process]
+[Output]
+号lo  可
+,,
+司人舍人★★
+早?
+?
+·1：
+？
+·2：
+3
+/:
+NotebookLM
+
+=== Page 14 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+[Step3]AlEE7(Effortvs.Impact)
+★QuickWins(A早引)
+(Major Projects)
+ho号品品vlY 显品E号哥
+百能品
+(lmpact)
+(-!)
+享异(Drop)
+器
+(号)
+AI | (Effort)
+（引）
+NotebookLM
+
+=== Page 15 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+（）
+[Process]
+Best Practice
+b吾百 lo是lL 号2lo,显,~R酶, :肯可) <-
+)
+[Process]
+“ 2
+互 Quick Wins 引7水
+后E(品五x名名)扇l010 民 亨(e
+外印卫引L班（Table)印.
+NotebookLM
+
+=== Page 16 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+（
+AX
+(Al Transformation)
+2h lob品 居世音
+r（Summarize)
+o （Generate）
+r （Analyze)
+KI(Assist)
+Al
+是 lo后 l0v品
+百百立号立晶吉品
+o
+NotebookLM
+
+=== Page 17 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+是异：477（The4Pillars）
+1.
+2.
+3.
+lot
+(Assist)
+(Summarize)
+(Generate)
+(Analyze)
+l
+1号   llo ·
+·人人
+·
+居ly 晟yo 补lc aloll ·
+NotebookLM
+
+=== Page 18 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+DeepDive 1:(Assist)(Summarize)
+[司]
+品2Y[可]
+A4
+MUENESS
+LETIER
+BEFORE
+AFTER
+BEFORE:50+Pages
+AFTER:1-Page Table
+2lY xlYl2 ble停是 是月lol 厚A 孕h品 :湿量 ·
+,
+:0PDF,
+）l（Tone&Manner）
+NotebookLM
+
+=== Page 19 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+DeepDive2：（Generate）是（Analyze)
+[]
+BCASSCA
+0eg26
+：（Zero）（One)
+磊三口kYlloAlo:·
+：2030
+百可名n 量日lo 晨 暑加 x 目e k, :lrlb 吉晟
+,
+NotebookLM
+
+=== Page 20 ===
+chars: 0
+parser_text: [no extractable text detected with local parser]
+ocr_text:
+：AMyBlueprint)
+[]
+[碧印]
+2品吉品1后h
+(Assist)
+E片品l豆Od
+(Summarize)
+RRY
+(Generate)
+NxS（:
+(Analyze)
+LTOPLHR
+AHLAIAOEEOIZLZLALEI
+AL
+NotebookLM
