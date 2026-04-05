@@ -1,2 +1,5 @@
 models/
 .venv-rocm/
+.env
+workspace/
+paperclip-data/

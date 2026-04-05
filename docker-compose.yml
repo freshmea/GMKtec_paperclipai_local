@@ -1,8 +1,9 @@
 # =============================================================================
-# LLM 추론 서버 + OpenCode + PaperClip Docker Compose
+# LLM 추론 서버 + OpenCode Docker Compose
 # GMKtec EVO-X2 | AMD Ryzen AI MAX+ 395 | 128GB LPDDR5
 # Radeon 8060S (gfx1151, RDNA 4) — ROCm 7.2 + llama.cpp
 # =============================================================================
+# PaperClip은 npm 로컬 설치로 운영 (docker 외부)
 # 참고: https://github.com/kyuz0/amd-strix-halo-toolboxes
 # =============================================================================
 
@@ -40,10 +41,15 @@ services:
       --port 8000
       -m /models/${MODEL_FILENAME:-gemma-4-31B-it-Q4_K_M.gguf}
       --alias ${SERVED_MODEL_NAME:-gemma-4-31b-it}
+      -t ${OMP_NUM_THREADS:-32}
       -ngl 999
-      -fa
+      -fa on
       --no-mmap
-      -c ${CONTEXT_LENGTH:-8192}
+      -c ${CONTEXT_LENGTH:-131072}
+      -np ${PARALLEL_SLOTS:-2}
+      --cache-type-k q8_0
+      --cache-type-v q8_0
+      --reasoning-format deepseek
     deploy:
       resources:
         limits:
@@ -65,7 +71,7 @@ services:
     image: smanx/opencode:latest
     container_name: opencode-web
     ports:
-      - "${OPENCODE_PORT:-3000}:3000"
+      - "${OPENCODE_PORT:-3000}:4096"
     environment:
       - OPENAI_API_BASE=http://llm:8000/v1
       - OPENAI_API_KEY=${OPENAI_API_KEY:-sk-no-key-required}
@@ -78,53 +84,6 @@ services:
     restart: unless-stopped
     networks:
       - llm-network
-
-  # ---------------------------------------------------------------------------
-  # PaperClip - AI 오케스트레이션 플랫폼
-  # ---------------------------------------------------------------------------
-  paperclip-db:
-    image: postgres:17-alpine
-    container_name: paperclip-postgres
-    environment:
-      POSTGRES_USER: ${PG_USER:-paperclip}
-      POSTGRES_PASSWORD: ${PG_PASSWORD:-paperclip}
-      POSTGRES_DB: ${PG_DB:-paperclip}
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${PG_USER:-paperclip} -d ${PG_DB:-paperclip}"]
-      interval: 2s
-      timeout: 5s
-      retries: 30
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    restart: unless-stopped
-    networks:
-      - llm-network
-
-  paperclip:
-    image: ghcr.io/paperclipai/paperclip:latest
-    container_name: paperclip-server
-    ports:
-      - "${PAPERCLIP_PORT:-3100}:3100"
-    environment:
-      DATABASE_URL: postgres://${PG_USER:-paperclip}:${PG_PASSWORD:-paperclip}@paperclip-db:5432/${PG_DB:-paperclip}
-      PORT: "3100"
-      SERVE_UI: "true"
-      PAPERCLIP_DEPLOYMENT_MODE: "authenticated"
-      PAPERCLIP_DEPLOYMENT_EXPOSURE: "private"
-      PAPERCLIP_PUBLIC_URL: "${PAPERCLIP_PUBLIC_URL:-http://localhost:3100}"
-      BETTER_AUTH_SECRET: "${BETTER_AUTH_SECRET:-change-this-secret-in-production}"
-    volumes:
-      - paperclip-data:/paperclip
-    depends_on:
-      paperclip-db:
-        condition: service_healthy
-    restart: unless-stopped
-    networks:
-      - llm-network
-
-volumes:
-  pgdata:
-  paperclip-data:
 
 networks:
   llm-network:

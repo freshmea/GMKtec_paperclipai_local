@@ -1,4 +1,4 @@
-# vLLM + OpenCode + PaperClip Docker Compose 스택
+# LLM 추론 서버 + OpenCode + PaperClip 스택
 
 **GMKtec EVO-X2 | AMD Ryzen AI MAX+ 395 | Ubuntu 24.04**
 
@@ -10,7 +10,7 @@
 2. [아키텍처 개요](#2-아키텍처-개요)
 3. [사전 준비](#3-사전-준비)
 4. [모델 다운로드](#4-모델-다운로드)
-5. [Docker Compose 실행](#5-docker-compose-실행)
+5. [서비스 실행](#5-서비스-실행)
 6. [서비스 상세](#6-서비스-상세)
 7. [양자화 및 KV 캐시 설정](#7-양자화-및-kv-캐시-설정)
 8. [하드웨어 최적화](#8-하드웨어-최적화)
@@ -26,40 +26,49 @@
 | OS | Ubuntu 24.04.4 LTS |
 | 커널 | 6.17.0-20-generic |
 | CPU | AMD Ryzen AI MAX+ 395 w/ Radeon 8060S (16C/32T, 최대 5187 MHz) |
-| RAM | 64GB (iGPU와 공유) |
-| GPU | AMD Radeon 8060S (iGPU, gfx1150, RDNA 4) |
-| GPU 드라이버 | `amdgpu` 커널 모듈 |
+| RAM | 128GB LPDDR5 (iGPU와 공유) |
+| GPU | AMD Radeon 8060S (iGPU, gfx1151, RDNA 4) |
+| GPU 드라이버 | `amdgpu` 커널 모듈 + ROCm 7.2 |
 
 > **참고:** 본 시스템은 iGPU(통합 그래픽)를 사용하며, VRAM은 시스템 메모리에서 할당됩니다.
-> 128GB VRAM 사용을 위해서는 물리 RAM 128GB + BIOS UMA 설정이 필요합니다.
+> BIOS UMA 64GB 고정 + GTT ~105GB 동적 할당으로 운용합니다.
 
 ## 2) 아키텍처 개요
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    Docker Compose Stack                       │
-│                                                               │
-│  ┌─────────────┐   ┌──────────────┐   ┌──────────────────┐  │
-│  │   vLLM       │   │  OpenCode    │   │   PaperClip      │  │
-│  │  :8000       │   │  :3000       │   │   :3100           │  │
-│  │  OpenAI API  │◄──│  AI Coding   │   │   AI Orchestrator │  │
-│  │  Gemma 4 31B │   │  Assistant   │   │                   │  │
-│  │  Q4_K_M GGUF │   │              │   │  ┌─────────────┐ │  │
-│  └─────────────┘   └──────────────┘   │  │ PostgreSQL  │ │  │
-│                                        │  │ :5432       │ │  │
-│                                        │  └─────────────┘ │  │
-│                                        └──────────────────┘  │
-│                                                               │
-│                     [llm-network bridge]                      │
-└─────────────────────────────────────────────────────────────┘
+┌──────────────────────────── Docker Compose ─────────────────────────────┐
+│                                                                         │
+│  ┌──────────────────┐            ┌──────────────────┐                  │
+│  │   llama-server    │            │    OpenCode       │                  │
+│  │   (ROCm 7.2)     │◄───────────│    Web UI         │                  │
+│  │   :8000           │            │    :3000→4096     │                  │
+│  │   OpenAI API      │            │    AI Coding      │                  │
+│  │   gemma-4-31B     │            │    Assistant      │                  │
+│  └────────┬─────────┘            └──────────────────┘                  │
+│           │                                                             │
+│           │  [llm-network bridge]                                       │
+└───────────┼─────────────────────────────────────────────────────────────┘
+            │
+            │ http://localhost:8000/v1
+            │
+┌───────────┼──────────── 호스트 (npm 로컬) ──────────────────────────────┐
+│           │                                                             │
+│  ┌────────▼─────────┐    ┌────────────────┐    ┌────────────────┐      │
+│  │   PaperClip       │    │  Codex CLI      │    │  기타 도구      │      │
+│  │   (paperclipai)   │    │  (@openai/codex)│    │                │      │
+│  │   :3100           │    │                 │    │                │      │
+│  │   AI Orchestrator │    │  ChatGPT Plus   │    │                │      │
+│  │   내장 PostgreSQL  │    │  Auth           │    │                │      │
+│  └──────────────────┘    └────────────────┘    └────────────────┘      │
+└─────────────────────────────────────────────────────────────────────────┘
 ```
 
-| 서비스 | 이미지 | 포트 | 역할 |
-|--------|--------|------|------|
-| vllm | 커스텀 빌드 (Dockerfile.vllm) | 8000 | Gemma 4 31B 추론 서버 (OpenAI 호환 API) |
-| opencode | `smanx/opencode:latest` | 3000 | AI 코딩 어시스턴트 웹 UI |
-| paperclip | `ghcr.io/paperclipai/paperclip:latest` | 3100 | AI 오케스트레이션 플랫폼 |
-| paperclip-db | `postgres:17-alpine` | (내부) | PaperClip 데이터베이스 |
+| 구성요소 | 실행 환경 | 포트 | 역할 |
+|----------|-----------|------|------|
+| llama-server | Docker (ROCm 7.2) | 8000 | LLM 추론 서버 (OpenAI 호환 API) |
+| OpenCode | Docker | 3000 | AI 코딩 어시스턴트 웹 UI |
+| PaperClip | npm 로컬 | 3100 | AI 오케스트레이션 플랫폼 (내장 PostgreSQL) |
+| Codex CLI | npm 로컬 | - | OpenAI Codex CLI (ChatGPT Plus 인증) |
 
 ## 3) 사전 준비
 
@@ -91,15 +100,26 @@ newgrp docker
 # 또는 로그아웃 후 재로그인
 ```
 
-검증:
+### 3-3. Node.js 및 npm 도구 설치
 
 ```bash
-docker --version
-docker compose version
-docker run hello-world
+# Node.js 22 설치 (이미 설치되어 있으면 건너뛰기)
+node --version  # v22.x 확인
+
+# npm 전역 디렉토리 설정 (sudo 없이 설치)
+mkdir -p ~/.npm-global
+npm config set prefix '~/.npm-global'
+echo 'export PATH="$HOME/.npm-global/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+
+# PaperClip CLI 설치
+npm install -g paperclipai
+
+# Codex CLI 설치 (선택)
+npm install -g @openai/codex
 ```
 
-### 3-3. 작업 디렉토리 생성
+### 3-4. 작업 디렉토리 생성
 
 ```bash
 mkdir -p models workspace
@@ -129,62 +149,63 @@ huggingface-cli download \
 >
 > 대안: `bartowski/google_gemma-4-31B-it-GGUF`, `lmstudio-community/gemma-4-31B-it-GGUF`
 
-## 5) Docker Compose 실행
+## 5) 서비스 실행
 
-### 환경변수 설정
-
-`.env` 파일이 프로젝트 루트에 포함되어 있습니다. 필요에 따라 수정하세요:
+### Docker 서비스 (LLM + OpenCode)
 
 ```bash
-# 주요 설정 확인/수정
-vi .env
-```
+# LLM 서버 + OpenCode 시작
+docker compose up -d
 
-### 전체 스택 시작
-
-```bash
-# vLLM Docker 이미지 빌드 + 전체 서비스 시작
-docker compose up -d --build
-```
-
-### 개별 서비스 시작
-
-```bash
-# vLLM만 시작
-docker compose up -d vllm
-
-# OpenCode만 시작 (vLLM 의존)
-docker compose up -d opencode
-
-# PaperClip만 시작
-docker compose up -d paperclip
-```
-
-### 상태 확인
-
-```bash
+# 상태 확인
 docker compose ps
-docker compose logs -f vllm
-docker compose logs -f opencode
-docker compose logs -f paperclip
+docker compose logs -f llm
+```
+
+### PaperClip (npm 로컬)
+
+```bash
+# 최초 실행 — 초기화 + 서버 시작
+paperclipai onboard --yes --data-dir ./paperclip-data
+
+# 이후 실행
+paperclipai run --data-dir ./paperclip-data
+
+# LLM 설정 변경
+paperclipai configure --section llm --data-dir ./paperclip-data
+
+# 진단
+paperclipai doctor --data-dir ./paperclip-data
+```
+
+### 개별 Docker 서비스
+
+```bash
+# LLM만 시작
+docker compose up -d llm
+
+# OpenCode만 시작 (LLM 의존)
+docker compose up -d opencode
 ```
 
 ### 중지
 
 ```bash
+# Docker 서비스 중지
 docker compose down
-# 볼륨 포함 완전 삭제:
-# docker compose down -v
+
+# PaperClip 중지: Ctrl+C 또는 프로세스 종료
 ```
 
 ## 6) 서비스 상세
 
-### 6-1. vLLM (LLM 추론 서버)
+### 6-1. LLM 추론 서버 (llama-server + ROCm)
 
 - **엔드포인트:** `http://localhost:8000`
 - **API:** OpenAI Chat Completions 호환
 - **모델:** Gemma 4 31B IT (Q4_K_M GGUF)
-- **모드:** CPU 추론 (32 스레드)
+- **이미지:** `kyuz0/amd-strix-halo-toolboxes:rocm-7.2`
+- **GPU:** ROCm 7.2 가속 (gfx1151 네이티브 지원)
 
 API 테스트:
 
@@ -205,45 +226,55 @@ curl http://localhost:8000/v1/chat/completions \
 ### 6-2. OpenCode (AI 코딩 어시스턴트)
 
 - **웹 UI:** `http://localhost:3000`
-- **LLM 연동:** vLLM 서버 자동 연결 (`http://vllm:8000/v1`)
+- **LLM 연동:** LLM 서버 자동 연결 (`http://llm:8000/v1`)
 - **작업 디렉토리:** `./workspace` 마운트
 
-> **참고:** OpenCode는 현재 아카이브 상태이며, 후속 프로젝트는 [Crush](https://github.com/charmbracelet/crush)입니다.
-> Docker 이미지 `smanx/opencode`는 100K+ 다운로드로 안정적입니다.
-
-### 6-3. PaperClip (AI 오케스트레이션)
+### 6-3. PaperClip (AI 오케스트레이션 — npm 로컬)
 
 - **웹 UI:** `http://localhost:3100`
-- **데이터베이스:** PostgreSQL 17 (자동 구성)
-- **인증:** BETTER_AUTH_SECRET 환경 변수로 설정
+- **데이터베이스:** 내장 PostgreSQL (자동 구성, 포트 54329)
+- **인증:** `local_trusted` 모드 (로컬 접속 자동 신뢰)
+- **데이터 디렉토리:** `./paperclip-data/`
+- **설정 파일:** `./paperclip-data/instances/default/config.json`
 
-> **참고:** `.env`의 `BETTER_AUTH_SECRET` 값을 프로덕션 환경에서는 반드시 변경하세요.
+PaperClip은 Docker가 아닌 npm 로컬로 실행됩니다. Codex CLI, 로컬 LLM 등
+호스트 도구와의 연동이 자유롭습니다.
 
-## 7) 양자화 및 KV 캐시 설정
+```bash
+# LLM 설정 (config.json의 llm 섹션)
+paperclipai configure --section llm --data-dir ./paperclip-data
 
-### TurboQuant 상태
+# 모델 변경, codex 어댑터 등 자유롭게 설정 가능
+```
 
-TurboQuant는 현재 vLLM PR 단계입니다 (PR #38662, #38479, #38280). 아직 메인 브랜치에
-머지되지 않아 사용할 수 없습니다.
+### 6-4. Codex CLI (선택)
 
-### FP8 KV 캐시
+- **인증:** ChatGPT Plus (Google OAuth)
+- **설정:** `~/.codex/config.toml`
 
-FP8 KV 캐시(`--kv-cache-dtype fp8`)는 NVIDIA Ada Lovelace/Hopper GPU에서만 지원됩니다.
-AMD GPU 및 CPU 모드에서는 사용할 수 없습니다.
+```bash
+# 인증
+codex auth login
+
+# 사용
+codex "설명할 내용"
+```
+
+## 7) 양자화 및 모델 설정
 
 ### 현재 적용된 최적화
 
 | 항목 | 설정 | 비고 |
 |------|------|------|
 | 모델 양자화 | Q4_K_M (GGUF) | 31B 모델을 ~18GB로 압축 |
-| KV 캐시 | `--kv-cache-dtype auto` | 자동 최적 선택 |
-| KV 캐시 공간 | `VLLM_CPU_KVCACHE_SPACE=40` (GB) | CPU 모드 KV 캐시 크기 |
-| 컨텍스트 길이 | `--max-model-len 8192` | 메모리에 맞게 조정 가능 |
-| CPU 스레드 | `OMP_NUM_THREADS=32` | 16C/32T 풀 활용 |
+| GPU 오프로드 | `-ngl 999` (전 레이어) | ROCm GPU 가속 |
+| Flash Attention | `-fa on` | 메모리 효율 어텐션 |
+| 메모리 매핑 | `--no-mmap` | 안정성 우선 |
+| 컨텍스트 길이 | `-c 8192` | 메모리에 맞게 조정 가능 |
+| CPU 스레드 | `-t 32` | 16C/32T 풀 활용 |
 
-> **GGUF Q4_K_M 선택 이유:** 31B 모델을 64GB RAM 시스템에서 실행 가능하게 하면서
-> 품질 손실을 최소화하는 최적의 균형점입니다. Q5_K_M(~21GB)도 가능하지만
-> KV 캐시 공간이 줄어듭니다.
+> **GGUF Q4_K_M 선택 이유:** 31B 모델을 128GB 공유 메모리 시스템에서 실행하면서
+> 품질 손실을 최소화하는 최적의 균형점입니다.
 
 ## 8) 하드웨어 최적화
 
@@ -260,133 +291,64 @@ echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governo
 ### 메모리 최적화
 
 ```bash
-# 대용량 페이지 활성화 (32B 모델 로딩 최적화)
+# 대용량 페이지 활성화
 echo 'vm.nr_hugepages=1024' | sudo tee -a /etc/sysctl.conf
 sudo sysctl -p
-
-# swap 비활성화 (성능 향상)
-sudo swapoff -a
 ```
 
-### vLLM 네이티브 실행 (Docker 없이, ROCm GPU 가속)
+### iGPU 메모리 구조
 
-Docker 대신 호스트에서 직접 실행하면 ROCm GPU 가속을 활용할 수 있습니다:
+| 메모리 | 크기 | 용도 |
+|--------|------|------|
+| VRAM (UMA) | 64GB | BIOS 고정 할당, GPU 프레임버퍼 |
+| GTT | ~105GB | 동적 할당, 모델 텐서 로딩 |
+| 시스템 | 128GB | 전체 물리 메모리 (VRAM+GTT 공유) |
 
-```bash
-export HSA_OVERRIDE_GFX_VERSION=11.5.0
-export VLLM_USE_TRITON_FLASH_ATTN=0
-export OMP_NUM_THREADS=32
+## 9) ROCm GPU 가속
 
-numactl --cpunodebind=0 --membind=0 \
-python3 -m vllm.entrypoints.openai.api_server \
-  --model ./models/gemma-4-31B-it-Q4_K_M.gguf \
-  --served-model-name gemma-4-31b-it \
-  --dtype auto \
-  --gpu-memory-utilization 0.92 \
-  --max-model-len 8192
-```
-
-## 9) ROCm GPU 가속 (선택)
-
-현재 `vllm/vllm-openai` Docker Hub에 ROCm 태그가 없습니다.
-ROCm GPU 가속을 Docker에서 사용하려면 아래 두 가지 방법이 있습니다:
-
-### 방법 A: vLLM ROCm 소스 빌드
-
-```bash
-# vLLM 소스 클론
-git clone --depth 1 --branch v0.19.0 \
-    https://github.com/vllm-project/vllm.git /tmp/vllm-src
-
-# ROCm Dockerfile로 빌드 (1~2시간 소요)
-cd /tmp/vllm-src
-DOCKER_BUILDKIT=1 docker build \
-    --target vllm-openai \
-    --tag vllm-rocm:v0.19.0 \
-    --file docker/Dockerfile.rocm .
-```
-
-빌드 완료 후 `docker-compose.yml`에서 vllm 서비스의 `build` 섹션을 변경:
-
-```yaml
-vllm:
-  image: vllm-rocm:v0.19.0
-  # build: 섹션 제거
-  devices:
-    - /dev/kfd
-    - /dev/dri
-  group_add:
-    - video
-    - render
-  command: >
-    --host 0.0.0.0
-    --port 8000
-    --model /models/gemma-4-31B-it-Q4_K_M.gguf
-    --served-model-name gemma-4-31b-it
-    --max-model-len 8192
-    --kv-cache-dtype auto
-    --dtype auto
-    --gpu-memory-utilization 0.92
-```
-
-### 방법 B: Dockerfile.vllm-rocm 사용
-
-```bash
-# docker-compose.yml의 vllm 서비스 dockerfile을 변경
-# dockerfile: Dockerfile.vllm → dockerfile: Dockerfile.vllm-rocm
-# + devices 추가
-docker compose up -d --build vllm
-```
-
-> **참고:** Radeon 8060S (gfx1150, RDNA 4)의 ROCm 지원은 ROCm 버전에 따라 실험적입니다.
-> `HSA_OVERRIDE_GFX_VERSION=11.5.0` 환경변수가 필요할 수 있습니다.
+현재 아키텍처는 `kyuz0/amd-strix-halo-toolboxes:rocm-7.2` 이미지로
+ROCm 7.2 GPU 가속을 기본 사용합니다. gfx1151 네이티브 지원으로
+`HSA_OVERRIDE_GFX_VERSION` 설정이 불필요합니다.
 
 ## 10) 트러블슈팅
 
-### vLLM 시작이 느림
+### LLM 서버 시작이 느림
 
-CPU 모드에서 31B 모델 로딩에 2~5분 소요될 수 있습니다.
-`start_period: 120s` 헬스체크 설정으로 충분한 시간을 부여하고 있습니다.
+ROCm GPU 모드에서 31B 모델 로딩에 2~3분 소요될 수 있습니다.
+`start_period: 180s` 헬스체크 설정으로 충분한 시간을 부여합니다.
 
 ```bash
-# 로그 확인
-docker compose logs -f vllm
+docker compose logs -f llm
 ```
 
 ### 메모리 부족 (OOM)
 
-`.env`에서 설정 조정:
-
 ```bash
-# KV 캐시 크기 줄이기
-VLLM_CPU_KVCACHE_SPACE=20
+# 컨텍스트 길이 줄이기 (.env)
+CONTEXT_LENGTH=4096
 
-# 컨텍스트 길이 줄이기
-MAX_MODEL_LEN=4096
-
-# 컨테이너 메모리 제한 줄이기
-VLLM_MEMORY_LIMIT=40g
+# 컨테이너 메모리 제한 조정 (.env)
+LLM_MEMORY_LIMIT=64g
 ```
 
-### OpenCode가 vLLM에 연결 실패
-
-vLLM의 헬스체크가 통과할 때까지 기다립니다:
+### OpenCode가 LLM에 연결 실패
 
 ```bash
-# vLLM 상태 확인
+# LLM 상태 확인
 curl http://localhost:8000/health
 
-# vLLM이 정상이면 OpenCode 재시작
+# LLM이 정상이면 OpenCode 재시작
 docker compose restart opencode
 ```
 
-### PaperClip 인증 오류
-
-`.env`의 `BETTER_AUTH_SECRET`를 안전한 값으로 변경:
+### PaperClip 문제
 
 ```bash
-# 랜덤 시크릿 생성
-openssl rand -hex 32
+# 진단 실행
+paperclipai doctor --data-dir ./paperclip-data
+
+# 설정 재구성
+paperclipai configure --data-dir ./paperclip-data
 ```
 
 ---
@@ -395,26 +357,33 @@ openssl rand -hex 32
 
 ```
 /home/aa/vllm/
-├── docker-compose.yml          # Docker Compose 정의 (전체 스택)
-├── Dockerfile.vllm             # vLLM CPU 모드 Docker 이미지
-├── Dockerfile.vllm-rocm        # vLLM ROCm GPU 모드 Docker 이미지 (선택)
-├── .env                        # 환경 변수 설정
+├── docker-compose.yml          # Docker Compose (LLM + OpenCode)
+├── Dockerfile.llama-rocm       # llama.cpp ROCm 커스텀 빌드 (선택)
+├── Dockerfile.vllm             # vLLM CPU 모드 이미지 (레거시)
+├── Dockerfile.vllm-rocm        # vLLM ROCm 이미지 (레거시)
 ├── download_model.sh           # GGUF 모델 다운로드 스크립트
 ├── install_docker.sh           # Docker Engine 설치 스크립트
 ├── setup_evo_x2_hardware.sh    # 하드웨어 최적화 스크립트
-├── models/                     # GGUF 모델 파일 저장 디렉토리
+├── models/                     # GGUF 모델 파일
 │   └── gemma-4-31B-it-Q4_K_M.gguf
 ├── workspace/                  # OpenCode 작업 디렉토리
+├── paperclip-data/             # PaperClip 로컬 데이터 (npm)
+│   └── instances/default/
+│       ├── config.json         # PaperClip 설정
+│       ├── db/                 # 내장 PostgreSQL 데이터
+│       └── data/               # 스토리지, 백업
+├── doc/                        # 가이드 문서
 └── README.md                   # 이 문서
 ```
 
 ## 버전 정보
 
-| 구성요소 | 버전 | 비고 |
-|----------|------|------|
-| vLLM | 0.19.0 (latest) | CPU 모드, GGUF 지원 |
-| Gemma 4 31B IT | Q4_K_M GGUF | ~18GB, unsloth 제공 |
-| OpenCode | latest | `smanx/opencode` Docker 이미지 |
-| PaperClip | latest | `ghcr.io/paperclipai/paperclip` |
-| PostgreSQL | 17-alpine | PaperClip 데이터베이스 |
-| Docker Compose | v2 | `docker compose` 명령 사용 |
+| 구성요소 | 버전 | 실행 환경 |
+|----------|------|-----------|
+| llama-server | ROCm 7.2 | Docker (`kyuz0/amd-strix-halo-toolboxes`) |
+| Gemma 4 31B IT | Q4_K_M GGUF (~18GB) | Docker 볼륨 마운트 |
+| OpenCode | latest | Docker (`smanx/opencode`) |
+| PaperClip | latest | npm 로컬 (`paperclipai`) |
+| Codex CLI | v0.118.0 | npm 로컬 (`@openai/codex`) |
+| Node.js | v22.22.2 | 호스트 |
+| Docker Compose | v2 | 호스트 |
