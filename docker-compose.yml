@@ -65,6 +65,56 @@ services:
       - llm-network
 
   # ---------------------------------------------------------------------------
+  # LLM 서버 (경량) — llama-server (ROCm GPU 가속)
+  # 빠른 응답용 Gemma 4 E4B (4.5B effective, 8B total)
+  # ---------------------------------------------------------------------------
+  llm-fast:
+    image: kyuz0/amd-strix-halo-toolboxes:rocm-7.2
+    container_name: llm-server-fast
+    ports:
+      - "${FAST_LLM_PORT:-8001}:8000"
+    volumes:
+      - ${MODEL_DIR:-./models}:/models:ro
+    devices:
+      - /dev/kfd:/dev/kfd
+      - /dev/dri:/dev/dri
+    group_add:
+      - video
+      - render
+    security_opt:
+      - seccomp=unconfined
+    environment:
+      - GPU_MAX_HW_QUEUES=${GPU_MAX_HW_QUEUES:-2}
+    command: >
+      llama-server
+      --host 0.0.0.0
+      --port 8000
+      -m /models/${FAST_MODEL_FILENAME:-gemma-4-E4B-it-Q4_K_M.gguf}
+      --alias ${FAST_SERVED_MODEL_NAME:-gemma-4-e4b-it}
+      -t ${FAST_OMP_NUM_THREADS:-16}
+      -ngl 999
+      -fa on
+      --no-mmap
+      -c ${FAST_CONTEXT_LENGTH:-131072}
+      -np ${FAST_PARALLEL_SLOTS:-4}
+      --cache-type-k q8_0
+      --cache-type-v q8_0
+      --reasoning-format deepseek
+    deploy:
+      resources:
+        limits:
+          memory: ${FAST_LLM_MEMORY_LIMIT:-16g}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    networks:
+      - llm-network
+
+  # ---------------------------------------------------------------------------
   # OpenCode - AI 코딩 어시스턴트 웹 UI
   # ---------------------------------------------------------------------------
   opencode:
@@ -78,8 +128,11 @@ services:
       - LOCAL_ENDPOINT=http://llm:8000/v1
     volumes:
       - ${WORKSPACE_DIR:-./workspace}:/workspace
+      - ./opencode-config:/root/.config/opencode
     depends_on:
       llm:
+        condition: service_healthy
+      llm-fast:
         condition: service_healthy
     restart: unless-stopped
     networks:
