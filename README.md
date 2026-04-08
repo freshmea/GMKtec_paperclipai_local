@@ -36,35 +36,36 @@
 ## 2) 아키텍처 개요
 
 ```
-┌──────────────────────────── Docker Compose ─────────────────────────────┐
-│                                                                         │
-│  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐      │
-│  │  llama-server     │  │  llama-server    │  │    OpenCode       │      │
-│  │  (31B, 고품질)    │  │  (E4B, 고속)     │  │    Web UI         │      │
-│  │  :8000            │  │  :8001           │  │    :3000→4096     │      │
-│  │  gemma-4-31B      │  │  gemma-4-E4B     │  │    AI Coding      │      │
-│  │  ~10.5 t/s        │  │  ~100+ t/s       │  │    Assistant      │      │
-│  └────────┬─────────┘  └────────┬─────────┘  └──────────────────┘      │
-│           │                     │                                       │
-│           │  [llm-network bridge]                                       │
-└───────────┼─────────────────────┼───────────────────────────────────────┘
-            │                     │
-            │ :8000/v1            │ :8001/v1
-            │                     │
-┌───────────┼─────────────────────┼──── 호스트 (npm 로컬) ───────────────┐
-│           │                     │                                       │
-│  ┌────────▼─────────────────────▼──┐  ┌────────────────┐               │
-│  │   PaperClip (paperclipai)       │  │  기타 도구      │               │
-│  │   :3100 — AI Orchestrator       │  │                │               │
-│  │   CTO → 31B | CEO → E4B        │  │                │               │
-│  │   내장 PostgreSQL               │  │                │               │
-│  └─────────────────────────────────┘  └────────────────┘               │
-└─────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────── Docker Compose ──────────────────────────────────┐
+│                                                                              │
+│  ┌───────────────┐  ┌───────────────┐  ┌───────────────┐  ┌────────────┐    │
+│  │ llama-server   │  │ llama-server  │  │ llama-server  │  │  OpenCode  │    │
+│  │ (31B, 고품질)  │  │ (26B MoE)     │  │ (E4B, 고속)   │  │  Web UI    │    │
+│  │ :8000          │  │ :8002         │  │ :8001         │  │  :3000     │    │
+│  │ gemma-4-31B    │  │ gemma-4-26B   │  │ gemma-4-E4B   │  │  AI Coding │    │
+│  │ ~10.5 t/s      │  │ ~30+ t/s      │  │ ~100+ t/s     │  │  Assistant │    │
+│  └───────┬───────┘  └───────┬───────┘  └───────┬───────┘  └────────────┘    │
+│          │                  │                   │                             │
+│          │  [llm-network bridge]                │                             │
+└──────────┼──────────────────┼───────────────────┼────────────────────────────┘
+           │                  │                   │
+           │ :8000/v1         │ :8002/v1          │ :8001/v1
+           │                  │                   │
+┌──────────┼──────────────────┼───────────────────┼──── 호스트 (npm 로컬) ─────┐
+│          │                  │                   │                             │
+│  ┌───────▼──────────────────▼───────────────────▼──┐  ┌────────────────┐     │
+│  │   PaperClip (paperclipai)                       │  │  기타 도구      │     │
+│  │   :3100 — AI Orchestrator                       │  │                │     │
+│  │   에이전트 → 31B / 26B MoE / E4B 자유 선택       │  │                │     │
+│  │   내장 PostgreSQL                               │  │                │     │
+│  └─────────────────────────────────────────────────┘  └────────────────┘     │
+└──────────────────────────────────────────────────────────────────────────────┘
 ```
 
 | 구성요소 | 실행 환경 | 포트 | 역할 |
 |----------|-----------|------|------|
-| llama-server (31B) | Docker (ROCm 7.2) | 8000 | LLM 추론 서버 — 고품질 (OpenAI 호환 API) |
+| llama-server (31B) | Docker (ROCm 7.2) | 8000 | LLM 추론 서버 — 고품질 Dense (OpenAI 호환 API) |
+| llama-server (26B MoE) | Docker (ROCm 7.2) | 8002 | LLM 추론 서버 — MoE 균형형 (OpenAI 호환 API) |
 | llama-server (E4B) | Docker (ROCm 7.2) | 8001 | LLM 추론 서버 — 고속 (OpenAI 호환 API) |
 | OpenCode | Docker | 3000 | AI 코딩 어시스턴트 웹 UI |
 | PaperClip | npm 로컬 | 3100 | AI 오케스트레이션 플랫폼 (내장 PostgreSQL) |
@@ -126,27 +127,40 @@ mkdir -p models workspace
 
 ## 4) 모델 다운로드
 
-Gemma 4 31B IT GGUF (Q4_K_M, 약 18GB) 다운로드:
+다운로드 스크립트로 원하는 모델을 선택하여 다운로드:
 
 ```bash
 chmod +x download_model.sh
 ./download_model.sh
+# 메뉴:
+# 1) Gemma 4 31B IT (Dense, ~18GB)     — 고품질, 느림
+# 2) Gemma 4 26B-A4B IT (MoE, ~17GB)   — 균형 (빠름 + 고품질) ← 추천
+# 3) Gemma 4 E4B IT (~5GB)             — 경량, 최고 속도
+# 4) 전체 다운로드
 ```
 
 또는 수동 다운로드:
 
 ```bash
 pip install huggingface_hub[cli]
-huggingface-cli download \
-    unsloth/gemma-4-31B-it-GGUF \
-    gemma-4-31B-it-Q4_K_M.gguf \
-    --local-dir ./models \
-    --local-dir-use-symlinks False
+
+# 31B Dense (고품질)
+hf download unsloth/gemma-4-31B-it-GGUF \
+    gemma-4-31B-it-Q4_K_M.gguf --local-dir ./models
+
+# 26B-A4B MoE (균형, 추천)
+hf download bartowski/google_gemma-4-26B-A4B-it-GGUF \
+    google_gemma-4-26B-A4B-it-Q4_K_M.gguf --local-dir ./models
+
+# E4B (고속)
+hf download unsloth/gemma-4-E4B-it-GGUF \
+    gemma-4-E4B-it-Q4_K_M.gguf --local-dir ./models
 ```
 
-> **모델 소스:** [`unsloth/gemma-4-31B-it-GGUF`](https://huggingface.co/unsloth/gemma-4-31B-it-GGUF) (274k+ 다운로드)
->
-> 대안: `bartowski/google_gemma-4-31B-it-GGUF`, `lmstudio-community/gemma-4-31B-it-GGUF`
+> **모델 소스:**
+> - 31B: [`unsloth/gemma-4-31B-it-GGUF`](https://huggingface.co/unsloth/gemma-4-31B-it-GGUF)
+> - 26B-A4B: [`bartowski/google_gemma-4-26B-A4B-it-GGUF`](https://huggingface.co/bartowski/google_gemma-4-26B-A4B-it-GGUF) (MoE, 25.2B total / 3.8B active)
+> - E4B: [`unsloth/gemma-4-E4B-it-GGUF`](https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF)
 
 ## 5) 서비스 실행
 
@@ -180,8 +194,11 @@ paperclipai doctor --data-dir ./paperclip-data
 ### 개별 Docker 서비스
 
 ```bash
-# LLM만 시작
+# LLM만 시작 (31B)
 docker compose up -d llm
+
+# MoE만 시작 (26B)
+docker compose up -d llm-moe
 
 # OpenCode만 시작 (LLM 의존)
 docker compose up -d opencode
@@ -198,13 +215,14 @@ docker compose down
 
 ## 6) 서비스 상세
 
-### 6-1. LLM 추론 서버 (듀얼 모델 구성)
+### 6-1. LLM 추론 서버 (트리플 모델 구성)
 
-두 개의 llama-server가 동시에 실행됩니다:
+세 개의 llama-server가 동시에 실행됩니다:
 
 | 서버 | 모델 | 포트 | 파라미터 | 슬롯 | 용도 |
 |------|------|------|---------|------|------|
 | `llm` (31B) | Gemma 4 31B IT Q4_K_M | 8000 | 30.7B Dense | 2 (128K/슬롯) | 복잡한 코딩, 긴 추론 |
+| `llm-moe` (26B) | Gemma 4 26B-A4B IT Q4_K_M | 8002 | 25.2B MoE (3.8B active) | 4 (32K/슬롯) | 균형형 (128 experts, 8 active) |
 | `llm-fast` (E4B) | Gemma 4 E4B IT Q4_K_M | 8001 | 4.5B Effective | 4 (32K/슬롯) | 빠른 응답, 단순 작업 |
 
 - **이미지:** `kyuz0/amd-strix-halo-toolboxes:rocm-7.2`
@@ -222,6 +240,15 @@ curl http://localhost:8000/v1/chat/completions \
     "max_tokens": 128
   }' | jq
 
+# 26B MoE 모델 (균형)
+curl http://localhost:8002/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gemma-4-26b-a4b-it",
+    "messages": [{"role": "user", "content": "안녕하세요"}],
+    "max_tokens": 128
+  }' | jq
+
 # E4B 모델 (고속)
 curl http://localhost:8001/v1/chat/completions \
   -H "Content-Type: application/json" \
@@ -235,11 +262,11 @@ curl http://localhost:8001/v1/chat/completions \
 ### 6-2. OpenCode (AI 코딩 어시스턴트)
 
 - **웹 UI:** `http://localhost:3000`
-- **LLM 연동:** 31B (`http://llm:8000/v1`) + E4B (`http://llm-fast:8000/v1`)
+- **LLM 연동:** 31B (`http://llm:8000/v1`) + 26B MoE (`http://llm-moe:8000/v1`) + E4B (`http://llm-fast:8000/v1`)
 - **작업 디렉토리:** `./workspace` 마운트
 - **설정 영속화:** `./opencode-config/` 볼륨 마운트
 
-OpenCode UI에서 `Ctrl+O`로 모델 선택 시 두 모델이 모두 표시됩니다.
+OpenCode UI에서 `Ctrl+O`로 모델 선택 시 세 모델이 모두 표시됩니다.
 
 ### 6-3. PaperClip (AI 오케스트레이션 — npm 로컬)
 
@@ -259,6 +286,22 @@ paperclipai configure --section llm --data-dir ./paperclip-data
 # 모델 변경, codex 어댑터 등 자유롭게 설정 가능
 ```
 
+#### PaperClip 에이전트의 LLM 모델 변경
+
+에이전트가 사용하는 모델을 26B MoE로 변경하려면 PaperClip 웹 UI에서
+에이전트 설정의 `model` 값을 변경합니다:
+
+| 모델 참조 (OpenCode adapter) | 설명 |
+|-----|------|
+| `local_llm/gemma-4-31b-it` | 31B Dense — 고품질, 느림 |
+| `local_llm_moe/gemma-4-26b-a4b-it` | **26B MoE — 균형 (추천)** |
+| `local_llm_fast/gemma-4-e4b-it` | E4B — 경량, 빠름 |
+
+```bash
+# 또는 CLI로 에이전트 어댑터 설정 변경
+paperclipai configure --section llm --data-dir ./paperclip-data
+```
+
 ### 6-4. Codex CLI (선택)
 
 - **인증:** ChatGPT Plus (Google OAuth)
@@ -276,19 +319,24 @@ codex "설명할 내용"
 
 ### 현재 적용된 최적화
 
-| 항목 | 31B (llm) | E4B (llm-fast) |
-|------|-----------|----------------|
-| 모델 양자화 | Q4_K_M (~18GB) | Q4_K_M (~5GB) |
-| GPU 오프로드 | `-ngl 999` (전 레이어) | `-ngl 999` (전 레이어) |
-| Flash Attention | `-fa on` | `-fa on` |
-| KV 캐시 | q8_0 (K, V) | q8_0 (K, V) |
-| 컨텍스트/슬롯 | 262K / 2슬롯 (128K/슬롯) | 131K / 4슬롯 (32K/슬롯) |
-| CPU 스레드 | 32 | 16 |
-| Reasoning | `--reasoning-format deepseek` | `--reasoning-format deepseek` |
-| 토큰 생성 속도 | ~10.5 t/s | ~100+ t/s |
+| 항목 | 31B (llm) | 26B MoE (llm-moe) | E4B (llm-fast) |
+|------|-----------|-------------------|----------------|
+| 모델 양자화 | Q4_K_M (~18GB) | Q4_K_M (~17GB) | Q4_K_M (~5GB) |
+| 아키텍처 | Dense 30.7B | MoE 25.2B (3.8B active) | Dense 4.5B eff |
+| GPU 오프로드 | `-ngl 999` (전 레이어) | `-ngl 999` (전 레이어) | `-ngl 999` (전 레이어) |
+| Flash Attention | `-fa on` | `-fa on` | `-fa on` |
+| KV 캐시 | q8_0 (K, V) | q8_0 (K, V) | q8_0 (K, V) |
+| 컨텍스트/슬롯 | 262K / 2슬롯 (128K/슬롯) | 131K / 4슬롯 (32K/슬롯) | 131K / 4슬롯 (32K/슬롯) |
+| CPU 스레드 | 32 | 32 | 16 |
+| Reasoning | `--reasoning-format deepseek` | `--reasoning-format deepseek` | `--reasoning-format deepseek` |
+| 토큰 생성 속도 | ~10.5 t/s | ~30+ t/s (예상) | ~100+ t/s |
+| 메모리 제한 | 96GB | 48GB | 16GB |
 
-> **GGUF Q4_K_M 선택 이유:** 31B 모델을 128GB 공유 메모리 시스템에서 실행하면서
+> **GGUF Q4_K_M 선택 이유:** 128GB 공유 메모리 시스템에서 세 모델을 동시 실행하면서
 > 품질 손실을 최소화하는 최적의 균형점입니다.
+>
+> **26B MoE 특징:** 총 25.2B 파라미터 중 추론 시 3.8B만 활성화 (128 experts 중 8개 선택).
+> 31B급 품질을 유지하면서 E4B에 가까운 속도를 제공합니다.
 
 ## 8) 하드웨어 최적화
 
@@ -379,8 +427,9 @@ paperclipai configure --data-dir ./paperclip-data
 ├── install_docker.sh           # Docker Engine 설치 스크립트
 ├── setup_evo_x2_hardware.sh    # 하드웨어 최적화 스크립트
 ├── models/                     # GGUF 모델 파일
-│   ├── gemma-4-31B-it-Q4_K_M.gguf    # 31B 고품질 (~18GB)
-│   └── gemma-4-E4B-it-Q4_K_M.gguf    # E4B 고속 (~5GB)
+│   ├── gemma-4-31B-it-Q4_K_M.gguf            # 31B 고품질 (~18GB)
+│   ├── google_gemma-4-26B-A4B-it-Q4_K_M.gguf # 26B MoE 균형형 (~17GB)
+│   └── gemma-4-E4B-it-Q4_K_M.gguf            # E4B 고속 (~5GB)
 ├── opencode-config/            # OpenCode 설정 (Docker 마운트)
 │   └── opencode.jsonc          # 프로바이더/모델 등록
 ├── workspace/                  # OpenCode 작업 디렉토리
@@ -398,8 +447,10 @@ paperclipai configure --data-dir ./paperclip-data
 | 구성요소 | 버전 | 실행 환경 |
 |----------|------|-----------|
 | llama-server (31B) | ROCm 7.2 | Docker 포트 8000 (`kyuz0/amd-strix-halo-toolboxes`) |
+| llama-server (26B MoE) | ROCm 7.2 | Docker 포트 8002 (`kyuz0/amd-strix-halo-toolboxes`) |
 | llama-server (E4B) | ROCm 7.2 | Docker 포트 8001 (`kyuz0/amd-strix-halo-toolboxes`) |
 | Gemma 4 31B IT | Q4_K_M GGUF (~18GB) | 고품질, 30.7B Dense |
+| Gemma 4 26B-A4B IT | Q4_K_M GGUF (~17GB) | MoE 균형형, 25.2B total / 3.8B active |
 | Gemma 4 E4B IT | Q4_K_M GGUF (~5GB) | 고속, 4.5B Effective (8B total) |
 | OpenCode | latest | Docker (`smanx/opencode`) |
 | PaperClip | latest | npm 로컬 (`paperclipai`) |

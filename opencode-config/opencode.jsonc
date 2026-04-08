@@ -25,6 +25,18 @@
       "options": {
         "baseURL": "http://llm-fast:8000/v1"
       }
+    },
+    "local_llm_moe": {
+      "name": "Local LLM — 26B MoE (균형)",
+      "npm": "@ai-sdk/openai-compatible",
+      "models": {
+        "gemma-4-26b-a4b-it": {
+          "name": "Gemma 4 26B MoE (빠른 속도 + 높은 품질)"
+        }
+      },
+      "options": {
+        "baseURL": "http://llm-moe:8000/v1"
+      }
     }
   }
 }
