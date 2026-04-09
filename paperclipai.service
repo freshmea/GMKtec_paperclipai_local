@@ -11,7 +11,7 @@ WorkingDirectory=/home/aa/vllm
 ExecStart=/home/aa/.npm-global/bin/paperclipai run --data-dir ./paperclip-data
 Restart=always
 RestartSec=5
-Environment=PATH=/home/aa/.npm-global/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Environment=PATH=/home/aa/.local/bin:/home/aa/.npm-global/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 Environment=HOME=/home/aa
 Environment=NODE_ENV=production
 
