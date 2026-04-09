@@ -248,3 +248,10 @@ cp companies/{company-id}/agents/{agent-id}/instructions/*.md \$AGENT_HOME/
 | CEO | 31B (고품질) | 멀티스텝 추론, API 호출, 전략적 판단 필요 |
 | CTO | 31B (고품질) | 코드 생성, 기술 설계, 복잡한 도구 사용 |
 | IC (개별 기여자) | E4B (경량) 또는 31B | 단순 작업은 E4B, 복잡한 작업은 31B |
+
+
+## 토큰 초과 문제
+
+Error: request (33121 tokens) exceeds the available context size (32768 tokens), try increasing it
+
+###
