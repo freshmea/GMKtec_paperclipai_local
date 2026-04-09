@@ -9,60 +9,60 @@
 
 services:
   # ---------------------------------------------------------------------------
-  # LLM 서버 — llama-server (ROCm GPU 가속)
+  # LLM 서버 — llama-server (ROCm GPU 가속) [31B — 램 절약을 위해 비활성화]
   # OpenAI 호환 API (/v1/chat/completions, /v1/models 등)
   # ---------------------------------------------------------------------------
-  llm:
-    image: kyuz0/amd-strix-halo-toolboxes:rocm-7.2
-    ## 커스텀 빌드 시 아래 주석 해제 (image: 줄을 주석 처리):
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile.llama-rocm
-    container_name: llm-server
-    ports:
-      - "${LLM_PORT:-8000}:8000"
-    volumes:
-      - ${MODEL_DIR:-./models}:/models:ro
-    # GPU 장치 접근
-    devices:
-      - /dev/kfd:/dev/kfd
-      - /dev/dri:/dev/dri
-    group_add:
-      - video
-      - render
-    security_opt:
-      - seccomp=unconfined
-    environment:
-      # ROCm 7.2는 gfx1151 네이티브 지원 — HSA_OVERRIDE 불필요
-      - GPU_MAX_HW_QUEUES=${GPU_MAX_HW_QUEUES:-2}
-    command: >
-      llama-server
-      --host 0.0.0.0
-      --port 8000
-      -m /models/${MODEL_FILENAME:-gemma-4-31B-it-Q4_K_M.gguf}
-      --alias ${SERVED_MODEL_NAME:-gemma-4-31b-it}
-      -t ${OMP_NUM_THREADS:-32}
-      -ngl 999
-      -fa on
-      --no-mmap
-      -c ${CONTEXT_LENGTH:-131072}
-      -np ${PARALLEL_SLOTS:-2}
-      --cache-type-k q8_0
-      --cache-type-v q8_0
-      --reasoning-format deepseek
-    deploy:
-      resources:
-        limits:
-          memory: ${LLM_MEMORY_LIMIT:-96g}
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 180s
-    networks:
-      - llm-network
+  # llm:
+  #   image: kyuz0/amd-strix-halo-toolboxes:rocm-7.2
+  #   ## 커스텀 빌드 시 아래 주석 해제 (image: 줄을 주석 처리):
+  #   # build:
+  #   #   context: .
+  #   #   dockerfile: Dockerfile.llama-rocm
+  #   container_name: llm-server
+  #   ports:
+  #     - "${LLM_PORT:-8000}:8000"
+  #   volumes:
+  #     - ${MODEL_DIR:-./models}:/models:ro
+  #   # GPU 장치 접근
+  #   devices:
+  #     - /dev/kfd:/dev/kfd
+  #     - /dev/dri:/dev/dri
+  #   group_add:
+  #     - video
+  #     - render
+  #   security_opt:
+  #     - seccomp=unconfined
+  #   environment:
+  #     # ROCm 7.2는 gfx1151 네이티브 지원 — HSA_OVERRIDE 불필요
+  #     - GPU_MAX_HW_QUEUES=${GPU_MAX_HW_QUEUES:-2}
+  #   command: >
+  #     llama-server
+  #     --host 0.0.0.0
+  #     --port 8000
+  #     -m /models/${MODEL_FILENAME:-gemma-4-31B-it-Q4_K_M.gguf}
+  #     --alias ${SERVED_MODEL_NAME:-gemma-4-31b-it}
+  #     -t ${OMP_NUM_THREADS:-32}
+  #     -ngl 999
+  #     -fa on
+  #     --no-mmap
+  #     -c ${CONTEXT_LENGTH:-131072}
+  #     -np ${PARALLEL_SLOTS:-2}
+  #     --cache-type-k q8_0
+  #     --cache-type-v q8_0
+  #     --reasoning-format deepseek
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         memory: ${LLM_MEMORY_LIMIT:-96g}
+  #   restart: unless-stopped
+  #   healthcheck:
+  #     test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 5
+  #     start_period: 180s
+  #   networks:
+  #     - llm-network
 
   # ---------------------------------------------------------------------------
   # LLM 서버 (경량) — llama-server (ROCm GPU 가속)
@@ -174,15 +174,15 @@ services:
     ports:
       - "${OPENCODE_PORT:-3000}:4096"
     environment:
-      - OPENAI_API_BASE=http://llm:8000/v1
+      - OPENAI_API_BASE=http://llm-moe:8000/v1
       - OPENAI_API_KEY=${OPENAI_API_KEY:-sk-no-key-required}
-      - LOCAL_ENDPOINT=http://llm:8000/v1
+      - LOCAL_ENDPOINT=http://llm-moe:8000/v1
     volumes:
       - ${WORKSPACE_DIR:-./workspace}:/workspace
       - ./opencode-config:/root/.config/opencode
     depends_on:
-      llm:
-        condition: service_healthy
+      # llm:                         # 31B 비활성화됨
+      #   condition: service_healthy
       llm-fast:
         condition: service_healthy
       llm-moe:
