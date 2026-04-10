@@ -29,6 +29,7 @@ As robots enter human spaces, social intelligence is becoming paramount.
 - **Multimodal Interaction**: Combining speech, gesture, and facial expression analysis.
 - **Affective Computing**: Developing robots that can perceive and respond to human emotions to build trust.
 - **Socially Aware Autonomy**: Designing robots that respect human social norms and personal space (proxemics).
+- **UX/Design Framework**: Applying structured human-centric design principles to robotics (see [Social Robotics UX Framework](robot/research/frameworks/social_robotics_ux_framework.md) for detailed guidelines).
 
 ## 3. Strategic Recommendations for Curriculum Development
 

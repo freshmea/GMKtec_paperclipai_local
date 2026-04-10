@@ -10,14 +10,17 @@ Gather resources and research for robot educational materials to support future 
     - Programming languages for robotics.
     - Robotics hardware/kits (already partially covered, but can be expanded).
     - Educational curricula (competitive vs. classroom).
+    - **Human-Robot Interaction (HRI) & UX Design**: Develop design frameworks for social robotics.
 3. **Perform new research**:
     - Search for emerging trends in AI-driven robotics education.
     - Research specific programming environments (ROS, Python, etc.) used in education.
     - Find more diverse robotics kit comparisons.
+    - **Develop UX/HRI design guidelines for educational robotics kits.**
 4. **Organize findings**:
     - Save new source materials in `robot/research/sources/`.
     - Create new summaries in `robot/research/summaries/`.
     - Update topic files in `robot/research/topics/`.
+    - **Add UX/HRI frameworks to `robot/research/frameworks/`.**
 5. **Finalize report**: Compile a comprehensive overview of robotics educational resources.
 
 ## Resources & Existing Work
