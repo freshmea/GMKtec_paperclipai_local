@@ -29,7 +29,6 @@
             "output": 8192
           }
         }
-        }
       },
       "options": {
         "baseURL": "http://llm-fast:8000/v1"
