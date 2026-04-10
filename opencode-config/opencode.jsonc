@@ -9,7 +9,7 @@
         "gemma-4-31b-it": {
           "name": "Gemma 4 31B (고품질, 느림)",
           "limit": {
-            "context": 65536,
+            "context": 131072,
             "output": 8192
           }
         }
@@ -25,9 +25,10 @@
         "gemma-4-e4b-it": {
           "name": "Gemma 4 E4B (경량, 빠름)",
           "limit": {
-            "context": 32768,
+            "context": 131072,
             "output": 8192
           }
+        }
         }
       },
       "options": {
