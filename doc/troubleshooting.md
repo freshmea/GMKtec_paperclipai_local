@@ -254,4 +254,263 @@ cp companies/{company-id}/agents/{agent-id}/instructions/*.md \$AGENT_HOME/
 
 Error: request (33121 tokens) exceeds the available context size (32768 tokens), try increasing it
 
-###
+---
+
+## 3. PaperClip AI 포트 3100 외부 접근 불가
+
+**발생일**: 2026-04-09
+
+### 증상
+
+- `localhost:3100`으로 접속하면 정상 작동
+- 외부에서 포트포워딩으로 접근 시 **접근 거부** (ERR_CONNECTION_REFUSED)
+- `ss -tlnp | grep 3100` 결과: `127.0.0.1:3100` (loopback만 바인딩)
+
+### 원인
+
+[config.json](../paperclip-data/instances/default/config.json)의 기본 설정이 로컬 전용:
+
+```json
+"server": {
+  "deploymentMode": "local_trusted",   // ← loopback 강제
+  "exposure": "private",
+  "host": "127.0.0.1",                 // ← localhost만 수신
+  ...
+}
+```
+
+PaperClip의 배포 모드 제약:
+- `local_trusted`: host가 **반드시** `127.0.0.1` (loopback) 필수, exposure는 `private` 필수
+- `authenticated`: host `0.0.0.0` 허용, 로그인 인증 필요
+
+### 에러 로그 (시도 과정)
+
+**시도 1** — `exposure: "local_network"` 사용:
+```
+✗ Config file: Invalid config: server.exposure: Invalid enum value. Expected 'private' | 'public', received 'local_network'
+```
+→ `exposure`는 `'private' | 'public'`만 허용
+
+**시도 2** — `deploymentMode: "self_hosted"` + `exposure: "public"` 사용:
+```
+✗ Config file: Invalid config: server.deploymentMode: Invalid enum value. Expected 'local_trusted' | 'authenticated', received 'self_hosted'
+```
+→ `deploymentMode`는 `'local_trusted' | 'authenticated'`만 허용
+
+**시도 3** — `deploymentMode: "local_trusted"` + `exposure: "private"` + `host: "0.0.0.0"`:
+```
+✗ Deployment/auth mode: local_trusted requires loopback host binding (found 0.0.0.0)
+```
+→ `local_trusted`는 loopback 바인딩 강제
+
+### 해결
+
+파일: `paperclip-data/instances/default/config.json`
+
+```diff
+  "server": {
+-   "deploymentMode": "local_trusted",
++   "deploymentMode": "authenticated",
+    "exposure": "private",
+-   "host": "127.0.0.1",
++   "host": "0.0.0.0",
+    "port": 3100,
+    "allowedHostnames": [
+-     "localhost"
++     "localhost",
++     "0.0.0.0"
+    ],
+    "serveUi": true
+  },
+  "auth": {
+    "baseUrlMode": "explicit",
+    "disableSignUp": false,
+-   "publicBaseUrl": "http://localhost:3100"
++   "publicBaseUrl": "http://0.0.0.0:3100"
+  },
+```
+
+핵심 변경 사항:
+| 항목 | 변경 전 | 변경 후 |
+|------|---------|---------|
+| `server.deploymentMode` | `local_trusted` | `authenticated` |
+| `server.host` | `127.0.0.1` | `0.0.0.0` |
+| `server.allowedHostnames` | `["localhost"]` | `["localhost", "0.0.0.0"]` |
+| `auth.publicBaseUrl` | `http://localhost:3100` | `http://0.0.0.0:3100` |
+
+서비스 재시작:
+```bash
+sudo systemctl restart paperclipai.service
+```
+
+### 검증
+
+```bash
+# 바인딩 주소 확인 — 0.0.0.0이면 성공
+ss -tlnp | grep 3100
+# 기대 결과: LISTEN 0  511  0.0.0.0:3100  0.0.0.0:*
+
+# 서비스 상태 확인
+sudo systemctl status paperclipai.service
+```
+
+### 허용 값 정리
+
+| 설정 | 허용 값 | 비고 |
+|------|---------|------|
+| `server.deploymentMode` | `local_trusted`, `authenticated` | |
+| `server.exposure` | `private`, `public` | `local_trusted`는 `private` 필수 |
+| `server.host` | IP 문자열 | `local_trusted`는 `127.0.0.1` 필수 |
+
+> **결론**: `local_trusted`에서는 직접 외부 바인딩이 불가능. 5번의 socat 프록시 방식으로 해결.
+
+---
+
+## 4. PaperClip AI 외부 IP 접속 시 "호스트 이름 허용되지 않음" 에러
+
+**발생일**: 2026-04-09
+
+### 증상
+
+외부 IP(예: `182.229.102.180`)로 포트포워딩하여 접속하면 다음 메시지 표시:
+
+```
+182.229.102.180 호스트 이름은 이 paperclip 인스턴스에서 허용되지 않습니다.
+이 호스트 이름을 허용하려면 pnpm paperclipai allowed-hostname 182.229.102.180 명령을 실행하십시오
+```
+
+### 원인
+
+`config.json`의 `server.allowedHostnames`에 접속에 사용된 호스트네임/IP가 포함되어 있지 않으면 차단됨.
+
+기존 설정:
+```json
+"allowedHostnames": ["localhost", "0.0.0.0"]
+```
+→ `localhost`와 `0.0.0.0`만 허용, 외부 IP 접속은 모두 거부
+
+### 해결
+
+와일드카드 `*`를 추가하여 **모든 호스트네임/IP에서 접속 허용**:
+
+```bash
+cd /home/aa/vllm
+paperclipai allowed-hostname '*' --data-dir ./paperclip-data
+sudo systemctl restart paperclipai.service
+```
+
+변경 후 `config.json`:
+```json
+"allowedHostnames": [
+  "*",
+  "0.0.0.0",
+  "localhost"
+]
+```
+
+### 개별 IP만 허용하려면
+
+특정 IP만 추가할 수도 있음:
+```bash
+paperclipai allowed-hostname 182.229.102.180 --data-dir ./paperclip-data
+```
+
+> **주의**: `allowedHostnames`의 `*` 와일드카드는 실제로는 **동작하지 않음** (Set.has()로 정확한 문자열 매칭만 수행).
+> 또한 `deploymentMode`를 `authenticated`로 변경하면 기존 회사 데이터가 보이지 않고 `Instance admin required` 에러가 발생함.
+> 아래 5번 항목의 socat 프록시 방식으로 해결.
+
+---
+
+## 5. PaperClip AI 외부 접속 — 최종 해결 (socat 프록시)
+
+**발생일**: 2026-04-09
+
+### 배경 (시도했으나 실패한 방법들)
+
+PaperClip의 `local_trusted` 모드 제약:
+- `host`는 반드시 `127.0.0.1` (loopback)
+- `exposure`는 반드시 `private`
+- `allowedHostnames`의 `*` 와일드카드는 작동하지 않음 (정확 매칭만 지원)
+
+`authenticated` 모드로 변경 시:
+- 외부 접속은 가능하지만 **기존 회사 데이터가 보이지 않음**
+- `Instance admin required` 에러 발생 (DB에 admin 역할 미설정)
+- `local_trusted`는 모든 요청을 `isInstanceAdmin: true`로 자동 처리하지만, `authenticated`는 DB 기반 인증 필요
+
+### 해결 — socat 리버스 프록시
+
+PaperClip은 `local_trusted` + `127.0.0.1:3100`으로 유지하고, `socat`으로 외부 포트를 내부로 포워딩:
+
+```
+외부 → 0.0.0.0:3101 (socat) → 127.0.0.1:3100 (PaperClip)
+```
+
+**1) socat 설치:**
+```bash
+sudo apt-get install -y socat
+```
+
+**2) systemd 서비스 생성:**
+```bash
+sudo tee /etc/systemd/system/paperclipai-proxy.service > /dev/null <<'EOF'
+[Unit]
+Description=PaperclipAI External Proxy (socat 0.0.0.0:3101 -> 127.0.0.1:3100)
+After=paperclipai.service
+Requires=paperclipai.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/socat TCP-LISTEN:3101,bind=0.0.0.0,reuseaddr,fork TCP:127.0.0.1:3100
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+**3) 서비스 활성화:**
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable --now paperclipai-proxy.service
+```
+
+**4) config.json은 원본 유지:**
+```json
+"server": {
+  "deploymentMode": "local_trusted",
+  "exposure": "private",
+  "host": "127.0.0.1",
+  "port": 3100
+}
+```
+
+### 포트 구조
+
+| 포트 | 바인딩 | 담당 | 용도 |
+|------|--------|------|------|
+| `127.0.0.1:3100` | PaperClip | node | 로컬 접속 (localhost) |
+| `0.0.0.0:3101` | socat 프록시 | socat | 외부/LAN 접속 |
+
+### 공유기 포트포워딩 설정
+
+| 외부 포트 | 내부 IP | 내부 포트 | 프로토콜 |
+|-----------|---------|-----------|----------|
+| 30005 | 192.168.219.45 | **3101** | TCP |
+
+### 검증
+
+```bash
+# 로컬 접속
+curl -s -o /dev/null -w "%{http_code}\n" http://localhost:3100
+
+# LAN 접속 (socat 경유)
+curl -s -o /dev/null -w "%{http_code}\n" http://192.168.219.45:3101
+
+# 서비스 상태
+sudo systemctl status paperclipai.service
+sudo systemctl status paperclipai-proxy.service
+
+# 포트 바인딩
+ss -tlnp | grep -E '3100|3101'
+```

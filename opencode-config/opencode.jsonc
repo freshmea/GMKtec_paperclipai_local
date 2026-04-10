@@ -41,7 +41,7 @@
         "gemma-4-26b-a4b-it": {
           "name": "Gemma 4 26B MoE (빠른 속도 + 높은 품질)",
           "limit": {
-            "context": 65536,
+            "context": 131072,
             "output": 8192
           }
         }

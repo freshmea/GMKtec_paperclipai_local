@@ -40,9 +40,9 @@ llama-server -c CONTEXT_LENGTH -np PARALLEL_SLOTS
 
 | 서버 | 모델 | 포트 | `-c` (전체) | `-np` (슬롯) | **per-slot 컨텍스트** | 메모리 제한 |
 |------|------|------|------------|-------------|---------------------|-----------|
-| llm | gemma-4-31B Q4 | 8000 | 131,072 | 2 | **65,536** | 64g |
+| llm | gemma-4-31B Q4 | 8000 | 131,072 | 2 | **65,536** | 64g (비활성화) |
 | llm-fast | gemma-4-E4B Q4 | 8001 | 131,072 | 4 | **32,768** | 16g |
-| llm-moe | gemma-4-26B MoE Q4 | 8002 | 131,072 | **2** | **65,536** | 48g |
+| llm-moe | gemma-4-26B MoE Q4 | 8002 | 131,072 | **1** | **131,072** | 48g |
 
 **설정 파일**: `.env`
 
@@ -54,7 +54,7 @@ FAST_CONTEXT_LENGTH=131072  # llm-fast (E4B)
 FAST_PARALLEL_SLOTS=4       # llm-fast (E4B)
 
 MOE_CONTEXT_LENGTH=131072   # llm-moe (26B MoE) ← Paperclip 에이전트 사용
-MOE_PARALLEL_SLOTS=2        # llm-moe — 2로 설정해야 65K per-slot 확보
+MOE_PARALLEL_SLOTS=1        # llm-moe — 1슬롯으로 131K per-slot 전체 확보
 ```
 
 **주의사항**:
@@ -74,7 +74,7 @@ MOE_PARALLEL_SLOTS=2        # llm-moe — 2로 설정해야 65K per-slot 확보
         "gemma-4-26b-a4b-it": {
           "name": "Gemma 4 26B MoE",
           "limit": {
-            "context": 65536,   // ← llama-server per-slot n_ctx와 일치시켜야 함
+            "context": 131072,  // ← llama-server per-slot n_ctx와 일치시켜야 함
             "output": 8192
           }
         }
@@ -172,9 +172,9 @@ opencode.jsonc limit.context = per-slot 값
 
 | 서버 | per-slot n_ctx | opencode limit.context |
 |------|---------------|----------------------|
-| llm (31B) | 65,536 | 65,536 ✓ |
+| llm (31B) | 65,536 | 65,536 ✓ (비활성화) |
 | llm-fast (E4B) | 32,768 | 32,768 ✓ |
-| llm-moe (26B MoE) | 65,536 | 65,536 ✓ |
+| llm-moe (26B MoE) | 131,072 | 131,072 ✓ |
 
 ---
 
@@ -185,3 +185,6 @@ opencode.jsonc limit.context = per-slot 값
 | 2026-04-09 | `MOE_PARALLEL_SLOTS`: 4→2 | CTO 에이전트 33K 토큰 초과 (per-slot 32K→65K) |
 | 2026-04-09 | opencode.jsonc에 `limit.context` 추가 | OpenCode 자동 compaction이 서버 한도를 인식하도록 동기화 |
 | 2026-04-09 | `compaction` 설정 추가 | auto=true, prune=true, reserved=4096 — 대화 자동 압축 활성화 |
+| 2026-04-10 | `MOE_PARALLEL_SLOTS`: 2→1 | 90K 토큰 초과 (per-slot 65K→131K, 동시처리 포기) |
+| 2026-04-10 | opencode.jsonc MoE `limit.context`: 65536→131072 | 서버 per-slot 변경에 맞춰 동기화 — compaction이 131K 기준으로 작동 |
+| 2026-04-10 | 31B 서버 비활성화 (docker-compose 주석처리) | 메모리 절약 (96GB→0), MoE가 주력 모델로 승격 |
