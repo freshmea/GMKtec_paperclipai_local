@@ -514,3 +514,130 @@ sudo systemctl status paperclipai-proxy.service
 # 포트 바인딩
 ss -tlnp | grep -E '3100|3101'
 ```
+
+---
+
+## 6. 에이전트 heartbeat 시 HEARTBEAT.md / instructions 파일 누락 에러 (반복 발생)
+
+**발생일**: 2026-04-09, 2026-04-10 (에이전트 고용할 때마다 반복)
+
+### 증상
+
+```
+File not found: /home/aa/vllm/paperclip-data/instances/default/workspaces/{agent-id}/HEARTBEAT.md
+```
+
+CEO 에이전트가 heartbeat 실행 시 `$AGENT_HOME/HEARTBEAT.md`를 읽으려 하지만 파일이 없어서 실패.
+
+### 근본 원인 — PaperClip의 설계 구조
+
+**이것은 설정 실수가 아니라 PaperClip의 의도된 아키텍처입니다.**
+
+PaperClip은 instructions 파일과 workspace를 **별도의 경로로 관리**합니다:
+
+```
+instructions 파일 (HEARTBEAT.md, SOUL.md 등)
+  → companies/{companyId}/agents/{agentId}/instructions/
+  → adapter_config.instructionsRootPath로 참조
+  → 에이전트 생성 시 자동으로 materializeManagedBundle()이 여기에 기록
+
+$AGENT_HOME (에이전트 워크스페이스)
+  → workspaces/{agentId}/
+  → heartbeat 시 자동으로 mkdir만 수행 (빈 디렉토리)
+  → instructions 파일은 복사되지 않음 ← 여기가 문제
+```
+
+**경로 비교:**
+| 항목 | 경로 |
+|------|------|
+| instructions 저장 | `.../companies/.../agents/{id}/instructions/HEARTBEAT.md` |
+| `$AGENT_HOME` | `.../workspaces/{id}/` ← **여기에는 파일 없음** |
+
+### 에이전트가 HEARTBEAT.md를 왜 `$AGENT_HOME`에서 찾는가?
+
+HEARTBEAT.md의 내용에 `$AGENT_HOME/memory/YYYY-MM-DD.md` 같은 경로 참조가 있어서,
+에이전트(LLM)가 heartbeat 실행 시 `$AGENT_HOME`에서 HEARTBEAT.md를 `Read`하려고 시도합니다.
+하지만 PaperClip 서버의 `instructionsRootPath`는 instructions 폴더를 가리키고,
+어댑터는 `$AGENT_HOME`만 환경변수로 전달합니다.
+
+**instructions는 어댑터의 시스템 프롬프트로 주입되므로** LLM이 파일을 직접 읽을 필요가 없지만,
+LLM이 파일 내용을 보고 "이 파일이 있으니 Read로 다시 읽어보자"라고 판단하는 것입니다.
+
+### 왜 에이전트를 고용할 때마다 반복되는가?
+
+1. CEO가 `paperclip-create-agent` 스킬로 새 에이전트 생성
+2. PaperClip이 instructions를 `companies/.../instructions/`에 기록 (정상)
+3. 새 에이전트의 첫 heartbeat에서 `$AGENT_HOME` = `workspaces/{new-id}/` (빈 디렉토리)
+4. LLM이 instructions 내용(HEARTBEAT.md)을 보고 해당 파일을 `$AGENT_HOME`에서 `Read` 시도
+5. 파일 없음 → 에러
+
+### 해결 — 수동 복사 (현재 유일한 방법)
+
+```bash
+# 특정 에이전트의 instructions를 workspace에 복사
+COMPANY=facae2e1-4110-4373-b4f2-3cbf7bd666ac
+AGENT_ID={에이전트-id}
+BASE=/home/aa/vllm/paperclip-data/instances/default
+
+cp "$BASE/companies/$COMPANY/agents/$AGENT_ID/instructions/"*.md \
+   "$BASE/workspaces/$AGENT_ID/"
+
+# memory, life 디렉토리도 생성 (HEARTBEAT.md에서 참조)
+mkdir -p "$BASE/workspaces/$AGENT_ID/memory" \
+         "$BASE/workspaces/$AGENT_ID/life"
+```
+
+### 해결 — 전체 에이전트 일괄 처리 스크립트
+
+```bash
+#!/bin/bash
+# fix-agent-workspaces.sh — 모든 에이전트의 instructions를 workspace에 동기화
+BASE=/home/aa/vllm/paperclip-data/instances/default
+
+for company_dir in "$BASE"/companies/*/; do
+  company_id=$(basename "$company_dir")
+  for agent_dir in "$company_dir"agents/*/; do
+    agent_id=$(basename "$agent_dir")
+    inst="$agent_dir/instructions"
+    ws="$BASE/workspaces/$agent_id"
+
+    [[ ! -d "$inst" ]] && continue
+    mkdir -p "$ws/memory" "$ws/life"
+
+    for f in "$inst"/*.md; do
+      [[ -f "$f" ]] || continue
+      fname=$(basename "$f")
+      if [[ ! -f "$ws/$fname" ]] || [[ "$f" -nt "$ws/$fname" ]]; then
+        cp "$f" "$ws/"
+        echo "Synced: $fname → $agent_id"
+      fi
+    done
+  done
+done
+echo "Done."
+```
+
+### 요약
+
+| 질문 | 답변 |
+|------|------|
+| 내 설정이 잘못된 건가? | **아님** — PaperClip이 원래 이렇게 동작함 |
+| instructions 자동 복사 기능이 있는가? | **없음** — instructions는 시스템 프롬프트로만 주입, 파일 복사 없음 |
+| 왜 에러가 나는가? | LLM이 HEARTBEAT.md 내용을 보고 `$AGENT_HOME`에서 직접 Read 시도 |
+| `provisionCommand`로 자동화 가능한가? | 가능 — `runtimeConfig.provisionCommand`에 복사 스크립트 설정 |
+
+### 향후 자동화 (provisionCommand 활용)
+
+에이전트의 `runtimeConfig`에 provision 명령어를 설정하면 workspace 생성 시 자동 실행됨:
+
+```sql
+-- CEO 에이전트에 자동 프로비저닝 설정
+UPDATE agents SET runtime_config = jsonb_set(
+  COALESCE(runtime_config, '{}'),
+  '{provisionCommand}',
+  '"cp $PAPERCLIP_WORKSPACE_REPO_ROOT/../companies/*/agents/$PAPERCLIP_AGENT_ID/instructions/*.md $AGENT_HOME/ 2>/dev/null; mkdir -p $AGENT_HOME/memory $AGENT_HOME/life"'
+) WHERE id = 'c73df5fb-9c81-4be2-9e3c-81696ae46ac9';
+```
+
+> 주의: `provisionCommand`는 execution workspace(git worktree 기반)에서만 실행됨.
+> agent_home 폴백 모드에서는 실행되지 않으므로 수동 복사가 더 안전함.
