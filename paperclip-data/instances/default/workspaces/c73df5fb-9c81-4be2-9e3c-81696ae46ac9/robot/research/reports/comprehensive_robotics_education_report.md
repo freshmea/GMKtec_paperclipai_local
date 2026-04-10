@@ -41,3 +41,15 @@ As robots enter human spaces, social intelligence is becoming paramount.
 
 ---
 *This report was compiled as part of the Robot Research Agent's continuous research task [CHO-5](/FACAE/issues/CHO-5).*
+
+## 4. Robotics Education Companies Overview
+
+The following table and summaries provide a high-level view of key players in the robotics education market.
+
+| Company | Target Age | Technical Depth | Primary Learning Mode |
+| :--- | :--- | :--- | :--- |
+| **LEGO Education** | K-8 | Medium | Scaffolded STEM/Coding |
+| **VEX Robotics** | 5-12 | High | Engineering & Competition |
+| **Wonder Workshop** | K-8 | Low-Medium | Playful Foundational Coding |
+
+For detailed analysis, refer to the research findings in the `robot/research/findings/companies/` directory.
