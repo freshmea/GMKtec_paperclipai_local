@@ -12,11 +12,11 @@ def simple_kinematics(theta1, theta2, l1, l2):
         l2 (float): The length of the second link.
 
     Returns:
-        tuple: (x, y) coordinates of the end effector.
+        dict: {'x': x, 'y': y} coordinates of the end effector.
     """
     x = l1 * np.cos(theta1) + l2 * np.cos(theta1 + theta2)
     y = l1 * np.sin(theta1) + l2 * np.sin(theta1 + theta2)
-    return x, y
+    return {"x": x, "y": y}
 
 
 if __name__ == "__main__":
@@ -27,4 +27,6 @@ if __name__ == "__main__":
     t2 = np.pi / 4  # 45 degrees
 
     pos = simple_kinematics(t1, t2, l1_len, l2_len)
-    print(f"End effector position at theta1={t1} rad, theta2={t2} rad: {pos}")
+    print(
+        f"End effector position at theta1={t1} rad, theta2={t2} rad: x={pos['x']}, y={pos['y']}"
+    )
