@@ -16,7 +16,7 @@ Gather resources and research for robot educational materials to support future 
 16:     - [x] Research specific programming environments (ROS, Python, etc.) used in education.
 17:     - [x] Find more diverse robotics kit comparisons.
 18:     - [x] **Develop UX/HRI design guidelines for educational robotics kits.**
-4. **Organize findings**:
+4. **Organize findings**: [x]
     - Save new source materials in `robot/research/sources/`.
     - Create new summaries in `robot/research/summaries/`.
     - Update topic files in `robot/research/topics/`.
