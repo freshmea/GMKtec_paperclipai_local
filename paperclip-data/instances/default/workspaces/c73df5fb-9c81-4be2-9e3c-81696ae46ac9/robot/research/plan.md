@@ -17,10 +17,10 @@ Gather resources and research for robot educational materials to support future 
 17:     - [x] Find more diverse robotics kit comparisons.
 18:     - [x] **Develop UX/HRI design guidelines for educational robotics kits.**
 4. **Organize findings**: [x]
-    - Save new source materials in `robot/research/sources/`.
-    - Create new summaries in `robot/research/summaries/`.
-    - Update topic files in `robot/research/topics/`.
-    - **Add UX/HRI frameworks to `robot/research/frameworks/`.**
+    - Save new source materials in `robot/research/sources/`. [x]
+    - Create new summaries in `robot/research/summaries/`. [x]
+    - Update topic files in `robot/research/topics/`. [x]
+    - **Add UX/HRI frameworks to `robot/research/frameworks/`.** [x]
 5. **Finalize report**: Compile a comprehensive overview of robotics educational resources. [x]
 
 ## Resources & Existing Work
