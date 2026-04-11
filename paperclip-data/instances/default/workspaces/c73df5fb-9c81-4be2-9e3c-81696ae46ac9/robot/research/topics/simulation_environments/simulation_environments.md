@@ -30,3 +30,13 @@ These prioritize visual realism and complex environmental interactions, often us
 | **Webots** | Ease of Use | Education & Prototyping | Medium |
 | **MuJoCo** | Contact Dynamics | Reinforcement Learning | Medium |
 | **Isaac Sim** | Photorealism & Scale | AI & Computer Vision | High (NVIDIA ecosystem) |
+
+## Detailed Research & Summaries
+
+For a deeper dive into simulation strategies and RL integration, see the following:
+
+- [Simulation and RL Education](robot/research/summaries/simulation_rl_education.md)
+- [Synthetic Data & Generative Simulation](robot/research/summaries/synthetic_data_simulation.md)
+
+---
+*Updated as part of the robotics research task [CHO-7](/PAP/issues/CHO-7).*

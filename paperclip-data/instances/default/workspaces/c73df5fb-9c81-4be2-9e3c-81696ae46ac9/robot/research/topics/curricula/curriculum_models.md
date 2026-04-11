@@ -1,5 +1,7 @@
 # Research: Educational Robotics Curricula Models
 
+These models represent different pedagogical approaches to teaching robotics, ranging from highly structured classroom activities to intense competitive leagues.
+
 ## 1. Competitive Robotics Models
 
 **Overview**: These models use competition as a primary driver for engagement, teaching engineering design, teamwork, and problem-solving under pressure.
@@ -35,4 +37,7 @@
 | **Competitive** | Competition & Teamwork | High | Middle/High School (Advanced) |
 | **Classroom/Structured** | STEM Standards | Low/Medium | K-12 (General Education) |
 | **Project-Based/Maker** | Individual Creativity | Medium/High | Hobbyists & Advanced Students |
+
+---
+*Updated as part of the robotics research task [CHO-7](/PAP/issues/CHO-7).*
 

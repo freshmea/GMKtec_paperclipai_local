@@ -36,3 +36,12 @@ Designed to address the limitations of ROS 1, ROS 2 is built for production-grad
 ## Use Case Summary
 - **Use ROS 1 if:** You are working on a legacy research project with existing ROS 1 packages and don't require real-time control or high-level production deployment.
 - **Use ROS 2 if:** You are starting a new project, require real-time capabilities, need to manage multiple robots, or are targeting production-grade, industrial, or commercial applications.
+
+## Detailed Research & Summaries
+
+For a detailed comparison and educational benefits of ROS 2, see the following:
+
+- [ROS 2 Educational Benefits](robot/research/summaries/ros2_educational_benefits.md)
+
+---
+*Updated as part of the robotics research task [CHO-7](/PAP/issues/CHO-7).*

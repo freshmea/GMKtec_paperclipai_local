@@ -7,6 +7,7 @@
 | **LEGO Spike Prime** | 9-12 | Block-based & Python | Medium | Advanced sensors, modular builds, high engagement | Middle school STEM integration |
 | **VEX IQ** | 9-12 | Block-based & C++ | Medium | Modular mechanical parts, engineering-focused | Engineering design principles |
 | **mBot (Makeblock)** | 9-12 | Block-based (Scratch) | Low/Medium | Easy assembly, affordable, versatile | Beginner hobbyists and classroom use |
+| **NVIDIA JetBot** | 13+ | Python | Medium/High | Edge AI, GPU-accelerated, vision-centric | Learning Deep Learning & Edge AI |
 | **VEX V5** | 13+ | C++, Python | High | Professional-grade, high-speed motors, advanced sensors | Competitive robotics and high school engineering |
 | **Arduino** | 13+ | C/C++ | High | Open-source, massive community, hardware-level control | Custom electronics and embedded systems |
 | **Raspberry Pi** | 13+ | Python, C++ | Very High | Full OS, AI/ML capability, computer vision | Advanced robotics and complex computing tasks |

@@ -36,3 +36,6 @@ Physics engines are critical components of robotics simulators, providing the ma
 - **Simulation Fidelity:** Does the engine support soft bodies, fluids, or complex multi-body constraints?
 - **Integration:** Does the engine work seamlessly with middleware like ROS 2 or simulators like Gazebo?
 - **Hardware Acceleration:** Can the engine leverage GPU acceleration (like PhysX) for large-scale parallel simulations?
+
+---
+*Updated as part of the robotics research task [CHO-7](/PAP/issues/CHO-7).*

@@ -1,9 +1,8 @@
 # Research: Simulation Environments in Robotics Education
 
-## 1. Overview
 Simulation is a critical component of modern robotics education, providing a safe, repeatable, and cost-effective environment for testing algorithms and training AI agents before deploying them to physical hardware.
 
-## 2. Key Simulation Tools
+## 1. Key Simulation Tools
 
 ### Gazebo
 - **Overview**: The industry-standard simulator for the Robot Operating System (ROS/ROS 2).
@@ -20,7 +19,7 @@ Simulation is a critical component of modern robotics education, providing a saf
 - **Capabilities**: Extremely versatile with a wide range of physics engines and complex scene capabilities.
 - **Educational Value**: Suitable for advanced university-level research and complex algorithmic testing.
 
-## 3. Summary Table
+## 2. Summary Table
 
 | Simulator | Primary Use | Learning Curve | Best For |
 | :--- | :--- | :--- | :--- |
@@ -28,8 +27,18 @@ Simulation is a critical component of modern robotics education, providing a saf
 | **Webots** | Rapid prototyping & K-12 | Medium | Introductory/Middle School |
 | **CoppeliaSim** | High-fidelity research | High | University/Research |
 
-## 4. The Sim-to-Real Pipeline
+## 3. The Sim-to-Real Pipeline
 A key learning objective in modern robotics is the **Sim-to-Real** process:
 1. **Design & Simulation**: Develop and test algorithms (e.g., RL or SLAM) in a virtual environment.
 2. **Validation**: Ensure the simulation accurately reflects real-world physics and sensor noise.
 3. **Deployment**: Transfer the learned behaviors to a physical robot, addressing the "reality gap."
+
+## Detailed Research & Summaries
+
+For a deeper dive into simulation strategies and RL integration, see the following:
+
+- [Simulation and RL Education](robot/research/summaries/simulation_rl_education.md)
+- [Synthetic Data & Generative Simulation](robot/research/summaries/synthetic_data_simulation.md)
+
+---
+*Updated as part of the robotics research task [CHO-7](/PAP/issues/CHO-7).*

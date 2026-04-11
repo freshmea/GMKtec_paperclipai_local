@@ -20,3 +20,12 @@ Computer vision enables robots to interpret and understand visual information fr
 - **Object Manipulation**: Identifying and grasping objects with robotic arms.
 - **Human-Robot Interaction**: Recognizing gestures, facial expressions, or tracking human presence.
 - **Quality Inspection**: Detecting defects in manufacturing processes.
+
+## Detailed Research & Summaries
+
+For in-depth analysis of pedagogical approaches to computer vision, see the following:
+
+- [Computer Vision Pedagogy](robot/research/summaries/computer_vision_pedagogy.md)
+
+---
+*Updated as part of the robotics research task [CHO-7](/PAP/issues/CHO-7).*

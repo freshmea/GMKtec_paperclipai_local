@@ -1,22 +1,40 @@
-# Summary: Human-Robot Interaction (HRI) and Social Robotics
+# Human-Robot Interaction (HRI) and Social Robotics
 
-This summary outlines the evolving field of HRI and its growing importance in making robots accessible and safe for human environments.
+## Overview
+Human-Robot Interaction (HRI) is an interdisciplinary field focused on the design, implementation, and evaluation of interactions between humans and robots. As robots move from industrial cages into homes, hospitals, and classrooms, the quality of these interactions becomes paramount for adoption and effective use.
 
-## Core Research Domains
-- **Multimodal Interaction**: Combining natural language (NLP/LLMs) with non-verbal cues (gestures, facial expressions) to create intuitive communication channels.
-- **Affective Computing**: Developing robots capable of perceiving and responding to human emotions to build empathy and rapport.
-- **Socially Aware Autonomy**: Designing robots that respect human social norms, such as personal space (proxemics) and predictable movement patterns.
-- **Trust & Transparency**: Enhancing robot explainability to ensure humans can understand and predict robotic intentions, which is critical for safe collaboration.
+## Key Research Areas
 
-## Educational Implications
-- **Interdisciplinary Approach**: Integrates robotics with psychology, sociology, and linguistics, moving beyond pure engineering.
-- **Human-Centric Design**: Emphasizes user experience, empathy, and the social impact of robotics.
-- **New Competencies**: Shifts focus toward social intelligence, ethical reasoning, and the design of collaborative human-robot teams.
+### 1. Natural Language and Multimodal Interaction
+The goal is to enable robots to understand and respond to humans as naturally as possible.
+* **Natural Language Processing (NLP):** Moving beyond simple voice commands to understanding intent, context, and nuance through LLMs.
+* **Multimodal Fusion:** Combining speech, gesture recognition, and facial expression analysis to build a complete understanding of human communication.
+* **Socially Aware Navigation:** Designing robots that move through human crowds in a way that is predictable, non-threatening, and respects personal space (proxemics).
 
-## Key Technologies
-- **Natural Language Processing (NLP) & LLMs**: For semantic understanding and dialogue.
-- **Computer Vision**: For gesture and emotion recognition.
-- **Explainable AI (XAI)**: For making robotic reasoning transparent to humans.
+### 2. Affective Computing and Emotional Intelligence
+Robots that can perceive and respond to human emotions can build better rapport and trust.
+* **Emotion Recognition:** Using computer vision (facial expressions) and audio analysis (tone of voice) to detect human emotional states.
+* **Empathetic Response:** Developing behaviors (voice modulation, movement speed, facial mimicry) that respond appropriately to the user's emotional state.
+
+### 3. Trust and Human Factors
+The psychological aspect of how humans perceive and interact with autonomous agents.
+* **Transparency and Explainability (XAI):** Ensuring robots communicate their intentions and reasoning (e.g., "I am moving to the left to avoid you") so humans can predict their behavior.
+* **Trust Calibration:** Helping users understand when to rely on a robot and when to intervene, preventing both over-reliance and undue skepticism.
+* **Human-Robot Teaming:** Researching how humans and robots can work together as partners in a shared task, requiring mutual adaptation and coordination.
+
+## Educational Impact
+
+| Modality | Technology Driver | Primary Goal | Educational Focus |
+| :--- | :--- | :--- | :--- |
+| **Verbal** | NLP, LLMs | Intuitive command & dialogue | Semantic reasoning, intent |
+| **Non-Verbal** | Computer Vision, Gestures | Natural communication | Gesture recognition, proxemics |
+| **Affective** | Emotion AI, Audio Analysis | Empathy & rapport | Emotional intelligence, social cues |
+| **Cognitive** | Explainable AI (XAI) | Trust & predictability | Transparency, reasoning |
+
+### Shifting the Curriculum
+* **Interdisciplinary Learning:** Encourages students to study psychology, sociology, and linguistics alongside robotics and AI.
+* **Design Thinking:** Emphasizes user-centered design, requiring students to consider the end-user's experience, safety, and emotional comfort.
+* **Ethics and Social Impact:** Integrates discussions on the social consequences of robotics, such as privacy, job displacement, and the ethics of human-robot companionship.
 
 ---
-*Generated from research findings in `robot/research/findings/hri/social_robotics_trends.md`.*
+*This summary is part of the robotics research task [CHO-7](/PAP/issues/CHO-7).*
