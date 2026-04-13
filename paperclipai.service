@@ -8,9 +8,22 @@ Type=simple
 User=aa
 Group=aa
 WorkingDirectory=/home/aa/vllm
+# 시작 전: 죽은 PostgreSQL의 stale PID 파일 자동 정리
+ExecStartPre=/bin/bash -c '\
+  PID_FILE="./paperclip-data/instances/default/db/postmaster.pid"; \
+  if [ -f "$PID_FILE" ]; then \
+    PG_PID=$(head -1 "$PID_FILE"); \
+    if ! kill -0 "$PG_PID" 2>/dev/null; then \
+      echo "Removing stale postmaster.pid (pid=$PG_PID not running)"; \
+      rm -f "$PID_FILE"; \
+    fi; \
+  fi'
 ExecStart=/home/aa/.npm-global/bin/paperclipai run --data-dir ./paperclip-data
 Restart=always
 RestartSec=5
+# 크래시 루프 방지: 60초 내 5회 실패 시 재시작 중단
+StartLimitIntervalSec=60
+StartLimitBurst=5
 Environment=PATH=/home/aa/.local/bin:/home/aa/.npm-global/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 Environment=HOME=/home/aa
 Environment=NODE_ENV=production

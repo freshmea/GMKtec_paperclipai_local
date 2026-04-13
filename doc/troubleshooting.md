@@ -640,4 +640,127 @@ UPDATE agents SET runtime_config = jsonb_set(
 ```
 
 > 주의: `provisionCommand`는 execution workspace(git worktree 기반)에서만 실행됨.
+
+---
+
+## 3. PaperclipAI Stale PostgreSQL PID 파일로 인한 크래시 루프
+
+**발생일**: 2026-04-13
+
+### 증상
+
+- `http://localhost:3100` 접속 불가
+- `systemctl status paperclipai` → 서비스가 `active (running)` 이지만 즉시 `exit-code` FAILURE 로 전환
+- 재시작 카운터가 **389회** 이상 누적 (무한 크래시 루프)
+- 로그에 반복적으로:
+  ```
+  Paperclip server failed to start.
+  connect ECONNREFUSED 127.0.0.1:54329
+  WARN: Embedded PostgreSQL already running; reusing existing process (pid=3035, port=54329)
+  ```
+
+### 원인
+
+내장 PostgreSQL의 `postmaster.pid` 파일이 정리되지 않은 상태로 남음 (stale PID).
+
+1. 어떤 이유로(비정상 종료, 시스템 sleep/hibernate 등) 내장 PostgreSQL 프로세스(PID 3035)가 죽음
+2. `paperclip-data/instances/default/db/postmaster.pid` 파일은 남아있음
+3. paperclipai가 시작할 때 PID 파일을 보고 "PostgreSQL이 이미 실행 중"이라고 판단
+4. 죽은 프로세스의 포트(54329)에 연결 시도 → `ECONNREFUSED`
+5. `Restart=always`로 인해 5초마다 무한 반복
+
+```
+postmaster.pid 존재 → "이미 실행 중" 오판 → 연결 실패 → 크래시 → 재시작 → 반복
+```
+
+### 진단
+
+```bash
+# 1. 서비스 상태 확인
+systemctl status paperclipai
+# → restart counter is at 389
+
+# 2. 로그에서 에러 패턴 확인
+journalctl -u paperclipai -n 30
+# → ECONNREFUSED 127.0.0.1:54329 반복
+
+# 3. PID 파일이 가리키는 프로세스 존재 여부 확인
+cat paperclip-data/instances/default/db/postmaster.pid
+# → PID 3035
+ps -p 3035
+# → 프로세스 없음 (stale PID 확인)
+
+# 4. 포트 54329 리스닝 여부 확인
+ss -tlnp | grep 54329
+# → 없음 (PostgreSQL 실제로 죽어있음)
+```
+
+### 해결
+
+```bash
+# 1. 서비스 중지
+sudo systemctl stop paperclipai
+
+# 2. stale PID 파일 제거
+rm -f paperclip-data/instances/default/db/postmaster.pid
+
+# 3. 서비스 재시작
+sudo systemctl start paperclipai
+
+# 4. 확인
+ss -tlnp | grep 3100
+# → LISTEN 0 511 127.0.0.1:3100 ...
+```
+
+### 재발 방지 — paperclipai.service 개선
+
+`paperclipai.service`에 두 가지 보호 장치를 추가함:
+
+**1) `ExecStartPre` — 시작 전 stale PID 자동 정리**
+
+```ini
+ExecStartPre=/bin/bash -c '\
+  PID_FILE="./paperclip-data/instances/default/db/postmaster.pid"; \
+  if [ -f "$PID_FILE" ]; then \
+    PG_PID=$(head -1 "$PID_FILE"); \
+    if ! kill -0 "$PG_PID" 2>/dev/null; then \
+      echo "Removing stale postmaster.pid (pid=$PG_PID not running)"; \
+      rm -f "$PID_FILE"; \
+    fi; \
+  fi'
+```
+
+서비스가 시작되기 전에 PID 파일이 가리키는 프로세스가 실제로 살아있는지 확인하고, 죽어있으면 PID 파일을 제거한다.
+
+**2) `StartLimitBurst` + `StartLimitIntervalSec` — 크래시 루프 제한**
+
+```ini
+StartLimitIntervalSec=60
+StartLimitBurst=5
+```
+
+60초 내에 5회 이상 실패하면 systemd가 자동 재시작을 중단한다. 389회 크래시 루프 같은 리소스 낭비를 방지.
+
+### 서비스 파일 변경 후 적용
+
+```bash
+sudo cp paperclipai.service /etc/systemd/system/paperclipai.service
+sudo systemctl daemon-reload
+sudo systemctl restart paperclipai
+```
+
+### 참고: 수동 복구 (StartLimitBurst로 중단된 경우)
+
+`StartLimitBurst` 에 도달하여 서비스가 중단된 경우:
+
+```bash
+# 실패 카운터 초기화
+sudo systemctl reset-failed paperclipai
+
+# 필요시 stale PID 파일 수동 제거
+rm -f paperclip-data/instances/default/db/postmaster.pid
+
+# 서비스 재시작
+sudo systemctl start paperclipai
+```
 > agent_home 폴백 모드에서는 실행되지 않으므로 수동 복사가 더 안전함.
