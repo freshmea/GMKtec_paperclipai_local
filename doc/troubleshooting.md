@@ -947,3 +947,151 @@ systemctl status paperclipai.service --no-pager
 ss -ltnp | grep -E '3100|3101'
 journalctl -u paperclipai.service -n 80 --no-pager
 ```
+
+---
+
+## 5. `opencode` 명령을 찾지 못해 에이전트 실행 실패
+
+**발생일**: 2026-04-14
+
+### 증상
+
+- Paperclip run transcript에 다음 메시지가 표시됨:
+
+```text
+[system] Command not found in PATH: "opencode"
+```
+
+- 일부 heartbeat/run은 fallback workspace까지 생성한 뒤 즉시 실패
+- 에이전트 실행이 `opencode_local` 어댑터 단계에서 멈춤
+
+### 원인
+
+호스트에 `opencode` CLI는 설치되어 있었지만, 실제 바이너리 위치가 다음 한 곳뿐이었음:
+
+```bash
+/home/aa/.local/bin/opencode
+```
+
+즉, 로그인 셸이나 특정 환경에서는 동작할 수 있었지만, Paperclip의 비대화형 실행 경로에서는 `opencode` 문자열만으로 명령을 찾지 못하는 상황이 발생함.
+
+실제 확인 결과:
+
+```bash
+opencode --version
+# /bin/bash: opencode: command not found
+
+/home/aa/.local/bin/opencode models
+# 정상 동작
+```
+
+정리하면:
+
+- **절대경로**로는 실행 가능
+- **PATH 기반 탐색**에서는 실패 가능
+
+### 해결
+
+두 층으로 보강함.
+
+#### 1. `run_paperclipai_service.sh`에서 PATH 강제 설정
+
+서비스 러너 시작 시 다음 환경을 명시적으로 export:
+
+```bash
+export PATH="/home/aa/.local/bin:/home/aa/.npm-global/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+export HOME="/home/aa"
+```
+
+이렇게 하면 PaperclipAI 서비스 프로세스와 그 하위 프로세스가 `~/.local/bin`을 항상 우선적으로 볼 수 있음.
+
+#### 2. `/usr/local/bin/opencode` 심볼릭 링크 생성
+
+설치 스크립트에서 다음 링크를 자동 생성하도록 수정:
+
+```bash
+sudo ln -sf /home/aa/.local/bin/opencode /usr/local/bin/opencode
+```
+
+이제 비대화형 PATH가 `~/.local/bin`을 누락하더라도 `/usr/local/bin/opencode`로 명령을 찾을 수 있음.
+
+### 설치 스크립트 보강
+
+`install_paperclipai_service.sh`에 다음 검증도 추가함:
+
+```bash
+if [[ ! -x /home/aa/.local/bin/opencode ]]; then
+    echo "ERROR: /home/aa/.local/bin/opencode 실행 파일을 찾을 수 없습니다."
+    echo "먼저 호스트 OpenCode CLI를 설치하세요."
+    exit 1
+fi
+```
+
+즉, 호스트 CLI가 아예 없는 상태에서는 조용히 실패하지 않고 설치 단계에서 즉시 경고함.
+
+### 적용 방법
+
+```bash
+cd /home/aa/vllm
+sudo bash ./install_paperclipai_service.sh
+sudo systemctl daemon-reload
+sudo systemctl restart paperclipai.service
+```
+
+### 검증 방법
+
+#### 1. 전역 PATH에서 `opencode`가 보이는지 확인
+
+```bash
+which opencode
+```
+
+정상 기대값:
+
+```bash
+/usr/local/bin/opencode
+```
+
+#### 2. 버전 확인
+
+```bash
+opencode --version
+```
+
+정상 기대값:
+
+- 버전 문자열 출력
+- 더 이상 `command not found`가 나오지 않음
+
+#### 3. 모델 조회 확인
+
+```bash
+opencode models
+```
+
+정상 기대값:
+
+- 사용 가능한 모델 목록 출력
+
+#### 4. 서비스 로그 확인
+
+```bash
+journalctl -u paperclipai.service -n 80 --no-pager
+```
+
+정상 기대값:
+
+- 더 이상 `Command not found in PATH: "opencode"` 메시지가 없음
+
+### 운영 메모
+
+- `opencode_local` 어댑터는 Docker 컨테이너 내부 `opencode-web`와 별개로, **호스트의 `opencode` CLI** 가 필요함.
+- 따라서 Docker가 떠 있어도 호스트 PATH에 `opencode`가 없으면 Paperclip agent 실행은 실패할 수 있음.
+- 이후 유사 문제 발생 시 가장 먼저 아래를 확인:
+
+```bash
+which opencode
+ls -l /home/aa/.local/bin/opencode /usr/local/bin/opencode
+opencode --version
+opencode models
+```

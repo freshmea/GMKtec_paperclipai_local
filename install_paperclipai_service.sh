@@ -15,11 +15,19 @@ if [[ ! -f "$RUNNER_FILE" ]]; then
     exit 1
 fi
 
+if [[ ! -x /home/aa/.local/bin/opencode ]]; then
+    echo "ERROR: /home/aa/.local/bin/opencode 실행 파일을 찾을 수 없습니다."
+    echo "먼저 호스트 OpenCode CLI를 설치하세요."
+    exit 1
+fi
+
 echo "=== PaperclipAI systemd 서비스 설치 ==="
 
 # 서비스 파일 복사
 sudo cp "$SERVICE_FILE" /etc/systemd/system/${SERVICE_NAME}.service
 sudo install -m 755 "$RUNNER_FILE" /home/aa/vllm/run_paperclipai_service.sh
+# 비대화형/비로그인 PATH에서도 opencode를 찾을 수 있도록 전역 경로에 링크
+sudo ln -sf /home/aa/.local/bin/opencode /usr/local/bin/opencode
 echo "[1/4] 서비스 파일 복사 완료"
 
 # 이전 외부 프록시 분리 서비스 정리

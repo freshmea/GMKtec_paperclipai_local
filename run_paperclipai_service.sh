@@ -1,8 +1,30 @@
 #!/bin/bash
 set -euo pipefail
 
+export PATH="/home/aa/.local/bin:/home/aa/.npm-global/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+export HOME="/home/aa"
+
 PAPERCLIP_PID=""
 SOCAT_PID=""
+
+cleanup_listener_port() {
+    local port="$1"
+    local pids
+    pids="$(
+        ss -ltnp "( sport = :${port} )" 2>/dev/null \
+        | grep -o 'pid=[0-9]\+' \
+        | cut -d= -f2 \
+        | sort -u || true
+    )"
+
+    if [[ -n "${pids}" ]]; then
+        echo "Cleaning existing listener(s) on port ${port}: ${pids}"
+        for pid in ${pids}; do
+            kill "${pid}" 2>/dev/null || true
+        done
+        sleep 1
+    fi
+}
 
 cleanup() {
     if [[ -n "${SOCAT_PID}" ]] && kill -0 "${SOCAT_PID}" 2>/dev/null; then
@@ -16,6 +38,10 @@ cleanup() {
 }
 
 trap cleanup TERM INT EXIT
+
+# Clean up stale/manual listeners before starting the managed service instance.
+cleanup_listener_port 3101
+cleanup_listener_port 3100
 
 /home/aa/.npm-global/bin/paperclipai run --data-dir ./paperclip-data &
 PAPERCLIP_PID=$!
