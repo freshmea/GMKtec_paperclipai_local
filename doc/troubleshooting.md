@@ -764,3 +764,186 @@ rm -f paperclip-data/instances/default/db/postmaster.pid
 sudo systemctl start paperclipai
 ```
 > agent_home 폴백 모드에서는 실행되지 않으므로 수동 복사가 더 안전함.
+
+---
+
+## 4. PaperclipAI 외부 접속용 `3101/tcp` (`socat`) 미오픈 문제
+
+**발생일**: 2026-04-14
+
+### 증상
+
+- `paperclipai` 자체는 동작하지만 외부에서 `3101` 포트로 접속 불가
+- `ss -ltnp | grep 3101` 결과가 비어 있음
+- `paperclipai.service`는 살아 있거나 재시작되지만 `paperclipai-proxy.service`는 `failed`
+- 외부 접속 프록시가 켜져 있어야 하는 구조인데, 재부팅이나 재설치 후 `3101`이 열리지 않음
+
+### 당시 상태
+
+`3100`은 loopback 전용으로 정상 리스닝 중:
+
+```bash
+LISTEN 0 511 127.0.0.1:3100 0.0.0.0:* users:(("node",pid=...,fd=...))
+```
+
+하지만 `3101`은 열려 있지 않았음:
+
+```bash
+ss -ltnp | grep 3101
+# 출력 없음
+```
+
+그리고 별도 프록시 서비스는 실패 상태:
+
+```bash
+systemctl status paperclipai-proxy.service --no-pager
+# Active: failed (Result: exit-code)
+```
+
+### 원인
+
+기존 구조는 다음과 같았음:
+
+- `paperclipai.service` → `127.0.0.1:3100`에서 본체 실행
+- `paperclipai-proxy.service` → `socat 0.0.0.0:3101 -> 127.0.0.1:3100`
+
+문제는 두 서비스가 분리되어 있어서:
+
+1. `paperclipai`가 재시작/실패 루프에 들어가면
+2. `paperclipai-proxy.service`도 같이 정지/실패 상태로 남고
+3. 최종적으로 `paperclipai`만 살아 있고 `3101` 프록시는 죽은 상태가 됨
+
+즉, 외부 접속 포트 `3101`의 생명주기가 본체 서비스와 안정적으로 묶여 있지 않았음.
+
+### 첫 시도와 실패 원인
+
+처음에는 `paperclipai.service`의 `ExecStart=` 안에 직접 bash wrapper를 길게 넣어서
+
+- `paperclipai` 실행
+- `3100` 포트 오픈 대기
+- `socat` 실행
+- 둘 중 하나가 죽으면 전체 종료
+
+를 처리하려고 했음.
+
+하지만 systemd가 `ExecStart=` 안의 `${PAPERCLIP_PID}`, `${SOCAT_PID}` 같은 문자열을 shell 변수로 넘기기 전에 systemd environment variable처럼 먼저 해석하면서 다음 에러가 발생함:
+
+```text
+Referenced but unset environment variable evaluates to an empty string: PAPERCLIP_PID, SOCAT_PID, exit_code
+/bin/bash: wait: `': PID가 아니거나 적절한 작업 명세 없음
+```
+
+즉, inline shell script 방식은 systemd의 변수 해석과 충돌해서 실패했음.
+
+### 최종 해결
+
+`ExecStart=` 안의 긴 inline bash를 버리고, 별도 실행 스크립트로 분리함.
+
+#### 1. `paperclipai.service`
+
+핵심 실행부를 다음처럼 단순화:
+
+```ini
+ExecStart=/bin/bash /home/aa/vllm/run_paperclipai_service.sh
+```
+
+또한 크래시 루프 제한을 `Unit` 섹션으로 정리:
+
+```ini
+[Unit]
+StartLimitIntervalSec=60
+StartLimitBurst=5
+```
+
+#### 2. `run_paperclipai_service.sh`
+
+이 스크립트가 실제 런타임 오케스트레이션을 담당함:
+
+1. `paperclipai run --data-dir ./paperclip-data` 백그라운드 실행
+2. `127.0.0.1:3100`이 실제로 열릴 때까지 최대 60초 대기
+3. 포트가 열리면 `socat TCP-LISTEN:3101,bind=0.0.0.0,reuseaddr,fork TCP:127.0.0.1:3100` 실행
+4. 둘 중 하나가 죽으면 cleanup 후 전체 프로세스 종료
+
+이렇게 하면 `3101` 프록시가 본체와 항상 같이 올라오고 같이 내려감.
+
+#### 3. `install_paperclipai_service.sh`
+
+설치 스크립트도 함께 수정:
+
+- `run_paperclipai_service.sh`를 실행 가능 파일로 설치
+- 기존 `paperclipai-proxy.service`가 남아 있으면 `disable --now` 후 제거
+- 이후 `paperclipai.service`만 재시작하도록 변경
+
+### 적용 방법
+
+```bash
+cd /home/aa/vllm
+sudo bash ./install_paperclipai_service.sh
+sudo systemctl daemon-reload
+sudo systemctl restart paperclipai.service
+```
+
+### 검증 방법
+
+#### 1. 서비스 상태 확인
+
+```bash
+systemctl status paperclipai.service --no-pager
+```
+
+정상 기대값:
+
+- `Active: active (running)`
+
+#### 2. 포트 확인
+
+```bash
+ss -ltnp | grep -E '3100|3101'
+```
+
+정상 기대값:
+
+```bash
+LISTEN ... 127.0.0.1:3100 ...
+LISTEN ... 0.0.0.0:3101 ...
+```
+
+#### 3. 프록시 응답 확인
+
+```bash
+curl -I http://127.0.0.1:3101
+```
+
+정상 기대값:
+
+```text
+HTTP/1.1 200 OK
+```
+
+### 실제 검증 결과
+
+수정 후 `run_paperclipai_service.sh`를 직접 실행하여 다음을 확인함:
+
+- `paperclipai` 본체 정상 기동
+- `127.0.0.1:3100` 리스닝 확인
+- `0.0.0.0:3101` 리스닝 확인
+- `curl -I http://127.0.0.1:3101` → `HTTP/1.1 200 OK`
+
+예시:
+
+```bash
+LISTEN 0 511 127.0.0.1:3100 0.0.0.0:* users:(("node",pid=953199,fd=30))
+LISTEN 0 5   0.0.0.0:3101   0.0.0.0:* users:(("socat",pid=953265,fd=5))
+```
+
+### 운영 메모
+
+- 앞으로 `3101` 외부 접속 문제는 먼저 `paperclipai.service` 하나만 보면 됨.
+- `paperclipai-proxy.service`는 더 이상 운영 기준 서비스가 아님.
+- 재부팅 후 외부 접속이 안 되면 가장 먼저 다음 세 가지를 확인:
+
+```bash
+systemctl status paperclipai.service --no-pager
+ss -ltnp | grep -E '3100|3101'
+journalctl -u paperclipai.service -n 80 --no-pager
+```

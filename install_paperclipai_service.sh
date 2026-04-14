@@ -3,9 +3,15 @@ set -e
 
 SERVICE_NAME="paperclipai"
 SERVICE_FILE="$(dirname "$(realpath "$0")")/${SERVICE_NAME}.service"
+RUNNER_FILE="$(dirname "$(realpath "$0")")/run_paperclipai_service.sh"
 
 if [[ ! -f "$SERVICE_FILE" ]]; then
     echo "ERROR: ${SERVICE_FILE} 파일을 찾을 수 없습니다."
+    exit 1
+fi
+
+if [[ ! -f "$RUNNER_FILE" ]]; then
+    echo "ERROR: ${RUNNER_FILE} 파일을 찾을 수 없습니다."
     exit 1
 fi
 
@@ -13,7 +19,14 @@ echo "=== PaperclipAI systemd 서비스 설치 ==="
 
 # 서비스 파일 복사
 sudo cp "$SERVICE_FILE" /etc/systemd/system/${SERVICE_NAME}.service
+sudo install -m 755 "$RUNNER_FILE" /home/aa/vllm/run_paperclipai_service.sh
 echo "[1/4] 서비스 파일 복사 완료"
+
+# 이전 외부 프록시 분리 서비스 정리
+if sudo test -f /etc/systemd/system/paperclipai-proxy.service; then
+    sudo systemctl disable --now paperclipai-proxy.service || true
+    sudo rm -f /etc/systemd/system/paperclipai-proxy.service
+fi
 
 # sleep/hibernate 복귀 시 자동 재시작 hook
 sudo mkdir -p /etc/systemd/system/${SERVICE_NAME}.service.d
@@ -44,7 +57,7 @@ sudo systemctl enable paperclipai-wake.service
 echo "[3/4] 서비스 활성화 완료"
 
 # 서비스 시작
-sudo systemctl start ${SERVICE_NAME}.service
+sudo systemctl restart ${SERVICE_NAME}.service
 echo "[4/4] 서비스 시작 완료"
 
 echo ""
@@ -52,4 +65,4 @@ echo "=== 설치 완료 ==="
 echo "상태 확인:  sudo systemctl status ${SERVICE_NAME}"
 echo "로그 확인:  sudo journalctl -u ${SERVICE_NAME} -f"
 echo "중지:       sudo systemctl stop ${SERVICE_NAME}"
-echo "제거:       sudo systemctl disable ${SERVICE_NAME} ${SERVICE_NAME}-wake && sudo rm /etc/systemd/system/${SERVICE_NAME}*"
+echo "제거:       sudo systemctl disable ${SERVICE_NAME} paperclipai-wake && sudo rm -f /etc/systemd/system/${SERVICE_NAME}.service /etc/systemd/system/paperclipai-wake.service && sudo rm -rf /etc/systemd/system/${SERVICE_NAME}.service.d"

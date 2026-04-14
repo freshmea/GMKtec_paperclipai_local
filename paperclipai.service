@@ -2,6 +2,8 @@
 Description=PaperclipAI Local Server
 After=network-online.target
 Wants=network-online.target
+StartLimitIntervalSec=60
+StartLimitBurst=5
 
 [Service]
 Type=simple
@@ -18,18 +20,16 @@ ExecStartPre=/bin/bash -c '\
       rm -f "$PID_FILE"; \
     fi; \
   fi'
-ExecStart=/home/aa/.npm-global/bin/paperclipai run --data-dir ./paperclip-data
+ExecStart=/bin/bash /home/aa/vllm/run_paperclipai_service.sh
 Restart=always
 RestartSec=5
-# 크래시 루프 방지: 60초 내 5회 실패 시 재시작 중단
-StartLimitIntervalSec=60
-StartLimitBurst=5
 Environment=PATH=/home/aa/.local/bin:/home/aa/.npm-global/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 Environment=HOME=/home/aa
 Environment=NODE_ENV=production
 
 # 휴지(sleep/hibernate) 모드 복귀 후에도 자동 재시작
 TimeoutStopSec=30
+KillMode=control-group
 
 [Install]
 WantedBy=multi-user.target
