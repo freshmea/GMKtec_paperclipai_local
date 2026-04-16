@@ -1,19 +1,19 @@
-# Curriculum Resource: FIRST Robotics Overview
+# 커리큘럼 자료: FIRST Robotics 개요
 
-## Overview
-FIRST (For Inspiration and Recognition of Science and Technology) is a global non-profit organization that provides competitive robotics programs to inspire students to pursue careers in STEM.
+## 개요
+FIRST(For Inspiration and Recognition of Science and Technology)는 학생들이 STEM 분야 진로를 탐색하도록 돕기 위해 경쟁형 로보틱스 프로그램을 운영하는 글로벌 비영리 단체입니다.
 
-## Competition Tiers
-- **FIRST LEGO League (FLL)**: Aimed at elementary and middle school students, focusing on basic robotics and core values.
-- **FIRST Tech Challenge (FTC)**: Designed for middle and high school students, requiring more complex mechanical design and programming.
-- **FIRST Robotics Competition (FRC)**: High school students work on large-scale robots, requiring professional-level engineering and teamwork.
+## 대회 단계
+- **FIRST LEGO League (FLL)**: 초등 및 중학생 대상이며, 기초 로보틱스와 핵심 가치에 중점을 둡니다.
+- **FIRST Tech Challenge (FTC)**: 중학생과 고등학생을 대상으로 하며, 더 복잡한 기계 설계와 프로그래밍을 요구합니다.
+- **FIRST Robotics Competition (FRC)**: 고등학생이 대형 로봇을 제작하며, 전문가 수준의 공학과 팀워크가 요구됩니다.
 
-## Educational Impact
-- **Gracious Professionalism®**: A core value emphasizing respect and collaboration even in competition.
-- **Real-World Engineering**: Students work with sophisticated hardware, software, and mechanical systems.
-- **Project Management**: Teams manage budgets, timelines, and complex technical requirements.
+## 교육적 효과
+- **Gracious Professionalism®**: 경쟁 상황에서도 존중과 협업을 중시하는 핵심 가치
+- **실전형 공학 경험**: 학생들이 고급 하드웨어, 소프트웨어, 기계 시스템을 직접 다룹니다.
+- **프로젝트 관리**: 팀 단위로 예산, 일정, 복잡한 기술 요구 사항을 관리합니다.
 
-## Integration with Advanced Robotics
-- **Advanced Programming**: Use of Java, C++, and increasingly Python for robot control.
-- **Sensor Integration**: Heavy use of encoders, gyros, and vision sensors.
-- **Mechanical Complexity**: Focus on drivetrain design, lifting mechanisms, and manipulator precision.
+## 고급 로보틱스와의 연계
+- **고급 프로그래밍**: 로봇 제어를 위해 Java, C++, 그리고 점점 더 많이 Python을 사용합니다.
+- **센서 통합**: 엔코더, 자이로, 비전 센서를 적극적으로 활용합니다.
+- **기계적 복잡성**: 구동계 설계, 리프팅 메커니즘, 매니퓰레이터 정밀도에 중점을 둡니다.

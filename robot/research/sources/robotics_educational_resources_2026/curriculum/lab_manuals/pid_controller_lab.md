@@ -1,50 +1,50 @@
-# Lab Manual: Implementing a PID Controller
+# 실습 매뉴얼: PID 제어기 구현
 
-## Objective
-The goal of this lab is to design and implement a Proportional-Integral-Derivative (PID) controller to control the position of a simulated robot arm (or motor).
+## 목표
+이 실습의 목표는 시뮬레이션된 로봇 팔(또는 모터)의 위치를 제어하기 위한 비례-적분-미분(PID) 제어기를 설계하고 구현하는 것입니다.
 
-## Background
-A PID controller is a control loop feedback mechanism widely used in industrial control systems. It calculates an error value as the difference between a measured process variable and a desired setpoint.
+## 배경
+PID 제어기는 산업 제어 시스템에서 널리 사용되는 제어 루프 피드백 메커니즘입니다. 측정된 공정 변수와 목표값(setpoint)의 차이를 오차로 계산합니다.
 
-The control signal is calculated as:
+제어 입력은 다음과 같이 계산됩니다.
 $u(t) = K_p e(t) + K_i \int e(t) dt + K_d \frac{de(t)}{dt}$
 
-Where:
-- $K_p$: Proportional gain
-- $K_i$: Integral gain
-- $K_d$: Derivative gain
-- $e(t)$: Error at time $t$
+각 항의 의미는 다음과 같습니다.
+- $K_p$: 비례 게인
+- $K_i$: 적분 게인
+- $K_d$: 미분 게인
+- $e(t)$: 시각 $t$에서의 오차
 
-## Equipment
-- Simulation environment (e.g., Gazebo, Webots, or a custom Python script).
-- Python development environment.
+## 준비물
+- 시뮬레이션 환경(Gazebo, Webots 또는 사용자 정의 Python 스크립트)
+- Python 개발 환경
 
-## Procedure
+## 절차
 
-### 1. Mathematical Modeling
-- Understand the system dynamics of the plant you are controlling.
-- Define the setpoint (target position).
+### 1. 수학적 모델링
+- 제어하려는 플랜트의 시스템 동역학을 이해합니다.
+- 목표 위치인 setpoint를 정의합니다.
 
-### 2. Implementation
-- Implement the PID algorithm in Python.
-- Create a loop that:
-    1. Reads the current state (position).
-    2. Calculates the error.
-    3. Computes the PID output.
-    4. Applies the output to the system.
-    5. Waits for the next time step.
+### 2. 구현
+- Python으로 PID 알고리즘을 구현합니다.
+- 다음을 수행하는 루프를 만듭니다.
+  1. 현재 상태(위치)를 읽습니다.
+  2. 오차를 계산합니다.
+  3. PID 출력을 계산합니다.
+  4. 계산된 출력을 시스템에 적용합니다.
+  5. 다음 시간 스텝까지 대기합니다.
 
-### 3. Tuning
-- **Step 1: Proportional Gain ($K_p$)**: Increase $K_p$ until the system responds quickly but starts to oscillate.
-- **Step 2: Derivative Gain ($K_d$)**: Increase $K_d$ to dampen the oscillations and improve stability.
-- **Step 3: Integral Gain ($K_i$)**: Increase $K_i$ to eliminate steady-state error.
+### 3. 튜닝
+- **1단계: 비례 게인($K_p$)**: 시스템이 빠르게 반응하되 진동이 시작될 정도까지 $K_p$를 증가시킵니다.
+- **2단계: 미분 게인($K_d$)**: 진동을 감쇠시키고 안정성을 높이기 위해 $K_d$를 증가시킵니다.
+- **3단계: 적분 게인($K_i$)**: 정상 상태 오차를 제거하기 위해 $K_i$를 증가시킵니다.
 
-## Results and Analysis
-- Plot the setpoint vs. measured position.
-- Identify the overshoot, rise time, and settling time.
-- Document the final tuned parameters ($K_p, K_i, K_d$).
+## 결과 및 분석
+- 목표값과 실제 측정 위치를 함께 그래프로 표시합니다.
+- 오버슈트, 상승 시간, 정착 시간을 확인합니다.
+- 최종 튜닝된 파라미터($K_p, K_i, K_d$)를 기록합니다.
 
-## Troubleshooting
-- **Oscillations**: Too much $K_p$ or too little $K_d$.
-- **Slow response**: Too little $K_p$.
-- **Steady-state error**: Too little $K_i$.
+## 문제 해결
+- **진동 발생**: $K_p$가 너무 크거나 $K_d$가 너무 작을 수 있습니다.
+- **반응이 느림**: $K_p$가 너무 작을 수 있습니다.
+- **정상 상태 오차**: $K_i$가 너무 작을 수 있습니다.

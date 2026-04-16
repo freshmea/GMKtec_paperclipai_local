@@ -1,45 +1,45 @@
-# Hardware Integration Research Report
+# 하드웨어 통합 연구 보고서
 
-## Core Components
-- **IMUs (Inertial Measurement Units)**: These sensors measure orientation, acceleration, and angular velocity. They are critical for maintaining robot stability, dead reckoning, and state estimation.
-- **LiDAR (Light Detection and Ranging)**: LiDAR uses laser pulses to measure distances to surrounding objects. It is a cornerstone technology for high-precision mapping and Simultaneous Localization and Mapping (SLAM).
-- **Depth Cameras (RGB-D)**: These cameras provide both color (RGB) and depth (D) information, such as the Intel RealSense series. They are essential for object recognition, 3D spatial mapping, and complex obstacle avoidance.
-- **Ultrasonic Sensors**: Working on the principle of emitting sound waves and measuring the time of flight for the echo, these sensors are widely used for simple, low-cost proximity sensing and obstacle avoidance.
+## 핵심 구성 요소
+- **IMU(관성 측정 장치)**: 방향, 가속도, 각속도를 측정합니다. 로봇의 안정성 유지, 데드 레커닝, 상태 추정에 중요합니다.
+- **LiDAR(Light Detection and Ranging)**: 레이저 펄스로 주변 물체까지의 거리를 측정합니다. 고정밀 매핑과 SLAM(동시적 위치 추정 및 지도 작성)의 핵심 기술입니다.
+- **깊이 카메라(RGB-D)**: Intel RealSense 계열처럼 색상(RGB)과 깊이(D) 정보를 함께 제공합니다. 객체 인식, 3차원 공간 매핑, 복합 장애물 회피에 필수적입니다.
+- **초음파 센서**: 음파를 송신하고 반사파의 도달 시간을 측정하는 방식으로 동작하며, 단순하고 저비용의 근접 감지와 장애물 회피에 널리 사용됩니다.
 
-## Integration Methods
+## 통합 방법
 
-### Communication Protocols
-Robotics sensors typically communicate with microcontrollers or single-board computers (SBCs) using several standard protocols:
+### 통신 프로토콜
+로보틱스 센서는 일반적으로 다음과 같은 표준 프로토콜을 사용해 마이크로컨트롤러나 SBC와 통신합니다.
 
-- **I2C (Inter-Integrated Circuit):** A synchronous, multi-master, multi-slave, packet-switched, single-ended, serial communication bus. It uses two lines: SDA (data) and SCL (clock). It is widely used for low-speed sensors like IMUs and temperature sensors due to its simplicity and ability to connect multiple devices on the same bus.
-- **SPI (Serial Peripheral Interface):** A synchronous serial communication interface used for short-distance communication, primarily in embedded systems. It is faster than I2C and supports full-duplex communication, making it ideal for high-speed sensors like high-frequency IMUs or SD cards.
-- **UART (Universal Asynchronous Receiver-Transmitter):** An asynchronous serial communication protocol. It uses two wires (TX and RX) and does not require a clock signal. It is commonly used for GPS modules, ultrasonic sensors, and some LiDARs.
+- **I2C(Inter-Integrated Circuit)**: 동기식 멀티마스터/멀티슬레이브 직렬 버스입니다. SDA(데이터), SCL(클럭) 두 선을 사용하며, 단순성과 다중 장치 연결 능력 덕분에 IMU, 온도 센서 같은 저속 센서에 널리 쓰입니다.
+- **SPI(Serial Peripheral Interface)**: 임베디드 시스템에서 주로 사용하는 동기식 직렬 통신 인터페이스입니다. I2C보다 빠르고 전이중 통신을 지원해 고속 IMU나 SD 카드처럼 높은 처리량이 필요한 장치에 적합합니다.
+- **UART(Universal Asynchronous Receiver-Transmitter)**: 비동기식 직렬 통신 프로토콜입니다. TX, RX 두 선을 사용하며 클럭 신호가 필요 없습니다. GPS 모듈, 초음파 센서, 일부 LiDAR에서 흔히 사용됩니다.
 
-### Driver Implementation: Python vs. C++
+### 드라이버 구현: Python vs. C++
 
-| Feature | Python | C++ |
+| 항목 | Python | C++ |
 | :--- | :--- | :--- |
-| **Speed** | Slower (interpreted) | Faster (compiled) |
-| **Ease of Use** | High (rapid prototyping) | Moderate/Low (stricter syntax) |
-| **Latency** | Higher (garbage collection, interpreter overhead) | Lower (deterministic execution) |
-| **Use Case** | High-level logic, prototyping, AI/ML integration | Real-time control, high-speed sensor drivers |
+| **속도** | 느림(인터프리터 기반) | 빠름(컴파일 기반) |
+| **사용 편의성** | 높음(빠른 프로토타이핑) | 중간/낮음(엄격한 문법) |
+| **지연 시간** | 높음(가비지 컬렉션, 인터프리터 오버헤드) | 낮음(결정적 실행) |
+| **주요 용도** | 고수준 로직, 프로토타이핑, AI/ML 통합 | 실시간 제어, 고속 센서 드라이버 |
 
-## Edge Computing
-- **NVIDIA Jetson**: A highly capable platform for AI and machine learning at the edge. It features GPU-accelerated processing, making it suitable for advanced robotics tasks like computer vision and real-time neural network inference.
-- **Raspberry Pi**: A versatile and low-cost Single-Board Computer (SBC) used for general robotics control. It features robust GPIO capabilities and is a staple in both hobbyist and educational robotics applications.
+## 엣지 컴퓨팅
+- **NVIDIA Jetson**: 엣지 AI와 머신러닝에 매우 강력한 플랫폼입니다. GPU 가속 처리를 제공해 컴퓨터 비전, 실시간 신경망 추론 같은 고급 로보틱스 작업에 적합합니다.
+- **Raspberry Pi**: 범용 로봇 제어에 널리 쓰이는 다목적 저비용 SBC입니다. GPIO 활용성이 높아 취미용과 교육용 로보틱스 모두에서 핵심 플랫폼으로 자리잡고 있습니다.
 
-## Sensor Summary Table
+## 센서 요약 표
 
-| Sensor Type | Typical Use Cases | Common Protocols |
+| 센서 유형 | 대표 사용 사례 | 일반 프로토콜 |
 | :--- | :--- | :--- |
-| **IMU** | Orientation, acceleration, angular velocity | I2C, SPI |
-| **LiDAR** | Mapping, obstacle detection, SLAM | UART, Ethernet, USB |
-| **Depth Camera** | Object recognition, 3D mapping, obstacle avoidance | USB (UVC), Ethernet |
-| **Ultrasonic** | Proximity sensing, simple obstacle avoidance | UART, GPIO (Pulse width) |
+| **IMU** | 자세, 가속도, 각속도 측정 | I2C, SPI |
+| **LiDAR** | 매핑, 장애물 탐지, SLAM | UART, Ethernet, USB |
+| **깊이 카메라** | 객체 인식, 3D 매핑, 장애물 회피 | USB(UVC), Ethernet |
+| **초음파** | 근접 감지, 단순 장애물 회피 | UART, GPIO(펄스 폭) |
 
-## Educational Curriculum Integration
-The integration of these hardware components into an educational curriculum provides students with hands-on experience in:
-1. **Embedded Systems:** Understanding low-level communication protocols (I2C, SPI, UART).
-2. **Software Engineering:** Comparing high-level (Python) and low-level (C++) programming for real-time applications.
-3. **Systems Integration:** Learning how sensors, processing units (Edge Computing), and actuators work together in a robotic system.
-4. **Problem Solving:** Troubleshooting hardware/software interfaces and optimizing for latency and reliability.
+## 교육 커리큘럼 통합
+이러한 하드웨어 구성 요소를 교육 커리큘럼에 통합하면 학생들은 다음을 실습할 수 있습니다.
+1. **임베디드 시스템**: I2C, SPI, UART 같은 저수준 통신 프로토콜 이해
+2. **소프트웨어 엔지니어링**: 실시간 응용에서 Python과 C++의 차이 비교
+3. **시스템 통합**: 센서, 처리 장치(엣지 컴퓨팅), 액추에이터가 하나의 로봇 시스템에서 어떻게 함께 동작하는지 학습
+4. **문제 해결**: 하드웨어/소프트웨어 인터페이스를 디버깅하고 지연 시간과 신뢰성을 최적화하는 경험

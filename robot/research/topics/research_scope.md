@@ -1,32 +1,32 @@
-# Research Scope: Robotics Educational Materials Investigation
+# 연구 범위: 로보틱스 교육 자료 조사
 
-This document defines the specific research areas for the robotics investigation initiated in [CHO-7](/PAP/issues/CHO-7).
+이 문서는 [CHO-7](/PAP/issues/CHO-7)에서 시작된 로보틱스 조사 작업의 구체적인 연구 범위를 정의합니다.
 
-## 1. Advanced Software & Simulation Environments
-Research the pedagogical approaches and technical requirements for teaching:
-- **ROS 2 (Robot Operating System)**: Communication patterns (Topics, Services, Actions), node development, and ecosystem tools.
-- **High-Fidelity Simulation**: Comparison of **Gazebo**, **Webots**, and **NVIDIA Isaac Sim** for educational "Sim-to-Real" workflows.
-- **Integration**: How to transition from simulation to physical hardware.
+## 1. 고급 소프트웨어 및 시뮬레이션 환경
+다음 주제를 가르치기 위한 교육적 접근과 기술 요구 사항을 조사합니다.
+- **ROS 2 (Robot Operating System)**: 통신 패턴(Topics, Services, Actions), 노드 개발, 생태계 도구
+- **고충실도 시뮬레이션**: 교육용 Sim-to-Real 워크플로를 위한 **Gazebo**, **Webots**, **NVIDIA Isaac Sim** 비교
+- **통합**: 시뮬레이션에서 실제 하드웨어로 전환하는 방법
 
-## 2. Technical Hardware & Sensor Integration
-Deep dive into the hardware requirements for advanced robotics education:
-- **Core Components**: IMUs, LiDAR, Depth Cameras (RGB-D), and ultrasonic sensors.
-- **Integration Methods**: Communication protocols (I2C, SPI, UART) and driver implementation (Python/C++).
-- **Edge Computing**: Using platforms like **NVIDIA Jetson** or **Raspberry Pi** for on-device AI processing.
+## 2. 기술적 하드웨어 및 센서 통합
+고급 로보틱스 교육에 필요한 하드웨어 요구 사항을 심층 조사합니다.
+- **핵심 구성 요소**: IMU, LiDAR, 깊이 카메라(RGB-D), 초음파 센서
+- **통합 방법**: 통신 프로토콜(I2C, SPI, UART)과 드라이버 구현(Python/C++)
+- **엣지 컴퓨팅**: 장치 내 AI 처리를 위한 **NVIDIA Jetson** 또는 **Raspberry Pi** 활용
 
-## 3. AI-Driven Robotics & Emerging Trends
-Investigate the intersection of AI and robotics education:
-- **LLM-to-Robotics**: Using Large Language Models for high-level task planning, code generation, and natural language robot control.
-- **Computer Vision**: Teaching object detection, segmentation, and spatial awareness using OpenCV and deep learning frameworks.
-- **Reinforcement Learning (RL)**: Introduction to training agents in simulated environments.
+## 3. AI 기반 로보틱스 및 신흥 트렌드
+AI와 로보틱스 교육의 교차 지점을 조사합니다.
+- **LLM-to-Robotics**: 고수준 작업 계획, 코드 생성, 자연어 로봇 제어를 위한 대규모 언어 모델 활용
+- **컴퓨터 비전**: OpenCV와 딥러닝 프레임워크를 활용한 객체 탐지, 세그멘테이션, 공간 인식 교육
+- **강화 학습(RL)**: 시뮬레이션 환경에서 에이전트를 학습시키는 방법 소개
 
-## 4. Educational Implementation & Case Studies
-Analyze real-world success stories:
-- **Competition Frameworks**: Best practices from **FIRST** and **VEX Robotics**.
-- **Classroom Integration**: Case studies of successful robotics programs in K-12 and Higher Education.
-- **Curriculum Models**: Comparing structured (standardized) vs. exploratory (maker-style) learning.
+## 4. 교육 구현 및 사례 연구
+현실 세계의 성공 사례를 분석합니다.
+- **경쟁 프레임워크**: **FIRST**와 **VEX Robotics**의 모범 사례
+- **교실 통합**: K-12 및 고등 교육에서 성공적으로 운영된 로보틱스 프로그램 사례
+- **커리큘럼 모델**: 구조화된 학습(표준형)과 탐구형 학습(메이커 스타일) 비교
 
-## 5. Source Code & Resource Collection
-Targeted collection of:
-- **Code Repositories**: Well-documented examples of ROS 2 nodes, OpenCV pipelines, and sensor drivers.
-- **Curriculum Materials**: Lesson plans, lab manuals, and instructional videos.
+## 5. 소스 코드 및 자료 수집
+다음 항목을 중점적으로 수집합니다.
+- **코드 저장소**: 문서화가 잘 된 ROS 2 노드, OpenCV 파이프라인, 센서 드라이버 예제
+- **커리큘럼 자료**: 수업 계획, 실습 매뉴얼, 교육 영상

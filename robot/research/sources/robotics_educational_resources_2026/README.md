@@ -1,19 +1,19 @@
-# Robotics Educational Resources 2026
+# 2026 로보틱스 교육 리소스
 
-This directory contains a collection of high-quality, representative source code examples and curriculum materials designed for robotics education.
+이 디렉터리는 로보틱스 교육을 위해 설계된 고품질 대표 예제 코드와 커리큘럼 자료 모음을 담고 있습니다.
 
-## Contents
+## 구성
 
-### 1. Source Code (`/code`)
-Contains practical implementation examples across different robotics domains:
-- **ROS 2 (`/code/ros2`)**: Simple publisher and subscriber nodes to demonstrate the core communication pattern of the Robot Operating System.
-- **OpenCV (`/code/opencv`)**: A basic computer vision pipeline including grayscale conversion, Gaussian blurring, Canny edge detection, and thresholding.
-- **Drivers (`/code/drivers`)**: A simulated IMU driver that provides realistic acceleration and angular velocity data with noise.
+### 1. 소스 코드 (`/code`)
+다양한 로보틱스 분야에 걸친 실용적인 구현 예제를 포함합니다.
+- **ROS 2 (`/code/ros2`)**: Robot Operating System의 핵심 통신 패턴을 보여 주는 간단한 퍼블리셔/서브스크라이버 노드
+- **OpenCV (`/code/opencv`)**: 그레이스케일 변환, 가우시안 블러, Canny 에지 검출, 이진화가 포함된 기본 컴퓨터 비전 파이프라인
+- **Drivers (`/code/drivers`)**: 노이즈가 포함된 현실적인 가속도 및 각속도 데이터를 제공하는 시뮬레이션 IMU 드라이버
 
-### 2. Curriculum Materials (`/curriculum`)
-Educational resources to guide learners through fundamental and intermediate topics:
-- **Lesson Plans (`/curriculum/lesson_plans`)**: Structured teaching guides, such as "Introduction to Robotics Sensors".
-- **Lab Manuals (`/curriculum/lab_manuals`)**: Practical, hands-on guides for implementing complex control algorithms, like a PID Controller.
+### 2. 커리큘럼 자료 (`/curriculum`)
+기초 및 중급 주제를 학습할 수 있도록 돕는 교육 자료입니다.
+- **수업 계획 (`/curriculum/lesson_plans`)**: "로보틱스 센서 입문" 같은 구조화된 교수 가이드
+- **실습 매뉴얼 (`/curriculum/lab_manuals`)**: PID 제어기처럼 복잡한 제어 알고리즘을 구현하기 위한 실습형 가이드
 
-## Usage
-These resources are intended to be used as templates or starting points for educational modules. The code is designed to be readable and well-commented to facilitate learning.
+## 활용 방법
+이 자료들은 교육 모듈을 설계할 때 템플릿이나 출발점으로 사용할 수 있도록 구성되었습니다. 코드는 학습이 쉽도록 가독성과 주석성을 고려해 작성되었습니다.

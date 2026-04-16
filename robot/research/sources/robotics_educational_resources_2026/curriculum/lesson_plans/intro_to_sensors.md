@@ -1,39 +1,39 @@
-# Lesson Plan: Introduction to Robotics Sensors
+# 수업 계획: 로보틱스 센서 입문
 
-## Overview
-This lesson introduces students to the fundamental concept of sensors in robotics. Students will learn how robots perceive their environment through various modalities.
+## 개요
+이 수업은 학생들에게 로보틱스에서 센서가 어떤 역할을 하는지 소개합니다. 학생들은 로봇이 다양한 감지 방식으로 환경을 인식하는 방법을 배우게 됩니다.
 
-## Learning Objectives
-- Define what a sensor is in the context of robotics.
-- Distinguish between different types of sensors (Proprioceptive vs. Exteroceptive).
-- Understand the difference between analog and digital sensor signals.
-- Identify common sensors used in mobile robotics (IMU, LiDAR, Ultrasonic, Camera).
+## 학습 목표
+- 로보틱스 맥락에서 센서가 무엇인지 정의할 수 있다.
+- 서로 다른 센서 유형(내부 감각형 vs. 외부 감각형)을 구분할 수 있다.
+- 아날로그 센서 신호와 디지털 센서 신호의 차이를 이해할 수 있다.
+- 이동형 로봇에서 자주 사용하는 센서(IMU, LiDAR, 초음파, 카메라)를 식별할 수 있다.
 
-## Materials Needed
-- A basic robot kit (e.g., Raspberry Pi or Arduino based).
-- Various sensor modules (Ultrasonic, IMU, Camera).
-- Computer with Python installed.
+## 준비물
+- 기본 로봇 키트(예: Raspberry Pi 또는 Arduino 기반)
+- 다양한 센서 모듈(초음파, IMU, 카메라)
+- Python이 설치된 컴퓨터
 
-## Lesson Outline
+## 수업 구성
 
-### 1. Introduction (15 mins)
-- Discussion: How do humans perceive the world? (Sight, Touch, Hearing).
-- Analogy: Sensors are the "senses" of a robot.
+### 1. 도입(15분)
+- 토의: 인간은 세상을 어떻게 인식하는가? (시각, 촉각, 청각)
+- 비유: 센서는 로봇의 "감각 기관"이다.
 
-### 2. Sensor Categorization (20 mins)
-- **Proprioceptive Sensors**: Measure internal state (e.g., battery level, wheel encoders, IMU).
-- **Exteroceptive Sensors**: Measure external environment (e.g., LiDAR, Ultrasonic, Camera, GPS).
+### 2. 센서 분류(20분)
+- **내부 감각형 센서(Proprioceptive Sensors)**: 내부 상태를 측정합니다(예: 배터리 잔량, 휠 엔코더, IMU).
+- **외부 감각형 센서(Exteroceptive Sensors)**: 외부 환경을 측정합니다(예: LiDAR, 초음파, 카메라, GPS).
 
-### 3. Deep Dive: The Ultrasonic Sensor (25 mins)
-- Principle of operation: Time-of-Flight (ToF).
-- Calculation: $Distance = \frac{Speed \times Time}{2}$.
-- Limitations: Surface texture, angle of incidence, and environmental noise.
+### 3. 심화 탐구: 초음파 센서(25분)
+- 동작 원리: ToF(Time-of-Flight)
+- 계산식: $Distance = \frac{Speed \times Time}{2}$
+- 한계: 표면 질감, 입사각, 환경 잡음의 영향을 받음
 
-### 4. Hands-on Activity (30 mins)
-- Students connect an ultrasonic sensor to a microcontroller.
-- Write a simple script to print distance values to the console.
-- Experiment with different object materials (hard vs. soft) to see how they affect readings.
+### 4. 실습 활동(30분)
+- 학생들이 초음파 센서를 마이크로컨트롤러에 연결합니다.
+- 거리 값을 콘솔에 출력하는 간단한 스크립트를 작성합니다.
+- 딱딱한 물체와 부드러운 물체 등 다양한 재질을 시험하며 측정값 차이를 관찰합니다.
 
-## Assessment
-- Quiz on sensor types.
-- Successful demonstration of the ultrasonic sensor reading code.
+## 평가
+- 센서 유형에 대한 퀴즈
+- 초음파 센서 측정 코드의 정상 동작 시연

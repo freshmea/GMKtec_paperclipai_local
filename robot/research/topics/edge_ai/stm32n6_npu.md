@@ -1,66 +1,66 @@
-# Technical Research Report: STM32N6 NPU and Edge AI Ecosystem
+# STM32N6 NPU 및 엣지 AI 생태계 기술 연구 보고서
 
-## 1. Architecture Overview
+## 1. 아키텍처 개요
 
-The **STM32N6** series represents a significant leap in microcontroller capabilities, integrating high-performance compute with dedicated AI acceleration.
+**STM32N6** 시리즈는 고성능 연산 능력과 전용 AI 가속기를 결합해 마이크로컨트롤러의 역량을 크게 끌어올린 제품군입니다.
 
-### 1.1 Core Processor
-- **CPU**: Arm® Cortex®-M55 running at **800 MHz**.
-- **Vector Processing**: Introduces **Arm Helium** technology, providing DSP-like capabilities to a standard CPU, enhancing mathematical operations essential for signal processing and AI.
+### 1.1 코어 프로세서
+- **CPU**: **800 MHz**로 동작하는 Arm® Cortex®-M55
+- **벡터 처리**: **Arm Helium** 기술을 도입해 표준 CPU에 DSP 수준의 기능을 제공하며, 신호 처리와 AI에 필요한 수학 연산을 강화합니다.
 
 ### 1.2 ST Neural-ART Accelerator™ (NPU)
-- **Type**: In-house developed Neural Processing Unit (NPU).
-- **Performance**: Clocked at **1 GHz**, delivering up to **600 GOPS** (Giga Operations Per Second).
-- **Design Goal**: Specifically engineered for high-efficiency, real-time neural network inference at the edge.
+- **유형**: ST가 자체 개발한 신경망 처리 장치(NPU)
+- **성능**: **1 GHz**로 동작하며 최대 **600 GOPS**(Giga Operations Per Second) 제공
+- **설계 목표**: 엣지 환경에서 고효율, 실시간 신경망 추론을 수행하도록 특화 설계
 
-### 1.3 Memory and Multimedia
-- **RAM**: **4.2 Mbytes** of contiguous embedded RAM, optimized for neural network weights and graphics buffers.
-- **Graphics**: Includes the **NeoChrom™ Accelerator** for high-performance graphics and an **H264 hardware encoder**.
-- **Vision Pipeline**: Dedicated computer vision pipeline with **MIPI CSI-2** interface and an **Image Signal Processor (ISP)**.
+### 1.3 메모리 및 멀티미디어
+- **RAM**: 신경망 가중치와 그래픽 버퍼에 최적화된 연속형 임베디드 RAM **4.2 Mbytes**
+- **그래픽**: 고성능 그래픽용 **NeoChrom™ Accelerator**와 **H264 하드웨어 인코더** 포함
+- **비전 파이프라인**: **MIPI CSI-2** 인터페이스와 **ISP(Image Signal Processor)** 를 포함한 전용 컴퓨터 비전 처리 경로 제공
 
 ---
 
-## 2. SDKs and Software Ecosystem
+## 2. SDK 및 소프트웨어 생태계
 
-STMicroelectronics provides a comprehensive suite to bridge the gap between high-level AI models and embedded hardware.
+STMicroelectronics는 고수준 AI 모델과 임베디드 하드웨어 사이를 연결하기 위한 종합 도구 모음을 제공합니다.
 
 ### 2.1 STM32Cube.AI / ST Edge AI Suite
-- **Function**: Converts pre-trained neural networks (from frameworks like TensorFlow Lite, Keras, etc.) into optimized C code for STM32 microcontrollers.
-- **Optimization**: The tools leverage the **Neural-ART Accelerator** and **Arm Helium** instructions to maximize throughput and minimize latency.
+- **기능**: TensorFlow Lite, Keras 등에서 학습한 신경망을 STM32 마이크로컨트롤러용 최적화 C 코드로 변환합니다.
+- **최적화**: **Neural-ART Accelerator** 및 **Arm Helium** 명령을 활용해 처리량을 높이고 지연 시간을 줄입니다.
 
-### 2.2 Development Tools
-- **STM32CubeMX/IDE**: Standard configuration and development environments.
-- **STM32CubeN6**: Specific software packages for the N6 series.
-- **ISP Tools**: Tools like `iqtune` for managing the Image Signal Processor.
-
----
-
-## 3. Supported Models and Capabilities
-
-The STM32N6 is designed to handle a variety of complex AI workloads:
-- **Computer Vision**: Real-time object detection, image segmentation, and facial recognition (via the dedicated ISP and NPU).
-- **Audio Intelligence**: Keyword spotting, sound classification, and voice command processing.
-- **Parallelism**: Ability to run different neural network models in parallel, enabling multi-modal AI (e.g., simultaneous vision and audio processing).
+### 2.2 개발 도구
+- **STM32CubeMX/IDE**: 표준 설정 및 개발 환경
+- **STM32CubeN6**: N6 시리즈 전용 소프트웨어 패키지
+- **ISP 도구**: 이미지 신호 프로세서를 다루기 위한 `iqtune` 같은 도구
 
 ---
 
-## 4. Robotics Applications
+## 3. 지원 모델 및 역량
 
-The combination of high-speed processing, low latency, and integrated vision makes the STM32N6 ideal for:
-- **Autonomous Mobile Robots (AMR)**: Real-time obstacle avoidance, SLAM (Simultaneous Localization and Mapping) assistance, and navigation.
-- **Industrial Automation**: Predictive maintenance through vibration/audio analysis and high-speed visual inspection on production lines.
-- **Human-Robot Interaction (HRI)**: Gesture recognition and voice command processing for more natural interaction.
-- **Drones/UAVs**: Edge-based flight stabilization and target tracking.
+STM32N6는 다양한 고급 AI 워크로드를 처리하도록 설계되었습니다.
+- **컴퓨터 비전**: 전용 ISP와 NPU를 활용한 실시간 객체 탐지, 이미지 세그멘테이션, 얼굴 인식
+- **오디오 인텔리전스**: 키워드 스포팅, 소리 분류, 음성 명령 처리
+- **병렬 처리**: 서로 다른 신경망 모델을 병렬 실행할 수 있어 시각과 오디오를 동시에 다루는 멀티모달 AI에 적합
 
 ---
 
-## 5. Comparative Analysis: STM32N6 vs. NVIDIA Jetson
+## 4. 로보틱스 적용 분야
 
-| Feature | STM32N6 (MCU) | NVIDIA Jetson (MPU/SoC) |
+고속 처리, 낮은 지연 시간, 통합 비전 기능의 조합 덕분에 STM32N6는 다음 분야에 적합합니다.
+- **자율 이동 로봇(AMR)**: 실시간 장애물 회피, SLAM 보조, 내비게이션
+- **산업 자동화**: 진동/오디오 분석을 통한 예지 보전, 생산 라인의 고속 비전 검사
+- **인간-로봇 상호작용(HRI)**: 제스처 인식 및 음성 명령 처리
+- **드론/UAV**: 엣지 기반 비행 안정화 및 목표 추적
+
+---
+
+## 5. 비교 분석: STM32N6 vs. NVIDIA Jetson
+
+| 항목 | STM32N6 (MCU) | NVIDIA Jetson (MPU/SoC) |
 | :--- | :--- | :--- |
-| **Target Use Case** | Ultra-low power, real-time, highly integrated edge AI. | High-performance, heavy-duty AI, complex vision. |
-| **Power Efficiency** | **Superior.** Designed for battery-operated or energy-constrained devices. | **Lower.** Requires significant power for GPU/CPU intensive tasks. |
-| **Compute Density** | Moderate (600 GOPS). | Very High (TFLOPS/TOPS). |
-| **Complexity** | Real-time deterministic execution (RTOS). | High-level OS (Linux), non-deterministic. |
+| **목표 사용 사례** | 초저전력, 실시간, 고집적 엣지 AI | 고성능, 대규모 AI, 복합 비전 처리 |
+| **전력 효율** | **우수함.** 배터리 기반 또는 전력 제약 장치에 적합 | **낮음.** GPU/CPU 중심 작업에 많은 전력이 필요 |
+| **연산 밀도** | 중간(600 GOPS) | 매우 높음(TFLOPS/TOPS급) |
+| **복잡도** | 실시간 결정성 실행(RTOS) | 고수준 OS(Linux), 비결정적 실행 |
 
-**Summary**: Choose **STM32N6** when power efficiency, cost, and real-time determinism are critical. Choose **NVIDIA Jetson** when the application requires massive throughput for large-scale deep learning models that exceed MCU capabilities.
+**요약**: 전력 효율, 비용, 실시간 결정성이 중요하다면 **STM32N6**가 적합합니다. MCU 수준을 넘어서는 대규모 딥러닝 처리량이 필요하다면 **NVIDIA Jetson**이 더 적합합니다.

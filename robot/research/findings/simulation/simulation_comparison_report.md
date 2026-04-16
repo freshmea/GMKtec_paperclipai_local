@@ -1,73 +1,73 @@
-# Simulation Environments Comparison Report
+# 시뮬레이션 환경 비교 보고서
 
 ## Gazebo
 
-### Pedagogical Approaches
-Gazebo is widely used in advanced robotics education due to its deep integration with ROS and ROS 2. It is best suited for students who are already familiar with Linux and command-line interfaces. While it has a steeper learning curve than Webots, it provides an industry-standard environment that prepares students for professional robotics workflows.
+### 교육적 접근
+Gazebo는 ROS 및 ROS 2와의 깊은 통합 덕분에 고급 로보틱스 교육에서 널리 사용됩니다. 이미 Linux와 명령줄 환경에 익숙한 학생에게 특히 적합합니다. Webots보다 학습 곡선은 가파르지만, 전문 로보틱스 워크플로를 준비시키는 업계 표준 환경을 제공합니다.
 
-### Technical Requirements
-- **OS**: Primarily Linux (Ubuntu is the standard), though it can run on Windows/macOS via containers or virtual machines.
-- **Hardware**: Requires a decent CPU and a dedicated GPU for smooth rendering, especially when using Gazebo Ignition (now Gazebo Sim).
-- **Software**: Extensive dependencies on ROS/ROS 2, ODE/Bullet/Simbody physics engines, and various plugins.
+### 기술 요구 사항
+- **OS**: 주로 Linux(Ubuntu가 사실상 표준)에서 사용되며, 컨테이너나 가상 머신을 통해 Windows/macOS에서도 실행할 수 있습니다.
+- **하드웨어**: 특히 Gazebo Ignition(현재 Gazebo Sim)을 사용할 때는 원활한 렌더링을 위해 적절한 CPU와 전용 GPU가 필요합니다.
+- **소프트웨어**: ROS/ROS 2, ODE/Bullet/Simbody 물리 엔진, 다양한 플러그인에 대한 의존성이 큽니다.
 
-### Sim-to-Real Capabilities
-Gazebo provides high-fidelity physics and sensor modeling (Lidar, IMU, Cameras), making it effective for Sim-to-Real. Its strength lies in its ability to mirror the software stack (ROS) used on real physical robots, ensuring that the logic developed in simulation translates directly to hardware.
+### Sim-to-Real 역량
+Gazebo는 고충실도 물리 모델과 센서 모델(LiDAR, IMU, 카메라)을 제공해 Sim-to-Real에 매우 효과적입니다. 실제 로봇에 쓰는 ROS 소프트웨어 스택을 그대로 반영할 수 있어, 시뮬레이션에서 개발한 로직이 하드웨어로 직접 이어지기 쉽습니다.
 
-### Feature Comparison
-- **Physics Engines**: Supports multiple engines including ODE, Bullet, and Simbody.
-- **Sensor Models**: Highly extensible with a wide range of plugins for Lidar, ultrasonic, and vision sensors.
-- **ROS 2 Integration**: Industry-leading; it is the native simulation environment for much of the ROS ecosystem.
+### 기능 비교
+- **물리 엔진**: ODE, Bullet, Simbody 등 여러 엔진을 지원합니다.
+- **센서 모델**: LiDAR, 초음파, 비전 센서를 위한 다양한 플러그인으로 매우 높은 확장성을 제공합니다.
+- **ROS 2 통합**: 업계 최고 수준이며, ROS 생태계의 대표적인 시뮬레이션 환경입니다.
 
 ---
 
 ## Webots
 
-### Pedagogical Approaches
-Webots is highly regarded for its ease of use and accessibility, making it an excellent choice for introductory robotics courses. It features a user-friendly GUI, a vast library of pre-built robot models, and supports multiple programming languages (C, C++, Python, Java, MATLAB), which lowers the barrier to entry for students.
+### 교육적 접근
+Webots는 사용 편의성과 접근성이 뛰어나 입문용 로보틱스 수업에 매우 적합합니다. 직관적인 GUI, 다양한 사전 제작 로봇 모델, 여러 프로그래밍 언어(C, C++, Python, Java, MATLAB) 지원 덕분에 학생의 진입 장벽을 크게 낮춰줍니다.
 
-### Technical Requirements
-- **OS**: Cross-platform support for Windows, Linux, and macOS.
-- **Hardware**: Runs well on a variety of hardware, from standard laptops to high-end workstations.
-- **Software**: Standalone application with a built-in editor and controller environment.
+### 기술 요구 사항
+- **OS**: Windows, Linux, macOS를 모두 지원합니다.
+- **하드웨어**: 일반 노트북부터 고성능 워크스테이션까지 폭넓은 환경에서 원활히 동작합니다.
+- **소프트웨어**: 자체 편집기와 컨트롤러 환경을 포함한 독립 실행형 애플리케이션입니다.
 
-### Sim-to-Real Capabilities
-Webots offers robust, deterministic simulation. While it may lack the extreme photorealism of Isaac Sim, its reliable physics and ease of configuring real-world robot parameters make it very effective for testing control algorithms that are intended for physical deployment.
+### Sim-to-Real 역량
+Webots는 안정적이고 결정적인 시뮬레이션을 제공합니다. Isaac Sim 수준의 극사실적 렌더링은 아니더라도, 신뢰할 수 있는 물리 모델과 실제 로봇 파라미터를 손쉽게 설정할 수 있는 장점 덕분에 하드웨어 배포를 염두에 둔 제어 알고리즘 검증에 매우 효과적입니다.
 
-### Feature Comparison
-- **Physics Engines**: Uses a customized version of the ODE (Open Dynamics Engine).
-- **Sensor Models**: Comprehensive library of built-in sensors (distance, camera, GPS, IMU) that are easy to configure.
-- **ROS 2 Integration**: Supports ROS 2 via specialized bridges and interfaces.
+### 기능 비교
+- **물리 엔진**: 맞춤형 ODE(Open Dynamics Engine) 버전을 사용합니다.
+- **센서 모델**: 거리 센서, 카메라, GPS, IMU 등 구성하기 쉬운 내장 센서 라이브러리를 제공합니다.
+- **ROS 2 통합**: 전용 브리지와 인터페이스를 통해 ROS 2를 지원합니다.
 
 ---
 
 ## NVIDIA Isaac Sim
 
-### Pedagogical Approaches
-Isaac Sim is geared towards advanced research and industrial AI development. It is less about "learning robotics basics" and more about "training AI at scale." The learning curve is significantly steeper due to its complexity and reliance on the NVIDIA Omniverse platform.
+### 교육적 접근
+Isaac Sim은 고급 연구와 산업용 AI 개발을 위한 플랫폼입니다. "로보틱스 기초 학습"보다는 "대규모 AI 학습"에 가깝습니다. 복잡성과 NVIDIA Omniverse 의존성 때문에 학습 곡선이 상당히 가파릅니다.
 
-### Technical Requirements
-- **OS**: Linux (Ubuntu) is the primary supported OS.
-- **Hardware**: Extremely high requirements; requires a modern NVIDIA RTX GPU for hardware-accelerated ray tracing and physics.
-- **Software**: Built on NVIDIA Omniverse and utilizes OpenUSD (Universal Scene Description).
+### 기술 요구 사항
+- **OS**: Linux(Ubuntu)가 주요 지원 운영체제입니다.
+- **하드웨어**: 요구 사양이 매우 높으며, 하드웨어 가속 레이 트레이싱과 물리를 위해 최신 NVIDIA RTX GPU가 필요합니다.
+- **소프트웨어**: NVIDIA Omniverse 기반이며 OpenUSD(Universal Scene Description)를 활용합니다.
 
-### Sim-to-Real Capabilities
-Isaac Sim excels in Sim-to-Real through photorealistic rendering and high-fidelity synthetic data generation. It allows for massive parallelization (via Isaac Lab), enabling Reinforcement Learning models to be trained in environments that look and behave almost exactly like the real world.
+### Sim-to-Real 역량
+Isaac Sim은 포토리얼리스틱 렌더링과 고충실도 합성 데이터 생성 능력을 바탕으로 Sim-to-Real에 탁월합니다. Isaac Lab 등을 통한 대규모 병렬 학습이 가능해, 실제 세계와 매우 유사한 환경에서 강화 학습 모델을 훈련할 수 있습니다.
 
-### Feature Comparison
-- **Physics Engines**: Powered by NVIDIA PhysX and the newer Newton engine for high-performance, GPU-accelerated simulation.
-- **Sensor Models**: Provides state-of-the-art photorealistic sensor models, including advanced Lidar and depth cameras.
-- **ROS 2 Integration**: Strong support through ROS 2 Bridge extensions.
+### 기능 비교
+- **물리 엔진**: NVIDIA PhysX와 최신 Newton 엔진을 사용해 GPU 가속 고성능 시뮬레이션을 제공합니다.
+- **센서 모델**: 고급 LiDAR와 깊이 카메라를 포함한 최첨단 포토리얼리스틱 센서 모델을 제공합니다.
+- **ROS 2 통합**: ROS 2 Bridge 확장을 통해 강력하게 지원합니다.
 
 ---
 
-## Summary Comparison
+## 종합 비교
 
-| Feature | Gazebo | Webots | NVIDIA Isaac Sim |
+| 항목 | Gazebo | Webots | NVIDIA Isaac Sim |
 | :--- | :--- | :--- | :--- |
-| **Primary Strength** | ROS/ROS 2 Integration | Ease of Use & Library | Photorealism & AI Scale |
-| **Learning Curve** | Medium/High | Low | High |
-| **Best Use Case** | General Robotics Research | Education & Prototyping | AI, Computer Vision & RL |
-| **Physics Engine** | ODE, Bullet, Simbody | ODE (fork) | PhysX, Newton |
-| **Hardware Req.** | Moderate | Low/Moderate | Very High (RTX GPU) |
-| **OS Support** | Linux (Primary) | Windows, Linux, macOS | Linux |
-| **Sim-to-Real** | High (Software-centric) | High (Control-centric) | Very High (Visual/AI-centric) |
+| **주요 강점** | ROS/ROS 2 통합 | 사용 편의성 및 라이브러리 | 포토리얼리즘 및 대규모 AI 학습 |
+| **학습 곡선** | 중간~높음 | 낮음 | 높음 |
+| **적합한 사용 사례** | 일반 로보틱스 연구 | 교육 및 프로토타이핑 | AI, 컴퓨터 비전, 강화 학습 |
+| **물리 엔진** | ODE, Bullet, Simbody | ODE(포크 버전) | PhysX, Newton |
+| **하드웨어 요구 사항** | 중간 | 낮음~중간 | 매우 높음(RTX GPU) |
+| **운영체제 지원** | Linux(주요) | Windows, Linux, macOS | Linux |
+| **Sim-to-Real 적합성** | 높음(소프트웨어 중심) | 높음(제어 중심) | 매우 높음(시각/AI 중심) |

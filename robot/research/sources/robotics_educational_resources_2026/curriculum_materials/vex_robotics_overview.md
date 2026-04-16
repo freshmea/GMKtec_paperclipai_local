@@ -1,20 +1,20 @@
-# Curriculum Resource: VEX Robotics Overview
+# 커리큘럼 자료: VEX Robotics 개요
 
-## Overview
-VEX Robotics provides a highly structured learning path through its competition-based frameworks and classroom-ready curriculum. It is designed to bridge the gap between basic STEM concepts and professional engineering practices.
+## 개요
+VEX Robotics는 대회 기반 프레임워크와 교실 수업에 바로 적용 가능한 커리큘럼을 통해 매우 구조화된 학습 경로를 제공합니다. 이는 기초 STEM 개념과 전문 엔지니어링 실무 사이의 간극을 줄이기 위해 설계되었습니다.
 
-## Key Components
-- **Hardware Kits**: VEX IQ (for younger learners) and VEX V5 (for middle/high school).
-- **Programming**: Support for VEXcode (Blocks, Python, C++) and advanced integration with ROS 2 for higher-level research.
-- **Competition Framework**: Structured challenges that encourage rapid prototyping, teamwork, and iterative design.
+## 핵심 구성 요소
+- **하드웨어 키트**: VEX IQ(저연령 학습자용)와 VEX V5(중학생/고등학생용)
+- **프로그래밍**: VEXcode(Blocks, Python, C++) 지원과 상위 연구를 위한 ROS 2 연계 가능성
+- **경쟁 프레임워크**: 빠른 프로토타이핑, 팀워크, 반복 설계를 장려하는 구조화된 챌린지
 
-## Educational Benefits
-- **Iterative Design**: Students learn to design, build, test, and refine their robots.
-- **Problem Solving**: Challenges require applying mathematical and engineering principles in real-time.
-- **Teamwork**: Competition formats emphasize collaborative engineering and project management.
+## 교육적 장점
+- **반복 설계**: 학생들이 설계, 제작, 테스트, 개선 과정을 직접 경험하게 합니다.
+- **문제 해결**: 수학 및 공학 원리를 실시간 문제에 적용하도록 요구합니다.
+- **팀워크**: 경쟁 형식 속에서 협업형 엔지니어링과 프로젝트 관리를 강조합니다.
 
-## Integration with Advanced Robotics
-As students progress, the VEX ecosystem can be integrated with:
-- **Python-based control** for complex algorithms.
-- **Computer Vision** via external camera modules.
-- **Simulation** using VEX-compatible software environments.
+## 고급 로보틱스와의 연계
+학생의 수준이 높아질수록 VEX 생태계는 다음과 같이 확장해 사용할 수 있습니다.
+- **Python 기반 제어**를 통한 복잡한 알고리즘 구현
+- 외부 카메라 모듈을 활용한 **컴퓨터 비전**
+- VEX 호환 소프트웨어 환경을 이용한 **시뮬레이션**

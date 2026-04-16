@@ -1,45 +1,45 @@
-# AI-Driven Robotics Trends Report
+# AI 기반 로보틱스 트렌드 보고서
 
 ## 1. LLM-to-Robotics
 
-Large Language Models (LLMs) are transforming robotics by bridging the gap between high-level human reasoning and low-level machine execution.
+대규모 언어 모델(LLM)은 고수준의 인간 추론과 저수준의 기계 실행 사이의 간극을 메우며 로보틱스를 변화시키고 있습니다.
 
-*   **High-Level Task Planning**: LLMs can decompose complex, natural language instructions (e.g., "Make me a cup of coffee") into a sequence of actionable sub-tasks. They act as a reasoning engine that understands the logical steps required to achieve a goal.
-*   **Code Generation for Robot Controllers**: LLMs can be used to generate executable code (Python, C++, etc.) that interfaces directly with robot APIs. This allows for rapid prototyping of behaviors without manual coding of every primitive.
-*   **Natural Language Control**: By interpreting human commands, LLMs enable intuitive human-robot interaction (HRI). This allows non-experts to control sophisticated robotic systems through conversational interfaces.
+* **고수준 작업 계획**: LLM은 복잡한 자연어 지시문(예: "커피 한 잔 만들어 줘")을 실행 가능한 하위 작업의 연속으로 분해할 수 있습니다. 목표 달성에 필요한 논리적 단계를 이해하는 추론 엔진으로 작동합니다.
+* **로봇 제어 코드 생성**: LLM은 로봇 API와 직접 연동되는 실행 코드(Python, C++ 등)를 생성하는 데 활용할 수 있습니다. 덕분에 모든 동작 원시 기능을 수작업으로 코딩하지 않아도 빠르게 프로토타입을 만들 수 있습니다.
+* **자연어 제어**: LLM은 인간의 명령을 해석해 직관적인 인간-로봇 상호작용(HRI)을 가능하게 합니다. 비전문가도 대화형 인터페이스를 통해 정교한 로봇 시스템을 제어할 수 있습니다.
 
-## 2. Computer Vision
+## 2. 컴퓨터 비전
 
-Computer vision provides the "eyes" for robotic systems, enabling them to perceive and interact with their surroundings.
+컴퓨터 비전은 로봇 시스템에 "눈"을 제공하여 주변 환경을 인식하고 상호작용할 수 있게 합니다.
 
-*   **Object Detection and Segmentation**: Identifying and delineating specific objects within a scene. This is critical for grasping, navigation, and obstacle avoidance.
-*   **Spatial Awareness and Depth Perception**: Using sensors like RGB-D cameras or LiDAR, robots can reconstruct 3D environments, allowing them to understand distances, volumes, and spatial relationships.
-*   **Key Frameworks**:
-    *   **OpenCV**: A foundational library for traditional image processing and computer vision algorithms.
-    *   **PyTorch / TensorFlow**: Deep learning frameworks used to train and deploy advanced neural networks for complex visual tasks like semantic segmentation and object detection.
+* **객체 탐지 및 세그멘테이션**: 장면 안의 특정 객체를 식별하고 경계를 구분합니다. 이는 파지, 내비게이션, 장애물 회피에 매우 중요합니다.
+* **공간 인식 및 깊이 지각**: RGB-D 카메라나 LiDAR 같은 센서를 사용해 로봇이 3차원 환경을 재구성하고 거리, 부피, 공간 관계를 이해하게 합니다.
+* **주요 프레임워크**:
+  * **OpenCV**: 전통적인 영상 처리 및 컴퓨터 비전 알고리즘을 위한 기초 라이브러리입니다.
+  * **PyTorch / TensorFlow**: 시맨틱 세그멘테이션, 객체 탐지와 같은 고급 시각 작업을 위한 신경망을 학습하고 배포하는 딥러닝 프레임워크입니다.
 
-## 3. Reinforcement Learning (RL)
+## 3. 강화 학습(RL)
 
-Reinforcement Learning enables robots to learn optimal behaviors through trial and error.
+강화 학습은 시행착오를 통해 로봇이 최적의 행동을 학습하도록 합니다.
 
-*   **Training in Simulated Environments**: To avoid the risks and costs of real-world training, agents are often trained in high-fidelity physics simulators (e.g., NVIDIA Isaac Gym, MuJoCo). This allows for millions of iterations in a safe, accelerated environment.
-*   **Autonomous Behavior Development**: RL is used to develop complex, adaptive behaviors such as walking, grasping, or navigating through unstructured terrain, where traditional rule-based programming would be too rigid.
+* **시뮬레이션 환경에서의 학습**: 실제 환경 학습의 위험과 비용을 줄이기 위해 에이전트는 고충실도 물리 시뮬레이터(NVIDIA Isaac Gym, MuJoCo 등)에서 학습하는 경우가 많습니다. 이를 통해 안전하고 가속된 환경에서 수백만 번의 반복 학습이 가능합니다.
+* **자율 행동 개발**: RL은 걷기, 파지, 비정형 지형 주행처럼 복잡하고 적응적인 행동을 학습시키는 데 사용됩니다. 이런 문제는 전통적인 규칙 기반 프로그래밍만으로는 지나치게 경직될 수 있습니다.
 
-## Educational Integration Roadmap
+## 교육 통합 로드맵
 
-Integrating these trends into a robotics curriculum can be structured by difficulty level:
+이러한 트렌드는 난이도별로 다음과 같이 로보틱스 커리큘럼에 통합할 수 있습니다.
 
-| Level | Focus Area | Typical Activities |
+| 수준 | 중점 영역 | 대표 활동 |
 | :--- | :--- | :--- |
-| **Beginner** | Fundamentals & Vision | Using OpenCV for color tracking; basic sensor integration; simple obstacle avoidance. |
-| **Intermediate** | Deep Learning & RL | Implementing object detection using pre-trained models (PyTorch); training simple RL agents in 2D simulations. |
-| **Advanced** | LLM & Complex RL | Integrating LLMs for task planning; training complex locomotion in 3D simulators; deploying end-to-end vision-to-action models. |
+| **초급** | 기초 및 비전 | OpenCV를 이용한 색상 추적, 기본 센서 통합, 단순 장애물 회피 |
+| **중급** | 딥러닝 및 RL | 사전 학습 모델(PyTorch)을 활용한 객체 탐지, 2D 시뮬레이션에서 단순 RL 에이전트 학습 |
+| **고급** | LLM 및 복합 RL | LLM을 이용한 작업 계획 통합, 3D 시뮬레이터에서 복잡한 보행 학습, 비전-액션 종단간 모델 배포 |
 
-## Summary of AI Techniques in Robotics
+## 로보틱스에서의 AI 기술 요약
 
-| AI Technique | Primary Robotics Application |
+| AI 기술 | 주요 로보틱스 적용 분야 |
 | :--- | :--- |
-| **LLMs** | Task planning, code generation, natural language interface |
-| **Computer Vision** | Object detection, spatial mapping, scene understanding |
-| **Reinforcement Learning** | Adaptive control, locomotion, complex behavior training |
-| **Deep Learning** | Feature extraction, visual recognition, sensory fusion |
+| **LLM** | 작업 계획, 코드 생성, 자연어 인터페이스 |
+| **컴퓨터 비전** | 객체 탐지, 공간 매핑, 장면 이해 |
+| **강화 학습** | 적응형 제어, 보행, 복잡한 행동 학습 |
+| **딥러닝** | 특징 추출, 시각 인식, 감각 융합 |
