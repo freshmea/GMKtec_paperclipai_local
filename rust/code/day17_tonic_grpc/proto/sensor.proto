@@ -1,0 +1,17 @@
+syntax = proto3;
+
+package sensor;
+
+service SensorService {
+  rpc StreamSensorData (SensorRequest) returns (stream SensorReading);
+}
+
+message SensorRequest {
+  string sensor_id = 1;
+}
+
+message SensorReading {
+  string sensor_id = 1;
+  double value = 2;
+  int64 timestamp = 3;
+}
