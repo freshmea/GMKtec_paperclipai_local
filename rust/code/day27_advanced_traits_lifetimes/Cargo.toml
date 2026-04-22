@@ -1,0 +1,6 @@
+[package]
+name = "day27_advanced_traits_lifetimes"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]

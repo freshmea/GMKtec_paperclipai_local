@@ -1,39 +1,101 @@
-# Day 22: Macros in Rust 실습 가이드
+# Day 22 실습 가이드: Macros (Declarative & Procedural)
 
-이 프로젝트는 Rust의 메타프로그래밍 도구인 매크로(Macros)를 학습하기 위한 예제입니다. 특히 `macro_rules!`를 이용한 선언적 매크로의 기초적인 문법과 확장 방식을 다룹니다.
+이 가이드는 Rust의 강력한 코드 생성 도구인 매크로를 사용하여 코드 중복을 줄이고, 새로운 문법 패턴(DSL)을 만드는 방법을 배우는 것을 목표로 합니다.
 
-## 프로젝트 개요
+## 1. 목표
+- `macro_rules!`를 사용하여 선언적 매크로(Declarative Macros)를 작성한다.
+- 매크로의 패턴 매칭(`$x:expr` 등)과 반복(`$(...)*`) 문법을 이해한다.
+- 절차적 매크로(Procedural Macros)의 개념과 종류(Derive, Attribute, Function-like)를 파악한다.
 
-매크로는 코드를 생성하는 도구입니다. 이 예제에서는 다음과 같은 내용을 실습합니다:
-1. **가변 인자 처리**: `$($arg:expr),*` 문법을 사용하여 여러 개의 인자를 처리하는 방법.
-2. **반복 확장**: 매크로 내부에서 `$( ... )*` 문법을 사용하여 전달받은 인자 개수만큼 코드를 반복 생성하는 방법.
-
-## 학습 포인트
-
-### 1. 선언적 매크로의 구조
-`macro_rules!` 블록 내부의 패턴은 다음과 같은 형식을 가집니다:
-- `$( ... )*`: 0번 이상 반복
-- `$( ... )+`: 1번 이상 반복
-- `$( ... )?`: 0번 또는 1번
-
-### 2. 매크로 확장 (Expansion)
-매크로가 호출되면 컴파일러는 정의된 패턴과 일치하는 부분을 찾아, 지정된 코드 블록으로 교체합니다. 이 과정은 컴파일 타임에 발생하므로 런타임 비용이 없습니다.
-
-## 실행 방법
-
-### 1. 데모 실행
-매크로가 어떻게 동작하는지 확인하려면 다음 명령을 실행하세요.
-```bash
-cargo run
+## 2. 프로젝트 구조
+```text
+day22_macros/
+├── Cargo.toml
+└── src/
+    └── main.rs
 ```
 
-### 2. 테스트 실행
+## 3. 구현 단계
+
+### 단계 1: 프로젝트 생성
+(이미 생성되어 있습니다.)
+
+### 단계 2: 실습 구현 (`src/main.rs`)
+다음 코드를 `src/main.rs`에 작성하고, 각 섹션의 주석을 따라가며 실험해 보세요.
+
+```rust
+// --- 1. Declarative Macros (macro_rules!) ---
+macro_rules! vec_and_print {
+    ( $( $x:expr ),* ) => {
+        {
+            let mut temp_vec = Vec::new();
+            $(
+                temp_vec.push($x);
+                println!("Added: {}", $x);
+            )*
+            temp_vec
+        }
+    };
+}
+
+macro_rules! calculate {
+    (add $a:expr, $b:expr) => { $a + $b };
+    (sub $a:expr, $b:expr) => { $a - $b };
+    (mul $a:expr, $b:expr) => { $a * $b };
+    (div $a:expr, $b:expr) => { $a / $b };
+}
+
+fn main() {
+    println!("--- 1. Declarative Macros (macro_rules!) ---");
+    
+    // vec_and_print! 매크로 사용
+    let my_vec = vec_and_print![10, 20, 30, 40];
+    println!("Final vector: {:?}", my_vec);
+
+    println!("\n--- 2. Simple Arithmetic Macro ---");
+    let sum = calculate!(add 10, 5);
+    let diff = calculate!(sub 10, 5);
+    let prod = calculate!(mul 10, 5);
+    let quot = calculate!(div 10, 5);
+
+    println!("10 + 5 = {}", sum);
+    println!("10 - 5 = {}", diff);
+    println!("10 * 5 = {}", prod);
+    println!("10 / 5 = {}", quot);
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_vec_and_print() {
+        let v = vec_and_print![1, 2, 3];
+        assert_eq!(v, vec![1, 2, 3]);
+    }
+
+    #[test]
+    fn test_calculate() {
+        assert_eq!(calculate!(add 10, 5), 15);
+        assert_eq!(calculate!(sub 10, 5), 5);
+        assert_eq!(calculate!(mul 10, 5), 50);
+        assert_eq!(calculate!(div 10, 5), 2);
+    }
+}
+```
+
+## 4. 실행 및 테스트
 ```bash
+cargo run
 cargo test
 ```
 
-## 연습 문제
+**실습 포인트:**
+1. **패턴 매칭:** `$( $x:expr ),*`에서 `$`의 의미와 `$x:expr`이 무엇을 의미하는지 이해해 보세요.
+2. **코드 확장:** 매크로가 컴파일 타임에 어떻게 실제 코드로 변환되는지 상상해 보세요. (매크로를 사용하면 컴파일 시간이 길어질 수 있습니다.)
+3. **절차적 매크로:** `#[derive(Debug)]`가 어떻게 동작하는지, 그리고 왜 `macro_rules!`보다 강력한지 조사해 보세요.
 
-1. `debug_print!` 매크로를 수정하여, 인자가 없을 때 `"No arguments provided"`라고 출력하도록 만들어 보세요.
-2. `sum!` 매크로를 만들어 보세요. 인자로 숫자들을 받아서 그 합계를 반환하는 매크로입니다. (예: `let s = sum!(1, 2, 3);`)
-3. `println!` 매크로와 `debug_print!` 매크로의 차이점(인자 처리 방식 등)을 고민해 보세요.
+## 5. 도전 과제 (Extra Credit)
+- `vec_and_print!` 매크로를 확장하여, 인자로 전달된 요소의 개수를 함께 출력하도록 만들어 보세요.
+- `calculate!` 매크로에 `pow` (거듭제곱) 연산을 추가해 보세요.
+- `macro_rules!`를 사용하여 간단한 `if-else` 문을 대체하는 `if_let_macro!`를 만들어 보세요.

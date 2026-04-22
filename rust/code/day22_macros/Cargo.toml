@@ -1,2 +1,7 @@
+[package]
+name = "day22_macros"
+version = "0.1.0"
+edition = "2021"
+
 [dependencies]
 # No dependencies needed for declarative macro demo

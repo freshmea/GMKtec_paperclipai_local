@@ -1,0 +1,4 @@
+[package]
+name = "day11_error_propagation"
+version = "0.1.0"
+edition = "2021"

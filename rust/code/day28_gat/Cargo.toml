@@ -1,0 +1,3 @@
+[dependencies]
+futures = "0.3"
+pin-project = "1.1"

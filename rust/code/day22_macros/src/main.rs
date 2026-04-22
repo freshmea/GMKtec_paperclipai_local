@@ -1,41 +1,51 @@
-macro_rules! debug_print {
-    // 패턴: 인자들을 쉼표로 구분하여 받음 ($($arg:expr),*)
-    ($($arg:expr),*) => {
+// --- 1. Declarative Macros (macro_rules!) ---
+// 매크로는 코드를 생성하는 코드를 작성하는 것입니다. 
+// 중복되는 패턴을 줄이고, DSL(Domain Specific Language)을 만들 수 있습니다.
+
+macro_rules! vec_and_print {
+    // 패턴 매칭: 변수들을 인자로 받음
+    ( $( $x:expr ),* ) => {
         {
-            println!("--- Debug Print ---");
+            let mut temp_vec = Vec::new();
             $(
-                // 각 인자에 대해 출력 (주의: expr 자체의 이름을 완벽히 알아내는 것은 
-                // 기본 macro_rules만으로는 한계가 있으나, 여기서는 값 위주로 예시)
-                println!("Value: {}", $arg);
+                temp_vec.push($x);
+                println!("Added: {}", $x);
             )*
-            println!("-------------------");
+            temp_vec
         }
     };
 }
 
-// 좀 더 발전된 버전: 인자의 이름을 알고 싶다면 
-// 보통은 별도의 crate나 복잡한 매크로가 필요하지만, 
-// 여기서는 단순한 형태의 확장을 보여줍니다.
-macro_rules! debug_print_simple {
-    ($($arg:expr),*) => {
-        {
-            $(
-                println!("arg = {:?}", $arg);
-            )*
-        }
-    };
+macro_rules! calculate {
+    // 단순 연산 매크로
+    (add $a:expr, $b:expr) => { $a + $b };
+    (sub $a:expr, $b:expr) => { $a - $b };
+    (mul $a:expr, $b:expr) => { $a * $b };
+    (div $a:expr, $b:expr) => { $a / $b };
 }
+
+// --- 2. Procedural Macros (Concept) ---
+// declarative macro와 달리, procedural macro는 함수처럼 컴파일 타임에 코드를 조작합니다.
+// derive, attribute, function-like 매크로 세 종류가 있습니다.
+// (이 예제에서는 코드 설명으로 대체합니다.)
 
 fn main() {
-    let a = 10;
-    let b = 20.5;
-    let c = "Hello, Macros!";
+    println!("--- 1. Declarative Macros (macro_rules!) ---");
+    
+    // vec_and_print! 매크로 사용
+    let my_vec = vec_and_print![10, 20, 30, 40];
+    println!("Final vector: {:?}", my_vec);
 
-    println!("Testing debug_print!");
-    debug_print!(a, b, c);
+    println!("\n--- 2. Simple Arithmetic Macro ---");
+    let sum = calculate!(add 10, 5);
+    let diff = calculate!(sub 10, 5);
+    let prod = calculate!(mul 10, 5);
+    let quot = calculate!(div 10, 5);
 
-    println!("\nTesting debug_print_simple!");
-    debug_print_simple!(a, b, c);
+    println!("10 + 5 = {}", sum);
+    println!("10 - 5 = {}", diff);
+    println!("10 * 5 = {}", prod);
+    println!("10 / 5 = {}", quot);
 }
 
 #[cfg(test)]
@@ -43,12 +53,16 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_macro_expansion() {
-        // 매크로는 출력을 수행하므로, 
-        // 테스트에서는 값이 올바르게 계산되는지 확인하는 용도로 사용합니다.
-        let x = 5;
-        let y = 10;
-        debug_print!(x, y);
-        assert_eq!(x + y, 15);
+    fn test_vec_and_print() {
+        let v = vec_and_print![1, 2, 3];
+        assert_eq!(v, vec![1, 2, 3]);
+    }
+
+    #[test]
+    fn test_calculate() {
+        assert_eq!(calculate!(add 10, 5), 15);
+        assert_eq!(calculate!(sub 10, 5), 5);
+        assert_eq!(calculate!(mul 10, 5), 50);
+        assert_eq!(calculate!(div 10, 5), 2);
     }
 }
