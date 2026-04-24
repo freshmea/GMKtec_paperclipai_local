@@ -32,6 +32,7 @@ print("Wrote requirements-rocm.txt")
 PY
 
 RUN python -m pip install -r requirements-rocm.txt
+RUN python -m pip install -U --pre comfyui-manager
 
 COPY start.sh /start.sh
 RUN chmod +x /start.sh && \
