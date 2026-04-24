@@ -16,6 +16,7 @@
 
 - 개요: `curriculum/advanced_track/advanced_track_overview.md`
 - 프로젝트 모듈: `curriculum/advanced_track/advanced_project_modules.md`
+- 프로젝트 카탈로그: `curriculum/advanced_track/ecosystem_project_catalog.md`
 - 사례 분석 `ripgrep`: `curriculum/advanced_track/case_study_ripgrep.md`
 - 사례 분석 `uv`: `curriculum/advanced_track/case_study_uv.md`
 - 재현 플레이북: `curriculum/advanced_track/reproduction_playbook.md`
@@ -34,6 +35,10 @@
 1. **Case Study (사례 분석):** `ripgrep`, `uv` 등 세계적인 Rust 오픈소스 프로젝트의 소스 코드를 분석하여 그들의 설계 철학과 최적화 기법을 배웁니다.
 2. **Project-Based Learning (프로젝트 기반 학습):** 분석한 내용을 바탕으로 자신만의 고성능 도구를 직접 구현합니다.
 3. **Benchmark-Driven (벤치마크 중심):** `criterion` 등을 사용하여 구현한 기능의 성능을 정량적으로 측정하고 검증합니다.
+
+### 🔎 추가 프로젝트 탐색 범위
+
+고급 트랙은 `ripgrep`, `uv`만 다루지 않습니다. `Tokio`, `Serde`, `rustls`, `fd`, `bat`, `Tauri`, `Deno`를 비교 사례로 포함해 CLI, runtime, serialization, security, desktop platform 관점까지 확장합니다.
 
 ---
 

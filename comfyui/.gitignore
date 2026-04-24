@@ -1,0 +1,10 @@
+models/*
+input/*
+output/*
+user/*
+custom_nodes/*
+!models/.gitkeep
+!input/.gitkeep
+!output/.gitkeep
+!user/.gitkeep
+!custom_nodes/.gitkeep

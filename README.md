@@ -17,6 +17,7 @@ Docker Compose
   llm-moe     -> Gemma 4 26B-A4B      -> http://localhost:8002/v1
   llm-qwen    -> Qwen3.6 35B-A3B      -> http://localhost:8003/v1
   opencode    -> Web UI               -> http://localhost:3000
+  comfyui     -> Image UI/API         -> http://localhost:3001
 
 Host (npm local)
   paperclipai -> AI orchestrator      -> http://localhost:3100
@@ -27,6 +28,7 @@ Host (npm local)
 | `llm-moe` | 8002 | Gemma 4 26B-A4B, shorter/mid-context |
 | `llm-qwen` | 8003 | Qwen3.6 35B-A3B, long-context/technical |
 | `opencode` | 3000 | AI 코딩 어시스턴트 웹 UI |
+| `comfyui` | 3001 | ComfyUI Web UI + Local API |
 | `paperclipai` | 3100 | 로컬 오케스트레이션 플랫폼 |
 
 ## 빠른 시작
@@ -66,7 +68,7 @@ hf download unsloth/Qwen3.6-35B-A3B-GGUF \
 ### 2. 서비스 실행
 
 ```bash
-docker compose up -d llm-moe llm-qwen opencode
+docker compose up -d llm-moe llm-qwen opencode comfyui
 docker compose ps
 ```
 
@@ -82,6 +84,7 @@ docker compose --profile legacy up -d llm llm-fast
 curl http://localhost:8002/health
 curl http://localhost:8003/health
 curl http://localhost:3000
+curl http://localhost:3001
 ```
 
 ### 4. 간단한 추론 테스트
@@ -136,6 +139,42 @@ legacy provider:
 
 - `local_llm/gemma-4-31b-it`
 - `local_llm_fast/gemma-4-e4b-it`
+
+## ComfyUI
+
+웹 UI / API:
+
+- `http://localhost:3001`
+
+현재 설정:
+
+- 호스트 포트 `3001` -> 컨테이너 `8188`
+- listen 주소 `0.0.0.0`
+- 외부 공유 시에는 라우터에서 `30006 -> 호스트 3001`로 포트포워딩
+
+실행:
+
+```bash
+docker compose up -d comfyui
+docker compose logs -f comfyui
+```
+
+ComfyUI 모델/입출력 경로:
+
+- `./comfyui/models`
+- `./comfyui/input`
+- `./comfyui/output`
+- `./comfyui/custom_nodes`
+- `./comfyui/user`
+
+API 확인 예시:
+
+```bash
+curl http://localhost:3001/system_stats
+curl http://localhost:3001/object_info
+```
+
+워크플로우 실행은 ComfyUI에서 `Save (API Format)`으로 저장한 JSON을 `POST /prompt`로 보내면 됩니다.
 
 ## PaperClip
 

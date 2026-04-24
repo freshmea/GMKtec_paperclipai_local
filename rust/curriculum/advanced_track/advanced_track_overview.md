@@ -26,6 +26,26 @@
 | **M3** | **도구 및 아키텍처 설계** | CLI Design, Plugin System, Modular Architecture | 확장 가능하고 유지보수하기 쉬운 시스템 설계 능력 |
 | **M4** | **신뢰성 및 관찰 가능성** | Structured Logging, Tracing, Error Modeling | 장애에 강하고 운영 가능한 시스템 구축 |
 
+## 4-1. 참고 프로젝트 확장 지도
+
+핵심 deep dive 사례는 `ripgrep`, `uv`로 유지하되, 학습 폭을 넓히기 위해 다음 프로젝트를 함께 읽는다.
+
+- CLI와 파일 탐색:
+  - `ripgrep`
+  - `fd`
+  - `bat`
+- runtime과 네트워크:
+  - `Tokio`
+  - `Deno`
+- tooling과 product architecture:
+  - `uv`
+  - `Serde`
+  - `Tauri`
+- security와 reliability:
+  - `rustls`
+
+이 확장 지도는 한 프로젝트를 완전히 복제하는 대신, 서로 다른 성공 프로젝트에서 설계 패턴을 추출해 비교 학습하도록 설계되었다.
+
 ## 5. 학습 방식
 - **Case Study:** `ripgrep`, `uv` 등 세계적인 Rust 오픈소스 프로젝트의 설계와 구현을 심층 분석합니다.
 - **Build & Benchmark:** 실제 도구의 핵심 기능을 구현하고, `criterion`을 사용하여 성능을 정량적으로 검증합니다.

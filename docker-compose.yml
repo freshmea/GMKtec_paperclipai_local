@@ -236,6 +236,47 @@ services:
     networks:
       - llm-network
 
+  # ---------------------------------------------------------------------------
+  # ComfyUI - 이미지 생성 워크플로우 UI/API (ROCm GPU 가속)
+  # 외부 공유 시에는 라우터/방화벽에서 30006 -> 호스트 3001 로 포트포워딩
+  # ---------------------------------------------------------------------------
+  comfyui:
+    build:
+      context: ./docker/comfyui
+      dockerfile: Dockerfile
+      args:
+        COMFYUI_REF: ${COMFYUI_REF:-v0.19.3}
+        ROCM_PYTORCH_IMAGE: ${COMFYUI_BASE_IMAGE:-rocm/pytorch:rocm7.2_ubuntu24.04_py3.12_pytorch_release_2.8.0}
+    container_name: comfyui
+    ports:
+      - "${COMFYUI_PORT:-3001}:8188"
+    devices:
+      - /dev/kfd:/dev/kfd
+      - /dev/dri:/dev/dri
+    group_add:
+      - video
+      - render
+    security_opt:
+      - seccomp=unconfined
+    environment:
+      - COMFYUI_LISTEN=${COMFYUI_LISTEN:-0.0.0.0}
+      - COMFYUI_INTERNAL_PORT=${COMFYUI_INTERNAL_PORT:-8188}
+    volumes:
+      - ./comfyui/models:/opt/comfyui/models
+      - ./comfyui/input:/opt/comfyui/input
+      - ./comfyui/output:/opt/comfyui/output
+      - ./comfyui/user:/opt/comfyui/user
+      - ./comfyui/custom_nodes:/opt/comfyui/custom_nodes
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8188/"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 180s
+    networks:
+      - llm-network
+
 networks:
   llm-network:
     driver: bridge
