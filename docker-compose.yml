@@ -9,66 +9,116 @@
 
 services:
   # ---------------------------------------------------------------------------
-  # LLM 서버 — llama-server (ROCm GPU 가속) [31B — 램 절약을 위해 비활성화]
-  # OpenAI 호환 API (/v1/chat/completions, /v1/models 등)
+  # LLM 서버 (레거시) — Gemma 4 31B Dense (ROCm GPU 가속)
+  # 필요 시 `docker compose --profile legacy up -d llm`
   # ---------------------------------------------------------------------------
-  # llm:
-  #   image: kyuz0/amd-strix-halo-toolboxes:rocm-7.2
-  #   ## 커스텀 빌드 시 아래 주석 해제 (image: 줄을 주석 처리):
-  #   # build:
-  #   #   context: .
-  #   #   dockerfile: Dockerfile.llama-rocm
-  #   container_name: llm-server
-  #   ports:
-  #     - "${LLM_PORT:-8000}:8000"
-  #   volumes:
-  #     - ${MODEL_DIR:-./models}:/models:ro
-  #   # GPU 장치 접근
-  #   devices:
-  #     - /dev/kfd:/dev/kfd
-  #     - /dev/dri:/dev/dri
-  #   group_add:
-  #     - video
-  #     - render
-  #   security_opt:
-  #     - seccomp=unconfined
-  #   environment:
-  #     # ROCm 7.2는 gfx1151 네이티브 지원 — HSA_OVERRIDE 불필요
-  #     - GPU_MAX_HW_QUEUES=${GPU_MAX_HW_QUEUES:-2}
-  #   command: >
-  #     llama-server
-  #     --host 0.0.0.0
-  #     --port 8000
-  #     -m /models/${MODEL_FILENAME:-gemma-4-31B-it-Q4_K_M.gguf}
-  #     --alias ${SERVED_MODEL_NAME:-gemma-4-31b-it}
-  #     -t ${OMP_NUM_THREADS:-32}
-  #     -ngl 999
-  #     -fa on
-  #     --no-mmap
-  #     -c ${CONTEXT_LENGTH:-131072}
-  #     -np ${PARALLEL_SLOTS:-2}
-  #     --cache-type-k q8_0
-  #     --cache-type-v q8_0
-  #     --reasoning-format deepseek
-  #   deploy:
-  #     resources:
-  #       limits:
-  #         memory: ${LLM_MEMORY_LIMIT:-96g}
-  #   restart: unless-stopped
-  #   healthcheck:
-  #     test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
-  #     interval: 30s
-  #     timeout: 10s
-  #     retries: 5
-  #     start_period: 180s
-  #   networks:
-  #     - llm-network
+  llm:
+    profiles: ["legacy"]
+    image: kyuz0/amd-strix-halo-toolboxes:rocm-7.2
+    ## Qwen3.6 로딩 호환성이 필요할 때는 Dockerfile.llama-rocm 커스텀 빌드도 가능
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile.llama-rocm
+    container_name: llm-server
+    ports:
+      - "${LLM_PORT:-8000}:8000"
+    volumes:
+      - ${MODEL_DIR:-./models}:/models:ro
+    devices:
+      - /dev/kfd:/dev/kfd
+      - /dev/dri:/dev/dri
+    group_add:
+      - video
+      - render
+    security_opt:
+      - seccomp=unconfined
+    environment:
+      - GPU_MAX_HW_QUEUES=${GPU_MAX_HW_QUEUES:-2}
+    command: >
+      llama-server
+      --host 0.0.0.0
+      --port 8000
+      -m /models/${MODEL_FILENAME:-gemma-4-31B-it-Q4_K_M.gguf}
+      --alias ${SERVED_MODEL_NAME:-gemma-4-31b-it}
+      -t ${OMP_NUM_THREADS:-32}
+      -ngl 999
+      -fa on
+      --no-mmap
+      -c ${CONTEXT_LENGTH:-65536}
+      -np ${PARALLEL_SLOTS:-1}
+      --cache-type-k q8_0
+      --cache-type-v q8_0
+    deploy:
+      resources:
+        limits:
+          memory: ${LLM_MEMORY_LIMIT:-56g}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 180s
+    networks:
+      - llm-network
 
   # ---------------------------------------------------------------------------
-  # LLM 서버 (경량) — llama-server (ROCm GPU 가속)
-  # 빠른 응답용 Gemma 4 E4B (4.5B effective, 8B total)
+  # LLM 서버 — Qwen3.6 35B-A3B (ROCm GPU 가속)
+  # 긴 컨텍스트 / 기술 리서치 / PaperClip 핵심 에이전트용
+  # 하이브리드 DeltaNet 모델의 안정성을 위해 1 슬롯 + prompt cache 비활성화
+  # ---------------------------------------------------------------------------
+  llm-qwen:
+    image: kyuz0/amd-strix-halo-toolboxes:rocm-7.2
+    container_name: llm-server-qwen
+    ports:
+      - "${QWEN_LLM_PORT:-8003}:8000"
+    volumes:
+      - ${MODEL_DIR:-./models}:/models:ro
+    devices:
+      - /dev/kfd:/dev/kfd
+      - /dev/dri:/dev/dri
+    group_add:
+      - video
+      - render
+    security_opt:
+      - seccomp=unconfined
+    environment:
+      - GPU_MAX_HW_QUEUES=${GPU_MAX_HW_QUEUES:-2}
+    command: >
+      llama-server
+      --host 0.0.0.0
+      --port 8000
+      -m /models/${QWEN_MODEL_FILENAME:-Qwen3.6-35B-A3B-UD-Q4_K_M.gguf}
+      --alias ${QWEN_SERVED_MODEL_NAME:-qwen3-6-35b-a3b}
+      -t ${QWEN_OMP_NUM_THREADS:-32}
+      -ngl 999
+      -fa on
+      --no-mmap
+      -c ${QWEN_CONTEXT_LENGTH:-131072}
+      -np ${QWEN_PARALLEL_SLOTS:-1}
+      --cache-type-k q8_0
+      --cache-type-v q8_0
+      --cache-ram 0
+    deploy:
+      resources:
+        limits:
+          memory: ${QWEN_LLM_MEMORY_LIMIT:-64g}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 240s
+    networks:
+      - llm-network
+
+  # ---------------------------------------------------------------------------
+  # LLM 서버 (경량, 레거시) — llama-server (ROCm GPU 가속)
+  # 필요 시 `docker compose --profile legacy up -d llm-fast`
   # ---------------------------------------------------------------------------
   llm-fast:
+    profiles: ["legacy"]
     image: kyuz0/amd-strix-halo-toolboxes:rocm-7.2
     container_name: llm-server-fast
     ports:
@@ -99,7 +149,6 @@ services:
       -np ${FAST_PARALLEL_SLOTS:-4}
       --cache-type-k q8_0
       --cache-type-v q8_0
-      --reasoning-format deepseek
     deploy:
       resources:
         limits:
@@ -115,9 +164,8 @@ services:
       - llm-network
 
   # ---------------------------------------------------------------------------
-  # LLM 서버 (MoE) — llama-server (ROCm GPU 가속)
-  # Gemma 4 26B-A4B (25.2B total, 3.8B active, 128 experts)
-  # MoE 구조로 빠른 속도 + 높은 품질 동시 달성
+  # LLM 서버 — Gemma 4 26B-A4B (ROCm GPU 가속)
+  # 기본 shorter/mid-context 작업용. 긴 문맥은 Qwen3.6 으로 분리
   # ---------------------------------------------------------------------------
   llm-moe:
     image: kyuz0/amd-strix-halo-toolboxes:rocm-7.2
@@ -146,11 +194,10 @@ services:
       -ngl 999
       -fa on
       --no-mmap
-      -c ${MOE_CONTEXT_LENGTH:-131072}
-      -np ${MOE_PARALLEL_SLOTS:-4}
+      -c ${MOE_CONTEXT_LENGTH:-65536}
+      -np ${MOE_PARALLEL_SLOTS:-1}
       --cache-type-k q8_0
       --cache-type-v q8_0
-      --reasoning-format deepseek
     deploy:
       resources:
         limits:
@@ -181,11 +228,9 @@ services:
       - ${WORKSPACE_DIR:-./workspace}:/workspace
       - ./opencode-config:/root/.config/opencode
     depends_on:
-      # llm:                         # 31B 비활성화됨
-      #   condition: service_healthy
-      llm-fast:
-        condition: service_healthy
       llm-moe:
+        condition: service_healthy
+      llm-qwen:
         condition: service_healthy
     restart: unless-stopped
     networks:

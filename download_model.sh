@@ -1,7 +1,8 @@
 #!/bin/bash
 # =============================================================================
-# Gemma 4 GGUF 모델 다운로드 스크립트
-# 지원 모델: 31B (Dense), 26B-A4B (MoE), E4B (경량)
+# GGUF 모델 다운로드 스크립트
+# 기본 운영 모델: Gemma 4 26B-A4B + Qwen3.6 35B-A3B
+# 선택 레거시 모델: Gemma 4 31B Dense, Gemma 4 E4B
 # =============================================================================
 set -e
 
@@ -9,22 +10,24 @@ MODEL_DIR="${MODEL_DIR:-./models}"
 
 # 모델 선택 메뉴
 echo "============================================"
-echo "  Gemma 4 GGUF 모델 다운로드"
+echo "  GGUF 모델 다운로드"
 echo "============================================"
 echo ""
 echo "  다운로드할 모델을 선택하세요:"
 echo ""
-echo "  1) Gemma 4 31B IT (Dense, ~18GB)     — 고품질, 느림"
-echo "  2) Gemma 4 26B-A4B IT (MoE, ~17GB)   — 균형 (빠름 + 고품질)"
-echo "  3) Gemma 4 E4B IT (~5GB)             — 경량, 최고 속도"
-echo "  4) 전체 다운로드"
+echo "  1) Gemma 4 26B-A4B IT (MoE, ~16GB)       — shorter/mid-context"
+echo "  2) Qwen3.6 35B-A3B Q4_K_M (~22.1GB)      — 긴 컨텍스트/기술 작업 ← 추천"
+echo "  3) Gemma 4 26B + Qwen3.6 (hybrid)        — PaperClip 혼합 운영 ← 기본"
+echo "  4) Gemma 4 31B IT (Dense, ~18GB)         — legacy 옵션"
+echo "  5) Gemma 4 E4B IT (~5GB)                 — legacy 고속"
+echo "  6) 전체 다운로드"
 echo ""
 
 if [ -n "$1" ]; then
     CHOICE="$1"
 else
-    read -p "선택 (1-4) [2]: " CHOICE
-    CHOICE="${CHOICE:-2}"
+    read -p "선택 (1-6) [3]: " CHOICE
+    CHOICE="${CHOICE:-3}"
 fi
 
 # 모델 정보 설정
@@ -94,33 +97,49 @@ mkdir -p "${MODEL_DIR}"
 
 case "${CHOICE}" in
     1)
-        download_model "unsloth/gemma-4-31B-it-GGUF" \
-            "gemma-4-31B-it-Q4_K_M.gguf" \
-            "Gemma 4 31B IT (Dense, Q4_K_M, ~18GB)"
-        ;;
-    2)
         download_model "bartowski/google_gemma-4-26B-A4B-it-GGUF" \
             "google_gemma-4-26B-A4B-it-Q4_K_M.gguf" \
-            "Gemma 4 26B-A4B IT (MoE, Q4_K_M, ~17GB)"
+            "Gemma 4 26B-A4B IT (MoE, Q4_K_M, ~16GB)"
+        ;;
+    2)
+        download_model "unsloth/Qwen3.6-35B-A3B-GGUF" \
+            "Qwen3.6-35B-A3B-UD-Q4_K_M.gguf" \
+            "Qwen3.6 35B-A3B (UD-Q4_K_M, ~22.1GB)"
         ;;
     3)
-        download_model "unsloth/gemma-4-E4B-it-GGUF" \
-            "gemma-4-E4B-it-Q4_K_M.gguf" \
-            "Gemma 4 E4B IT (Q4_K_M, ~5GB)"
+        download_model "bartowski/google_gemma-4-26B-A4B-it-GGUF" \
+            "google_gemma-4-26B-A4B-it-Q4_K_M.gguf" \
+            "Gemma 4 26B-A4B IT (MoE, Q4_K_M, ~16GB)"
+        download_model "unsloth/Qwen3.6-35B-A3B-GGUF" \
+            "Qwen3.6-35B-A3B-UD-Q4_K_M.gguf" \
+            "Qwen3.6 35B-A3B (UD-Q4_K_M, ~22.1GB)"
         ;;
     4)
         download_model "unsloth/gemma-4-31B-it-GGUF" \
             "gemma-4-31B-it-Q4_K_M.gguf" \
-            "Gemma 4 31B IT (Dense, Q4_K_M, ~18GB)"
-        download_model "bartowski/google_gemma-4-26B-A4B-it-GGUF" \
-            "google_gemma-4-26B-A4B-it-Q4_K_M.gguf" \
-            "Gemma 4 26B-A4B IT (MoE, Q4_K_M, ~17GB)"
+            "Gemma 4 31B IT (Dense, Q4_K_M, ~18GB, legacy optional)"
+        ;;
+    5)
         download_model "unsloth/gemma-4-E4B-it-GGUF" \
             "gemma-4-E4B-it-Q4_K_M.gguf" \
-            "Gemma 4 E4B IT (Q4_K_M, ~5GB)"
+            "Gemma 4 E4B IT (Q4_K_M, ~5GB, legacy)"
+        ;;
+    6)
+        download_model "bartowski/google_gemma-4-26B-A4B-it-GGUF" \
+            "google_gemma-4-26B-A4B-it-Q4_K_M.gguf" \
+            "Gemma 4 26B-A4B IT (MoE, Q4_K_M, ~16GB)"
+        download_model "unsloth/gemma-4-31B-it-GGUF" \
+            "gemma-4-31B-it-Q4_K_M.gguf" \
+            "Gemma 4 31B IT (Dense, Q4_K_M, ~18GB, legacy optional)"
+        download_model "unsloth/Qwen3.6-35B-A3B-GGUF" \
+            "Qwen3.6-35B-A3B-UD-Q4_K_M.gguf" \
+            "Qwen3.6 35B-A3B (UD-Q4_K_M, ~22.1GB)"
+        download_model "unsloth/gemma-4-E4B-it-GGUF" \
+            "gemma-4-E4B-it-Q4_K_M.gguf" \
+            "Gemma 4 E4B IT (Q4_K_M, ~5GB, legacy)"
         ;;
     *)
-        echo "[ERROR] 잘못된 선택: ${CHOICE} (1~4)"
+        echo "[ERROR] 잘못된 선택: ${CHOICE} (1~6)"
         exit 1
         ;;
 esac

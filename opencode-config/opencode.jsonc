@@ -1,16 +1,47 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "disabled_providers": ["local_llm"],
+  "disabled_providers": ["local_llm", "local_llm_fast"],
   "provider": {
-    // 31B — docker-compose에서 비활성화 상태 (disabled_providers에 추가)
+    "local_llm_moe": {
+      "name": "Local LLM — Gemma 4 26B-A4B",
+      "npm": "@ai-sdk/openai-compatible",
+      "models": {
+        "gemma-4-26b-a4b-it": {
+          "name": "Gemma 4 26B-A4B (shorter/mid-context)",
+          "limit": {
+            "context": 65536,
+            "output": 8192
+          }
+        }
+      },
+      "options": {
+        "baseURL": "http://llm-moe:8000/v1"
+      }
+    },
+    "local_llm_qwen": {
+      "name": "Local LLM — Qwen3.6 35B-A3B",
+      "npm": "@ai-sdk/openai-compatible",
+      "models": {
+        "qwen3-6-35b-a3b": {
+          "name": "Qwen3.6 35B-A3B (long-context, technical)",
+          "limit": {
+            "context": 131072,
+            "output": 8192
+          }
+        }
+      },
+      "options": {
+        "baseURL": "http://llm-qwen:8000/v1"
+      }
+    },
     "local_llm": {
-      "name": "Local LLM — 31B (고품질, 현재 비활성화)",
+      "name": "Local LLM — Gemma 4 31B Dense (legacy)",
       "npm": "@ai-sdk/openai-compatible",
       "models": {
         "gemma-4-31b-it": {
-          "name": "Gemma 4 31B (고품질, 느림)",
+          "name": "Gemma 4 31B (legacy optional)",
           "limit": {
-            "context": 131072,
+            "context": 65536,
             "output": 8192
           }
         }
@@ -20,35 +51,19 @@
       }
     },
     "local_llm_fast": {
-      "name": "Local LLM — E4B (고속)",
+      "name": "Local LLM — E4B (legacy)",
       "npm": "@ai-sdk/openai-compatible",
       "models": {
         "gemma-4-e4b-it": {
-          "name": "Gemma 4 E4B (경량, 빠름)",
+          "name": "Gemma 4 E4B (legacy, very fast)",
           "limit": {
-            "context": 131072,
+            "context": 32768,
             "output": 8192
           }
         }
       },
       "options": {
         "baseURL": "http://llm-fast:8000/v1"
-      }
-    },
-    "local_llm_moe": {
-      "name": "Local LLM — 26B MoE (균형)",
-      "npm": "@ai-sdk/openai-compatible",
-      "models": {
-        "gemma-4-26b-a4b-it": {
-          "name": "Gemma 4 26B MoE (빠른 속도 + 높은 품질)",
-          "limit": {
-            "context": 131072,
-            "output": 8192
-          }
-        }
-      },
-      "options": {
-        "baseURL": "http://llm-moe:8000/v1"
       }
     }
   },
