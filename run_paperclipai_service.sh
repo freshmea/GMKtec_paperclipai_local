@@ -6,6 +6,7 @@ export HOME="/home/aa"
 
 PAPERCLIP_PID=""
 SOCAT_PID=""
+WATCHDOG_PID=""
 
 cleanup_listener_port() {
     local port="$1"
@@ -27,6 +28,10 @@ cleanup_listener_port() {
 }
 
 cleanup() {
+    if [[ -n "${WATCHDOG_PID}" ]] && kill -0 "${WATCHDOG_PID}" 2>/dev/null; then
+        kill "${WATCHDOG_PID}" 2>/dev/null || true
+        wait "${WATCHDOG_PID}" 2>/dev/null || true
+    fi
     if [[ -n "${SOCAT_PID}" ]] && kill -0 "${SOCAT_PID}" 2>/dev/null; then
         kill "${SOCAT_PID}" 2>/dev/null || true
         wait "${SOCAT_PID}" 2>/dev/null || true
@@ -61,6 +66,9 @@ if ! ss -ltnH '( sport = :3100 )' | grep -q ':3100'; then
     echo "PaperclipAI did not open port 3100 in time"
     exit 1
 fi
+
+/bin/bash /home/aa/vllm/scripts/heartbeat_stale_run_watchdog.sh &
+WATCHDOG_PID=$!
 
 /usr/bin/socat TCP-LISTEN:3101,bind=0.0.0.0,reuseaddr,fork TCP:127.0.0.1:3100 &
 SOCAT_PID=$!
